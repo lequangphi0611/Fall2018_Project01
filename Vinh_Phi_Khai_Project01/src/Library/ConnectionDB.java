@@ -28,6 +28,7 @@ public class ConnectionDB {
     public static Connection openConnect()throws SQLException{
         return null;
     }
+    
     public void closeConnect(ResultSet rs,PreparedStatement prepare,Connection conn){
         try {
             if(rs != null && !rs.isClosed()){
