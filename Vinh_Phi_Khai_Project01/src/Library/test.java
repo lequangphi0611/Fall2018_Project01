@@ -21,7 +21,7 @@ public class test {
      */
     public static void main(String[] args) {
         String t = "Phi,Khải,Vinh,Son,VSVS";
-        String[] tAfter = myLibrary.stringToArray(t, ',');
+        String[] tAfter = StringLibrary.stringToArray(t, ',');
         for(String t1 : tAfter){
             System.out.println(t1);
         }

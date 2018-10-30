@@ -17,5 +17,11 @@ public interface IDao<model, object> {
 
     List<model> getAll();
 
-    void Delete(object ob);
+    boolean add(model model);
+    
+    boolean edit(model model);
+    
+    boolean Delete(object object);
+    
+    List<model> findModel(object object);
 }

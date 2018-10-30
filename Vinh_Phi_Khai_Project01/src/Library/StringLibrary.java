@@ -9,7 +9,7 @@ package Library;
  *
  * @author Quang Phi
  */
-public class myLibrary {
+public class StringLibrary {
     
     public static String[] stringToArray(String str, char chr){
         String[] first = new String[str.length()];
