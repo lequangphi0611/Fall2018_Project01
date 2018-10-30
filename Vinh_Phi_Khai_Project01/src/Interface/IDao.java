@@ -13,7 +13,9 @@ import java.util.List;
  * @param <model>
  * @param <object>
  */
-public interface IDao<model,object> {
+public interface IDao<model, object> {
+
     List<model> getAll();
+
     void Delete(object ob);
 }
