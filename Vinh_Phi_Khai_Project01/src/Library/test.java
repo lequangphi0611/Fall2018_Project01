@@ -14,12 +14,20 @@ import java.util.logging.Logger;
  *
  * @author Quang Phi
  */
-public class testConnect {
+public class test {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String t = "Phi,Khải,Vinh,Son,VSVS";
+        String[] tAfter = myLibrary.stringToArray(t, ',');
+        for(String t1 : tAfter){
+            System.out.println(t1);
+        }
+    }
+    
+    static void testConnect(){
         Connection conn = null;
         try {
             conn = ConnectionDB.openConnect();
@@ -29,10 +37,12 @@ public class testConnect {
                 System.out.println("Failed!");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(testConnect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             ConnectionDB.closeConnect(null, null, conn);
         }
     }
+    
+   
     
 }
