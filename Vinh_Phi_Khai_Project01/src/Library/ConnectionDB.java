@@ -6,6 +6,9 @@
 package Library;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,8 +25,30 @@ public class ConnectionDB {
         }
     }
     
-    public static Connection openConnect(){
+    public static Connection openConnect()throws SQLException{
         return null;
     }
-    public void closeConnect(){}
+    public void closeConnect(ResultSet rs,PreparedStatement prepare,Connection conn){
+        try {
+            if(rs != null && !rs.isClosed()){
+                rs.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            if(prepare != null && !prepare.isClosed()){
+                prepare.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            if(conn != null && !conn.isClosed()){
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
