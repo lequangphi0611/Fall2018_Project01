@@ -26,6 +26,7 @@ public class ConnectionDB {
     }
     
     public static Connection openConnect()throws SQLException{
+        System.out.println("");
         return null;
     }
     
