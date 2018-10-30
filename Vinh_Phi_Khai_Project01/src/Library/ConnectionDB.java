@@ -6,6 +6,7 @@
 package Library;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +27,10 @@ public class ConnectionDB {
     }
     
     public static Connection openConnect()throws SQLException{
-        System.out.println("");
-        return null;
+        return DriverManager.getConnection(ConnectInfo.URL, ConnectInfo.USER, ConnectInfo.PASS);
     }
     
-    public void closeConnect(ResultSet rs,PreparedStatement prepare,Connection conn){
+    public static void closeConnect(ResultSet rs,PreparedStatement prepare,Connection conn){
         try {
             if(rs != null && !rs.isClosed()){
                 rs.close();
