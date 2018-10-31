@@ -51,7 +51,6 @@ public class ConnectionDB {
         try {
             if (rs != null && !rs.isClosed()) {
                 rs.close();
-                System.out.println("Đóng kết nối rs");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,14 +59,12 @@ public class ConnectionDB {
             if (prepare != null && !prepare.isClosed()) {
                 conn = prepare.getConnection();
                 prepare.close();
-                System.out.println("Đóng kết nối prepare");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (conn != null && !conn.isClosed()) {
-                System.out.println("Đóng kết nối Connection");
                 conn.close();
             }
         } catch (SQLException ex) {

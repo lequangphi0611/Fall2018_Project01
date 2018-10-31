@@ -1,7 +1,28 @@
 create database project01
 
 go
+	use project01
+go
 
+create table Employees(
+	IdEmployees varchar(5) primary key not null,
+	Name nvarchar(50) not null,
+	Age int not null,
+	Role bit default 0
+)
+
+
+go
+
+
+
+create table Users(
+	UserName varchar (5) primary key not null,
+	Pass varchar(16) not null,
+	IdEmployees varchar(5) references Employees(IdEmployees) on Delete cascade unique
+)
+/**
+go
 create table typeItem(
 	Id char(3) primary key not null,
 	TypeItemName nvarchar(50) not null
@@ -27,5 +48,4 @@ create table bill(
 )
 
 go 
-
-create table employees()
+**/
