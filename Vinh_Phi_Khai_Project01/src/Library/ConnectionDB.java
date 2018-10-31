@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * @author Quang Phi
  */
 public class ConnectionDB {
+
     static {
         try {
             Class.forName(ConnectInfo.DRIVER);
@@ -25,28 +26,48 @@ public class ConnectionDB {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static Connection openConnect()throws SQLException{
+
+    public static Connection openConnect() throws SQLException {
         return DriverManager.getConnection(ConnectInfo.URL, ConnectInfo.USER, ConnectInfo.PASS);
     }
-    
-    public static void closeConnect(ResultSet rs,PreparedStatement prepare,Connection conn){
+
+    public static PreparedStatement prepareExecuted(String sql, Object... ob) throws SQLException {
+        PreparedStatement prepare = openConnect().prepareStatement(sql);
+        if (ob.length > 0) {
+            for (int i = 0; i < ob.length; i++) {
+                prepare.setObject(i + 1, ob[i]);
+            }
+        }
+        return prepare;
+    }
+
+    public static ResultSet resultExeQuery(String sql, Object... ob) throws SQLException {
+        PreparedStatement prepare = prepareExecuted(sql, ob);
+        return prepare.executeQuery();
+    }
+
+    public static void closeConnect(ResultSet rs, PreparedStatement prepare) {
+        Connection conn = null;
         try {
-            if(rs != null && !rs.isClosed()){
+            if (rs != null && !rs.isClosed()) {
                 rs.close();
+                System.out.println("Đóng kết nối rs");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            if(prepare != null && !prepare.isClosed()){
+            if (prepare != null && !prepare.isClosed()) {
+                conn = prepare.getConnection();
                 prepare.close();
+                System.out.println("Đóng kết nối prepare");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            if(conn != null && !conn.isClosed()){
+            if (conn != null && !conn.isClosed()) {
+                System.out.println("Đóng kết nối Connection");
                 conn.close();
             }
         } catch (SQLException ex) {

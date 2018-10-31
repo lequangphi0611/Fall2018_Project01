@@ -10,8 +10,10 @@ package Library;
  * @author Quang Phi
  */
 public class ConnectInfo {
+
     public static final String USER = "sa";
     public static final String PASS = "123";
-    public static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Project01";
+    public static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Polypro";
     public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+
 }

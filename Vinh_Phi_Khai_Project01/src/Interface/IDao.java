@@ -17,11 +17,11 @@ public interface IDao<model, object> {
 
     List<model> getAll();
 
-    boolean add(model model);
-    
-    boolean edit(model model);
-    
-    boolean Delete(object object);
-    
+    boolean insert(model model);
+
+    boolean update(model model);
+
+    boolean delete(object object);
+
     List<model> findModel(object object);
 }
