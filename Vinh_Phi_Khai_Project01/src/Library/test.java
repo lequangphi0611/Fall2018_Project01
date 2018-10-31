@@ -5,9 +5,13 @@
  */
 package Library;
 
+import DAO.CategoryDAO;
 import DAO.EmployeesDAO;
+import DAO.ItemDAO;
 import DAO.UserDAO;
+import Model.Category;
 import Model.Employees;
+import Model.Item;
 import Model.Users;
 import com.oracle.webservices.internal.api.databinding.DatabindingModeFeature;
 import java.util.Arrays;
@@ -50,12 +54,24 @@ public class test {
 //        list = dao.findModel("EE004");
 //        System.out.println(list.get(0).toString());
 
-        UserDAO userDO = new UserDAO();
-//        userDO.insert(new Users("Vinh", "123", "EE003"));
-        
-        List<Users> list = userDO.getAll();
-        for(Users u : list){
-            System.out.println(u.toString());
+//        UserDAO userDO = new UserDAO();
+////        userDO.insert(new Users("Vinh", "123", "EE003"));
+//        
+//        List<Users> list = userDO.getAll();
+//        for(Users u : list){
+//            System.out.println(u.toString());
+//        }
+//            CategoryDAO cate = new CategoryDAO();
+//            cate.insert(new Category("Đồ ăn"));
+//            List<Category> list = cate.getAll();
+//            System.out.println(list.get(0).toString());
+
+//            System.out.println(cate.findModel(1).get(0).toString());
+        ItemDAO item = new ItemDAO();
+        item.update(new Item(1,"Ếch xào xả", 800000, 1));
+        List<Item> list = item.getAll();
+        for(Item i : list){
+            System.out.println(i.toString());
         }
     }
     

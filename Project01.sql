@@ -21,23 +21,23 @@ create table Users(
 	Pass varchar(16) not null,
 	IdEmployees varchar(5) references Employees(IdEmployees) on Delete cascade unique
 )
-/**
+
 go
-create table typeItem(
-	Id char(3) primary key not null,
-	TypeItemName nvarchar(50) not null
+
+create table Category(
+	IdCategory int identity(1,1) primary key not null,
+	CategoryName nvarchar(30) unique not null
 )
 
-go
+go 
 
-create table item(
-	Id int identity(1,1) primary key not null,
-	ItemName nvarchar(50) unique not null,
-	TypeItemID char(3) not null references typeItem(Id) on Delete set null,
+create table Item(
+	IdItem int identity(1,1) not null,
+	ItemName nvarchar(30) unique not null,
 	Price money not null,
-	isSpecial bit default 0
+	IdCategory int references Category(IdCategory)
 )
-
+/**
 go
 
 create table bill(

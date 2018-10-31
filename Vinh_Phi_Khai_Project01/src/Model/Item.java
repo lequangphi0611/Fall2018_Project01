@@ -10,7 +10,62 @@ package Model;
  * @author Quang Phi
  */
 public class Item {
-    private int id;
+    private int idItem;
     private String itemName;
     private long price;
+    private int idCategory;
+
+    public Item() {
+    }
+
+    public Item(int idItem, String itemName, long price, int idCategory) {
+        this.idItem = idItem;
+        this.itemName = itemName;
+        this.price = price;
+        this.idCategory = idCategory;
+    }
+    public Item(String itemName, long price, int idCategory) {
+        this.itemName = itemName;
+        this.price = price;
+        this.idCategory = idCategory;
+    }
+
+    public int getIdItem() {
+        return idItem;
+    }
+
+    public void setIdItem(int idItem) {
+        this.idItem = idItem;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    @Override
+    public String toString() {
+        return this.itemName+":"+this.price; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

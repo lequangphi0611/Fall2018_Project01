@@ -14,26 +14,42 @@ import java.util.List;
  *
  * @author Quang Phi
  */
-public class ItemDAO extends DAO<Item> implements IDao<Item,Integer>{
+public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public Item getModel() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Item(
+                rs.getInt("IdItem"),
+                rs.getString("ItemName"),
+                rs.getLong("Price"),
+                rs.getInt("IdCategory")
+        );
     }
 
     @Override
     public List<Item> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executeQuery("select * from Item");
     }
 
     @Override
     public boolean insert(Item model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executeUpdate("insert into Item (ItemName,Price,IdCategory)"
+                + "values (?,?,?)",
+                model.getItemName(),
+                model.getPrice(),
+                model.getIdCategory()
+        );
     }
 
     @Override
     public boolean update(Item model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executeUpdate("update Item set ItemName = ?, Price = ?, IdCategory = ?"
+                + " where IdItem = ?", 
+                model.getItemName(),
+                model.getPrice(),
+                model.getIdCategory(),
+                model.getIdItem()
+        );
     }
 
     @Override
@@ -45,5 +61,5 @@ public class ItemDAO extends DAO<Item> implements IDao<Item,Integer>{
     public List<Item> findModel(Integer object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
