@@ -13,6 +13,4 @@ public class Item {
     private int id;
     private String itemName;
     private long price;
-    private int quantity;
-    private String type;
 }
