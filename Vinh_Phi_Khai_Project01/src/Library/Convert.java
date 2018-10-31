@@ -5,13 +5,15 @@
  */
 package Library;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Quang Phi
  */
-public class StringLibrary {
-    
-    public static String[] stringToArray(String str, char chr){
+public class Convert {
+
+    public static String[] stringToArray(String str, char chr) {
         String[] first = new String[str.length()];
         int i = 0;
         while (true) {
@@ -32,4 +34,13 @@ public class StringLibrary {
         System.arraycopy(first, 0, result, 0, result.length);
         return result;
     }
+
+    public static String toMoney(double money, String... pattern) {
+        DecimalFormat format = new DecimalFormat("###,###,###.##");
+        if (pattern.length > 0) {
+            format.applyPattern(pattern[0]);
+        }
+        return format.format(money) + " đ";
+    }
+
 }
