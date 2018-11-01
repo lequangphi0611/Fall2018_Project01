@@ -6,34 +6,15 @@
 package Library;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author Quang Phi
  */
 public class Convert {
-
-    public static String[] stringToArray(String str, char chr) {
-        String[] first = new String[str.length()];
-        int i = 0;
-        while (true) {
-            int index = str.indexOf(chr);
-            if (index == 0) {
-                str = str.substring(1);
-            } else if (index > 0) {
-                first[i] = str.substring(0, index).trim();
-                str = str.substring(index);
-                i++;
-            } else if (index < 0) {
-                first[i] = str.substring(0).trim();
-                break;
-            }
-        }
-
-        String[] result = new String[++i];
-        System.arraycopy(first, 0, result, 0, result.length);
-        return result;
-    }
 
     public static String toMoney(double money, String... pattern) {
         DecimalFormat format = new DecimalFormat("###,###,###.##");
@@ -43,4 +24,29 @@ public class Convert {
         return format.format(money) + " đ";
     }
 
+    public static Date getNow() {
+        return new Date();
+    }
+
+    public static String formatDate(Date date, String... pattern) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
+        if (pattern.length > 0) {
+            try {
+                simpleDate.applyPattern(pattern[0]);
+            } catch (java.lang.IllegalArgumentException ex) {
+            }
+        }
+        return simpleDate.format(date);
+    }
+    
+    public static Date parseDate(String date, String... pattern) throws ParseException{
+        SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
+        if(pattern.length > 0){
+            try {
+                simpleDate.applyPattern(pattern[0]);
+            } catch (java.lang.IllegalArgumentException ex) {
+            }
+        }
+        return simpleDate.parse(date);
+    }
 }

@@ -14,16 +14,26 @@ import java.util.List;
 public class Table {
 
     private int tableName;
-    List<Item> item;
+    private List<ItemOrder> itemOrder;
     private boolean status = true;//true là bàng trống...false là bàn đg có khách
 
     public Table() {
+        setStatus();
     }
 
-    public Table(int tableName, List<Item> item, boolean status) {
+    public Table(int tableName, List<ItemOrder> itemOrder) {
         this.tableName = tableName;
-        this.item = item;
-        this.status = status;
+        this.itemOrder = itemOrder;
+        setStatus();
+    }   
+    
+    public List<ItemOrder> getItemOrder() {
+        return itemOrder;
+    }
+
+    public void setItemOrder(List<ItemOrder> itemOrder) {
+        this.itemOrder = itemOrder;
+        setStatus();
     }
 
     public int getTableName() {
@@ -38,20 +48,28 @@ public class Table {
         this.tableName = tableName;
     }
 
-    public List<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(List<Item> item) {
-        this.item = item;
-    }
-
     public boolean isStatus() {
         return status;
     }
-
-    public void setStatus(boolean status) {
+    
+    public String statusToString(){
+        return this.status ? "Bàn đang trống" : "Đang có khách";
+    }
+    
+    public void setStatus(boolean status){
         this.status = status;
     }
+    
+    private void setStatus(){
+        this.status = this.itemOrder == null || this.itemOrder.isEmpty();
+    }
 
+    public long sumPrice(){
+        long result = 0;
+        for(int i = 0; i < itemOrder.size(); i++){
+            result += itemOrder.get(i).sumPrice();
+        }
+        return result;
+    }
+    
 }
