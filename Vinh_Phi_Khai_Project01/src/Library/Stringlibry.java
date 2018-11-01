@@ -44,7 +44,7 @@ public class Stringlibry {
         }
 
         String[] result = new String[++i];
-        System.arraycopy(first, 0, result, 0, result.length);
+        System.arraycopy(first, 0, result, 0, i);
         return result;
     }
 
