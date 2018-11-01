@@ -17,17 +17,17 @@ import java.util.logging.Logger;
 /**
  *
  * @author Quang Phi
- * @param <model>
+ * @param <Model>
  */
-public abstract class DAO<model> {
+public abstract class DAO<Model> {
 
     PreparedStatement prepare = null;
     ResultSet rs = null;
 
-    public abstract model getModel() throws SQLException;
+    public abstract Model getModel() throws SQLException;
 
-    public List<model> executeQuery(String sql, Object... ob) {
-        List<model> list = new ArrayList<>();
+    public List<Model> executeQuery(String sql, Object... ob) {
+        List<Model> list = new ArrayList<>();
         try {
             rs = ConnectionDB.resultExeQuery(sql, ob);
             while (rs.next()) {

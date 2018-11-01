@@ -10,18 +10,18 @@ import java.util.List;
 /**
  *
  * @author Quang Phi
- * @param <model>
- * @param <object>
+ * @param <Model>
+ * @param <Object>
  */
-public interface IDao<model, object> {
+public interface IDao<Model, Object> {
 
-    List<model> getAll();
+    List<Model> getAll();
 
-    boolean insert(model model);
+    boolean insert(Model model);
 
-    boolean update(model model);
+    boolean update(Model model);
 
-    boolean delete(object object);
+    boolean delete(Object object);
 
-    List<model> findModel(object object);
+    List<Model> findModel(Object object);
 }
