@@ -49,7 +49,7 @@ create table Content(
 go
 
 create table bill(
-	Id int identity(1,1) primary key not null,
+	IdBill varchar(5) primary key not null,
 	IdContent varchar(7) references Content(IdContent)on delete cascade,
 	IdEmloyees varchar(5) references Employees(IdEmployees),
 	DatePayment Date default getDate(),
