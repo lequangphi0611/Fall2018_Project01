@@ -15,7 +15,7 @@ public class Table {
 
     private final int TABLENUM;
     private List<ItemOrder> itemOrder;
-    private boolean status = true;//true là bàng trống...false là bàn đg có khách
+    private boolean status = true;//true là bàn trống...false là bàn đg có khách
 
     public Table(int tableNum) {
         this.TABLENUM = tableNum;
@@ -47,10 +47,6 @@ public class Table {
 
     public boolean isStatus() {
         return status;
-    }
-    
-    public String statusToString(){
-        return this.status ? "Bàn đang trống" : "Đang có khách";
     }
     
     public void setStatus(boolean status){
