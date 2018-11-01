@@ -38,4 +38,13 @@ public class ItemOrder extends Item {
         return getPrice() * this.quantity;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+":"+this.quantity ;
+    }
+
+    
+    
+    
+
 }

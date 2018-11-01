@@ -13,16 +13,17 @@ import java.util.List;
  */
 public class Table {
 
-    private int tableName;
+    private final int TABLENUM;
     private List<ItemOrder> itemOrder;
     private boolean status = true;//true là bàng trống...false là bàn đg có khách
 
-    public Table() {
+    public Table(int tableNum) {
+        this.TABLENUM = tableNum;
         setStatus();
     }
 
-    public Table(int tableName, List<ItemOrder> itemOrder) {
-        this.tableName = tableName;
+    public Table(int tableNum, List<ItemOrder> itemOrder) {
+        this.TABLENUM = tableNum;
         this.itemOrder = itemOrder;
         setStatus();
     }   
@@ -36,16 +37,12 @@ public class Table {
         setStatus();
     }
 
-    public int getTableName() {
-        return tableName;
+    public int getTableNum() {
+        return TABLENUM;
     }
 
-    public String getTableNameString() {
-        return "Bàn số " + tableName;
-    }
-
-    public void setTableName(int tableName) {
-        this.tableName = tableName;
+    public String getTableName() {
+        return "Bàn số " + TABLENUM;
     }
 
     public boolean isStatus() {

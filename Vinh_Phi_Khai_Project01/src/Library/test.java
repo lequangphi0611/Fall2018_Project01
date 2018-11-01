@@ -32,34 +32,23 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        testTable();
-        String t = "Thịt heo xào : 80000000,555:70 ngàn,Thịt heo xào : 80000000,555:70 ngàn,Thịt heo xào : 80000000,555:70 ngàn";
-        String[] tAfter = Stringlibry.stringToArray(t, ",");
-        Arrays.stream(tAfter).forEach((val) -> {
-            System.out.println(val);
-        });
-    }
-
-    static void testTable() {
-        int i = 1;
-        List<ItemOrder> item = new ArrayList<>();
-        item.add(new ItemOrder(i, "Dầu gội đầu", 60000, i, i++));
-        item.add(new ItemOrder(i, "Vegetable", 120000, i, i++));
-        item.add(new ItemOrder(i, "chả biết", 80000, i, i++));
-        item.add(new ItemOrder(i, "thức ăn", 222000, i, i++));
-        item.add(new ItemOrder(i, "thuốc", 10000, i, i++));
-
-        Table table = new Table(2, item);
-        System.out.println(table.getTableNameString());
-        System.out.println(table.statusToString());
-        for (i = 0; i < table.getItemOrder().size(); i++) {
-            ItemOrder items = table.getItemOrder().get(i);
-            System.out.println("ID = " + items.getIdItem()
-                    + ", Tến sản phẩm = " + items.getItemName()
-                    + ", Giá tiền = " + items.getPrice() + " , số lượng = " + items.getQuantity());
-            System.out.println("Tổng giá sản phẩm : " + items.sumPrice());
+        ItemOrder[] order = new ItemOrder[5];
+        order[0] = new ItemOrder(1, "Sting dâu", 7000, 2, 5);
+        order[1] = new ItemOrder(2, "Huda", 11000, 2,24);
+        order[2] = new ItemOrder(3, "Dê nướng", 50000,1,2);
+        order[3] = new ItemOrder(4,"Sà lách",1000,1,6);
+        order[4] = new ItemOrder(5,"Nước súi", 8000,2,8);
+        List<ItemOrder> list = new ArrayList<>();
+        list.addAll(Arrays.asList(order));
+        Table tb01 = new Table(1);
+        tb01.setItemOrder(list);
+        for(ItemOrder item : tb01.getItemOrder()){
+            System.out.println(item.toString());
+            System.out.println("Tổng tiền mỗi item = "+item.sumPrice());
         }
-        System.out.println("Tổng giá của bàn : " + table.sumPrice());
+        System.out.println("Tổng tiền của bàn = "+tb01.sumPrice());
+        Table tb02 = new Table(3);
+        System.out.println(tb01.getTableName() + " "+ tb02.getTableName());
     }
 
 }
