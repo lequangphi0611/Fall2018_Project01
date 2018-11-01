@@ -19,10 +19,9 @@ public class Stringlibry {
 
     public static String randomString(int length) {
         String result = "";
-        for (int i = 0; i < length;) {
-            int index = RD.nextInt(CHARS.length);
-            result += CHARS[index];
-            i++;
+        int lengthAlpha = CHARS.length;
+        for (int i = 0; i < length;i++) {
+            result += CHARS[RD.nextInt(lengthAlpha)];
         }
         return result;
     }
