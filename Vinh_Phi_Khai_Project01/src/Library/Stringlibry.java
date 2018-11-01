@@ -38,7 +38,7 @@ public class Stringlibry {
                 first[i] = str.substring(0, index).trim();
                 str = str.substring(index);
                 i++;
-            } else if (index < 0) {
+            } else{
                 first[i] = str.substring(0).trim();
                 break;
             }

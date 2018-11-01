@@ -33,29 +33,33 @@ public class test {
      */
     public static void main(String[] args) {
 //        testTable();
-        
+        String t = "Thịt heo xào : 80000000,555:70 ngàn,Thịt heo xào : 80000000,555:70 ngàn,Thịt heo xào : 80000000,555:70 ngàn";
+        String[] tAfter = Stringlibry.stringToArray(t, ",");
+        Arrays.stream(tAfter).forEach((val) -> {
+            System.out.println(val);
+        });
     }
-    
-    static void testTable(){
-        int i  = 1;
+
+    static void testTable() {
+        int i = 1;
         List<ItemOrder> item = new ArrayList<>();
         item.add(new ItemOrder(i, "Dầu gội đầu", 60000, i, i++));
         item.add(new ItemOrder(i, "Vegetable", 120000, i, i++));
         item.add(new ItemOrder(i, "chả biết", 80000, i, i++));
         item.add(new ItemOrder(i, "thức ăn", 222000, i, i++));
         item.add(new ItemOrder(i, "thuốc", 10000, i, i++));
-        
-        Table table = new Table(2,item);
+
+        Table table = new Table(2, item);
         System.out.println(table.getTableNameString());
         System.out.println(table.statusToString());
-        for(i = 0; i < table.getItemOrder().size(); i++){
+        for (i = 0; i < table.getItemOrder().size(); i++) {
             ItemOrder items = table.getItemOrder().get(i);
-            System.out.println("ID = "+items.getIdItem() + 
-                    ", Tến sản phẩm = "+items.getItemName() + 
-                    ", Giá tiền = "+items.getPrice() + " , số lượng = "+ items.getQuantity());
-            System.out.println("Tổng giá sản phẩm : "+items.sumPrice());
+            System.out.println("ID = " + items.getIdItem()
+                    + ", Tến sản phẩm = " + items.getItemName()
+                    + ", Giá tiền = " + items.getPrice() + " , số lượng = " + items.getQuantity());
+            System.out.println("Tổng giá sản phẩm : " + items.sumPrice());
         }
-        System.out.println("Tổng giá của bàn : "+table.sumPrice());
+        System.out.println("Tổng giá của bàn : " + table.sumPrice());
     }
-    
+
 }
