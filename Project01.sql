@@ -35,17 +35,28 @@ create table Item(
 	IdItem int identity(1,1) not null,
 	ItemName nvarchar(30) unique not null,
 	Price money not null,
-	IdCategory int references Category(IdCategory)
+	IdCategory int references Category(IdCategory) on delete set null
 )
-/**
+
+go
+
+create table Content(
+	IdContent varchar(7) primary key not null,
+	TableNum int not null,
+	Content nvarchar(max)
+)
+
 go
 
 create table bill(
 	Id int identity(1,1) primary key not null,
-	Contents nvarchar(max) not null,
+	IdContent varchar(7) references Content(IdContent)on delete cascade,
+	IdEmloyees varchar(5) references Employees(IdEmployees),
 	DatePayment Date default getDate(),
 	SumPrice money not null
 )
 
 go 
-**/
+
+
+drop database project01
