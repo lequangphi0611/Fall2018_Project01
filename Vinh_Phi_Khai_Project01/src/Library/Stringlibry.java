@@ -32,15 +32,15 @@ public class Stringlibry {
         int i = 0;
         while (true) {
             int index = str.indexOf(chr);
-            if (index == 0) {
+            if (index < 0) {
+                first[i] = str.substring(0).trim();
+                break;
+            } else if (index == 0) {
                 str = str.substring(1);
-            } else if (index > 0) {
+            } else{
                 first[i] = str.substring(0, index).trim();
                 str = str.substring(index);
                 i++;
-            } else{
-                first[i] = str.substring(0).trim();
-                break;
             }
         }
 
