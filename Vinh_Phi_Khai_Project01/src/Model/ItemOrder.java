@@ -42,9 +42,4 @@ public class ItemOrder extends Item {
     public String toString() {
         return super.toString()+":"+this.quantity ;
     }
-
-    
-    
-    
-
 }

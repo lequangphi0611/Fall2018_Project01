@@ -48,12 +48,4 @@ public class Stringlibry {
         return result;
     }
 
-    public static String arrayToString(String[] str, String chr) {
-        String result = "";
-        for(String str1 : str){
-            result += str1 + chr;
-        }
-        return result;
-    }
-
 }

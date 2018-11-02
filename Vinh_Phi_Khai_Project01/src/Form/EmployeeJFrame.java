@@ -5,6 +5,9 @@
  */
 package Form;
 
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
+
 /**
  *
  * @author PC
@@ -54,6 +57,8 @@ public class EmployeeJFrame extends javax.swing.JFrame {
                 "IdEmployees", "Name", "Age", "Role"
             }
         ));
+        header = jTable2.getTableHeader();
+        header.setFont(new java.awt.Font("Times New Roman",0,20));
         jScrollPane2.setViewportView(jTable2);
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_archive-insert-directory_79884.png"))); // NOI18N
@@ -123,13 +128,11 @@ public class EmployeeJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton9)
-                                    .addComponent(jButton10)
-                                    .addComponent(jButton16)
-                                    .addComponent(jButton11)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton9)
+                                .addComponent(jButton10)
+                                .addComponent(jButton16)
+                                .addComponent(jButton11))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton12)
                                 .addGap(2, 2, 2)))
@@ -209,5 +212,6 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private JTableHeader header;
     // End of variables declaration//GEN-END:variables
 }
