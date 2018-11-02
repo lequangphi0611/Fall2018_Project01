@@ -5,7 +5,12 @@
  */
 package Form;
 
+import DAO.EmployeesDAO;
+import Model.Employees;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -14,13 +19,28 @@ import javax.swing.table.JTableHeader;
  */
 public class EmployeeJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EmployeeJFrame
-     */
+    DefaultTableModel model;
+    List<Employees> list = new ArrayList<>();
+    EmployeesDAO employeeDO = new EmployeesDAO();
+    Employees employees = null;
+    
     public EmployeeJFrame() {
         initComponents();
+        model = (DefaultTableModel) tbJtable.getModel();
     }
-
+    
+    public void load(){
+        list = employeeDO.getAll();
+        model.setRowCount(0);
+        for(Employees emp : list){
+            model.addRow(new Object[]{
+                emp.getIdEmployees(),
+                emp.getName(),
+                emp.getAge(),
+                emp.isIdRole() ? "Quản lý" : "Nhân viên"
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,8 +53,8 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
+        tbJtable = new javax.swing.JTable();
+        btnInsert = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
@@ -44,12 +64,17 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Employee");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbJtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -57,15 +82,30 @@ public class EmployeeJFrame extends javax.swing.JFrame {
                 "IdEmployees", "Name", "Age", "Role"
             }
         ));
-        header = jTable2.getTableHeader();
+        header = tbJtable.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
-        jScrollPane2.setViewportView(jTable2);
+        tbJtable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbJtableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbJtable);
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_archive-insert-directory_79884.png"))); // NOI18N
-        jButton9.setText("Insert");
+        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_archive-insert-directory_79884.png"))); // NOI18N
+        btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_system-software-update_39272.png"))); // NOI18N
         jButton10.setText("Update");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-clear_38988.png"))); // NOI18N
         jButton11.setText("Clear");
@@ -94,7 +134,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jButton9)
+                        .addComponent(btnInsert)
                         .addGap(18, 18, 18)
                         .addComponent(jButton10)
                         .addGap(18, 18, 18)
@@ -129,7 +169,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton9)
+                                .addComponent(btnInsert)
                                 .addComponent(jButton10)
                                 .addComponent(jButton16)
                                 .addComponent(jButton11))
@@ -163,6 +203,24 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        new EmployeeJDiglog(this, true).setVisible(true);
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        load();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tbJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJtableMouseClicked
+        employees = list.get(tbJtable.getSelectedRow());
+    }//GEN-LAST:event_tbJtableMouseClicked
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if(employees != null){
+            new EmployeeJDiglog(this, true, employees.getIdEmployees()).setVisible(true);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +258,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInsert;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -207,11 +266,10 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbJtable;
     private JTableHeader header;
     // End of variables declaration//GEN-END:variables
 }
