@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/EmployeeJDiglog.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Model/ContentBill.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/DAO/ItemDAO.java</file>
@@ -25,6 +26,12 @@
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/DAO/DAO.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/CategoryJDialog.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Library/ConnectInfo.java</file>
+=======
+            <file>file:/C:/Users/This%20PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/OrderJDialog.java</file>
+            <file>file:/C:/Users/This%20PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/FloorManagementJFrame.java</file>
+            <file>file:/C:/Users/This%20PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/ItemJFrame.java</file>
+            <file>file:/C:/Users/This%20PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/CategoryJDialog.java</file>
+>>>>>>> ba75a9b042e60be69dfbacc4649d189464d6266d
         </group>
     </open-files>
 </project-private>
