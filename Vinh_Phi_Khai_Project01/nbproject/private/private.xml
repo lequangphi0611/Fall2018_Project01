@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Model/ContentBill.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Model/ItemOrder.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Library/test.java</file>
@@ -13,6 +14,12 @@
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/DAO/DAO.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Library/Stringlibry.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Model/Table.java</file>
+=======
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/JFrameUsers.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/EmployeeJFrame.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/DAO/UserDAO.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/Project01/Vinh_Phi_Khai_Project01/src/Form/EmployeeJDiglog.java</file>
+>>>>>>> 054bdce7c47bc042bbfd9e5555a8574114a48261
         </group>
     </open-files>
 </project-private>
