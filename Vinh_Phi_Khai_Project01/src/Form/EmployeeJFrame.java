@@ -40,6 +40,14 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             });
         }
     }
+    
+    private void delete(){
+        if(employees != null){
+            if(employeeDO.delete(employees.getIdEmployees())){
+                load();
+            }
+        }
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +132,11 @@ public class EmployeeJFrame extends javax.swing.JFrame {
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-delete_23231.png"))); // NOI18N
         jButton16.setText("Delete");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,6 +233,10 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             new EmployeeJDiglog(this, true, employees.getIdEmployees()).setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        delete();
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
      * @param args the command line arguments
