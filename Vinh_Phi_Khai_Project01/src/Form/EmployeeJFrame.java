@@ -70,8 +70,10 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
         jLabel2.setText("Employee");
 
         tbJtable.setModel(new javax.swing.table.DefaultTableModel(
