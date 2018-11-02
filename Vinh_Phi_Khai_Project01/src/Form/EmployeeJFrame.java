@@ -44,6 +44,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     private void delete(){
         if(employees != null){
             if(employeeDO.delete(employees.getIdEmployees())){
+                employees = null;
                 load();
             }
         }
@@ -217,7 +218,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        new EmployeeJDiglog(this, true).setVisible(true);
+        new EmployeeJDiglog(this, true,null).setVisible(true);
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -230,7 +231,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if(employees != null){
-            new EmployeeJDiglog(this, true, employees.getIdEmployees()).setVisible(true);
+            new EmployeeJDiglog(this, true, employees).setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 

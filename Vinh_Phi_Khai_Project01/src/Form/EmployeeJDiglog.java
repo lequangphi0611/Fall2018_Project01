@@ -7,6 +7,7 @@ package Form;
 
 import DAO.EmployeesDAO;
 import Model.Employees;
+import java.util.List;
 import javax.swing.ButtonGroup;
 
 /**
@@ -20,17 +21,13 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
      * Creates new form EmployeeJDiglog
      */
     EmployeeJFrame jframe;
-    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal) {
+    List<Employees> list;
+    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal,Employees employees) {
         super(parent, modal);
         contrustorBody();
         jframe = parent;
-    }
-    
-    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal, String idEmployess){
-        super(parent, modal);
-        contrustorBody();
-        jframe = parent;
-        txtIdEmployees.setText(idEmployess);
+        list = parent.list;
+        loadForm(employees);
     }
     
     private void contrustorBody(){
@@ -53,6 +50,19 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                 Integer.parseInt(txtAge.getText()), 
                 rdoManage.isSelected()
         );
+    }
+    
+    private void loadForm(Employees em){
+        if(em != null){
+            txtIdEmployees.setText(em.getIdEmployees());
+            txtName.setText(em.getName());
+            txtAge.setText(em.getAge()+"");
+            if(em.isIdRole()){
+                rdoManage.setSelected(true);
+            }else{
+                rdoEmployees.setSelected(true);
+            }
+        }
     }
     
     /**
@@ -230,7 +240,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EmployeeJDiglog dialog = new EmployeeJDiglog(new EmployeeJFrame(), true);
+                EmployeeJDiglog dialog = new EmployeeJDiglog(new EmployeeJFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
