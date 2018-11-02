@@ -9,7 +9,6 @@ import DAO.EmployeesDAO;
 import Model.Employees;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -41,6 +40,15 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             });
         }
     }
+    
+    private void delete(){
+        if(employees != null){
+            if(employeeDO.delete(employees.getIdEmployees())){
+                employees = null;
+                load();
+            }
+        }
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,6 +135,11 @@ public class EmployeeJFrame extends javax.swing.JFrame {
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-delete_23231.png"))); // NOI18N
         jButton16.setText("Delete");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,7 +220,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        new EmployeeJDiglog(this, true).setVisible(true);
+        new EmployeeJDiglog(this, true,null).setVisible(true);
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -220,9 +233,13 @@ public class EmployeeJFrame extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if(employees != null){
-            new EmployeeJDiglog(this, true, employees.getIdEmployees()).setVisible(true);
+            new EmployeeJDiglog(this, true, employees).setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        delete();
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
      * @param args the command line arguments
