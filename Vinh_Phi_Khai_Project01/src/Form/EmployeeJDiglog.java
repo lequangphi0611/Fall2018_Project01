@@ -107,9 +107,9 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Role:");
 
-        rdoManage.setText("Quản lý");
+        rdoManage.setText("Manage");
 
-        rdoEmployees.setText("Nhân viên");
+        rdoEmployees.setText("Employee");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
