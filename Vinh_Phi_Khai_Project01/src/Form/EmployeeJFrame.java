@@ -9,7 +9,6 @@ import DAO.EmployeesDAO;
 import Model.Employees;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
