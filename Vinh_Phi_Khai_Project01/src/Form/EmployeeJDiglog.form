@@ -199,12 +199,12 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="rdoManage">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd;"/>
+            <Property name="text" type="java.lang.String" value="Manage"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rdoEmployees">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="Employee"/>
           </Properties>
         </Component>
       </SubComponents>
