@@ -21,12 +21,10 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
      * Creates new form EmployeeJDiglog
      */
     EmployeeJFrame jframe;
-    List<Employees> list;
     public EmployeeJDiglog(EmployeeJFrame parent, boolean modal,Employees employees) {
         super(parent, modal);
         contrustorBody();
         jframe = parent;
-        list = parent.list;
         loadForm(employees);
     }
     
