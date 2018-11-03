@@ -5,9 +5,8 @@
  */
 package Form;
 
-import DAO.EmployeesDAO;
+import Library.Show;
 import Model.Employees;
-import java.util.List;
 import javax.swing.ButtonGroup;
 
 /**
@@ -16,51 +15,82 @@ import javax.swing.ButtonGroup;
  */
 public class EmployeeJDiglog extends javax.swing.JDialog {
 
-    EmployeesDAO employDAO = new EmployeesDAO();
-    /**
-     * Creates new form EmployeeJDiglog
-     */
-    EmployeeJFrame jframe;
-    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal,Employees employees) {
+    EmployeeJFrame employeesFrame;
+
+    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal, Employees employees) {
         super(parent, modal);
         contrustorBody();
-        jframe = parent;
+        employeesFrame = parent;
         loadForm(employees);
     }
-    
-    private void contrustorBody(){
+
+    private void contrustorBody() {
         initComponents();
         GROUP.add(rdoEmployees);
         GROUP.add(rdoManage);
         rdoEmployees.setSelected(true);
+        this.setLocationRelativeTo(null);
     }
-    
-    private void add(){
-        if(employDAO.insert(getDataForm())){
-            jframe.load();
+
+    private void add() {
+        if (employeesFrame.employeeDO.insert(getDataForm())) {
+            clearForm();
+            employeesFrame.load();
+            Show.success(this, "Insert successfully !");
         }
     }
-    
-    private Employees getDataForm(){
+
+    private void update() {
+        if (employeesFrame.employeeDO.update(getDataForm())) {
+            clearForm();
+            employeesFrame.load();
+            Show.success(this, "Update successfully !");
+        }
+    }
+
+    private Employees getDataForm() {
         return new Employees(
-                txtIdEmployees.getText(), 
-                txtName.getText(), 
-                Integer.parseInt(txtAge.getText()), 
+                txtIdEmployees.getText(),
+                txtName.getText(),
+                Integer.parseInt(txtAge.getText()),
                 rdoManage.isSelected()
         );
     }
-    
-    private void loadForm(Employees em){
-        if(em != null){
+
+    private void loadForm(Employees em) {
+        if (em != null) {
             txtIdEmployees.setText(em.getIdEmployees());
             txtName.setText(em.getName());
-            txtAge.setText(em.getAge()+"");
-            if(em.isIdRole()){
+            txtAge.setText(em.getAge() + "");
+            if (em.isIdRole()) {
                 rdoManage.setSelected(true);
-            }else{
-                rdoEmployees.setSelected(true);
+            } else {
+                rdoEmployees.setVisible(true);
             }
         }
+    }
+
+
+    private void loadFormList(int index) {
+        loadForm(EmployeeJFrame.list.get(index));
+    }
+
+    private void clearForm() {
+        txtIdEmployees.setText(null);
+        txtName.setText(null);
+        txtAge.setText(null);
+        rdoEmployees.setSelected(true);
+        employeesFrame.employees = null;
+        EmployeeJFrame.index = -1;
+    }
+
+    private boolean checkEmpty() {
+        String check = txtIdEmployees.getText().trim();
+        if (check.isEmpty()) {
+
+        }
+
+        return true;
     }
    
     /**
@@ -104,6 +134,11 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Name:");
@@ -144,7 +179,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,10 +235,25 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-clear_118917.png"))); // NOI18N
         jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-rtl_23350.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-ltr_23349.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Community Help_17879.png"))); // NOI18N
 
@@ -298,10 +348,11 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                     .addComponent(rdoManage)
                     .addComponent(rdoEmployees))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
 
@@ -320,12 +371,37 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-       add();
+       if (employeesFrame.employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
+            add();
+        } else {
+            update();
+        }
+        employeesFrame.employees = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void rdoManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoManageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoManageActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        clearForm();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(EmployeeJFrame.index < employeesFrame.list.size() - 1 ){
+            loadFormList(++EmployeeJFrame.index);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(EmployeeJFrame.index > 0){
+            loadFormList(--EmployeeJFrame.index);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

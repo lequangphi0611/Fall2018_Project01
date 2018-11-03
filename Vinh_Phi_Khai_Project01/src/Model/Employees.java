@@ -59,7 +59,7 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employees{" + "idEmployees=" + idEmployees + ", name=" + name + ", age=" + age + ", idRole=" + idRole + '}';
+        return this.name;
     }
     
     

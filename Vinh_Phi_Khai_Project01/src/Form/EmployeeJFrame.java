@@ -19,19 +19,21 @@ import javax.swing.table.JTableHeader;
 public class EmployeeJFrame extends javax.swing.JFrame {
 
     DefaultTableModel model;
-    List<Employees> list = new ArrayList<>();
+    static List<Employees> list;
     EmployeesDAO employeeDO = new EmployeesDAO();
     Employees employees = null;
-    
+    static int index = -1;
+
     public EmployeeJFrame() {
         initComponents();
         model = (DefaultTableModel) tbJtable.getModel();
+        this.setLocationRelativeTo(null);      
     }
-    
-    public void load(){
+
+    public void load() {
         list = employeeDO.getAll();
         model.setRowCount(0);
-        for(Employees emp : list){
+        for (Employees emp : list) {
             model.addRow(new Object[]{
                 emp.getIdEmployees(),
                 emp.getName(),
@@ -40,15 +42,16 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             });
         }
     }
-    
-    private void delete(){
-        if(employees != null){
-            if(employeeDO.delete(employees.getIdEmployees())){
+
+    private void delete() {
+        if (employees != null) {
+            if (employeeDO.delete(employees.getIdEmployees())) {
                 employees = null;
                 load();
             }
         }
-    } 
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +71,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -130,6 +133,11 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-cancel_79836.png"))); // NOI18N
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,7 +204,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        new EmployeeJDiglog(this, true,null).setVisible(true);
+        new EmployeeJDiglog(this, true, null).setVisible(true);
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -204,18 +212,25 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJtableMouseClicked
-        employees = list.get(tbJtable.getSelectedRow());
+        index = tbJtable.getSelectedRow();
+        employees = list.get(index);
     }//GEN-LAST:event_tbJtableMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(employees != null){
-            new EmployeeJDiglog(this, true, employees).setVisible(true);
+        if (employees == null) {
+            employees = list.get(0);
         }
+        new EmployeeJDiglog(this, true, employees).setVisible(true);
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         delete();
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

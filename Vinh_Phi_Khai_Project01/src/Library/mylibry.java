@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Quang Phi
  */
-public class Stringlibry {
+public class mylibry {
 
     static final String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY";
     static final Random RD = new Random();
