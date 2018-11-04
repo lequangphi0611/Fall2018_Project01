@@ -5,7 +5,7 @@
  */
 package Form;
 
-import Library.Show;
+import Library.OptionPane;
 import Model.Employees;
 import javax.swing.ButtonGroup;
 
@@ -26,9 +26,10 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
     private void contrustorBody() {
         initComponents();
-        GROUP.add(rdoEmployees);
-        GROUP.add(rdoManage);
-        rdoEmployees.setSelected(true);
+        bgrRole.add(rdoEmployees);
+        bgrRole.add(rdoManage);
+        bgrSex.add(rdoMale);
+        bgrSex.add(rdoFemale);
         this.setLocationRelativeTo(null);
     }
 
@@ -36,7 +37,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         if (employeesFrame.employeeDO.insert(getDataForm())) {
             clearForm();
             employeesFrame.load();
-            Show.success(this, "Insert successfully !");
+            OptionPane.success(this, "Insert successfully !");
         }
     }
 
@@ -44,7 +45,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         if (employeesFrame.employeeDO.update(getDataForm())) {
             clearForm();
             employeesFrame.load();
-            Show.success(this, "Update successfully !");
+            OptionPane.success(this, "Update successfully !");
         }
     }
 
@@ -53,34 +54,37 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                 txtIdEmployees.getText(),
                 txtName.getText(),
                 Integer.parseInt(txtAge.getText()),
-                rdoManage.isSelected()
+                rdoMale.isSelected(),
+                txtPhoneNumber.getText(),
+                rdoManage.isSelected(),
+                txtAddress.getText()
         );
     }
 
     private void loadForm(Employees em) {
-        if (em != null) {
-            txtIdEmployees.setText(em.getIdEmployees());
-            txtName.setText(em.getName());
-            txtAge.setText(em.getAge() + "");
-            if (em.isIdRole()) {
-                rdoManage.setSelected(true);
-            } else {
-                rdoEmployees.setVisible(true);
-            }
+        txtIdEmployees.setText(em.getIdEmployees());
+        txtName.setText(em.getName());
+        txtAge.setText(em.getAge() + "");
+        if(em.isSex()){
+            rdoMale.setSelected(true);
+        }else{
+            rdoFemale.setSelected(true);
         }
+        txtPhoneNumber.setText(em.getPhoneNumber());
+        if (em.isRole()) {
+            rdoManage.setSelected(true);
+        } else {
+            rdoEmployees.setSelected(true);
+        }
+        txtAddress.setText(em.getAddress());
     }
-
 
     private void loadFormList(int index) {
         loadForm(EmployeeJFrame.list.get(index));
     }
 
     private void clearForm() {
-        txtIdEmployees.setText(null);
-        txtName.setText(null);
-        txtAge.setText(null);
-        rdoEmployees.setSelected(true);
-        employeesFrame.employees = null;
+        loadForm(new Employees());
         EmployeeJFrame.index = -1;
     }
 
@@ -92,7 +96,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
         return true;
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,42 +110,39 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         txtAge = new javax.swing.JTextField();
         txtIdEmployees = new javax.swing.JTextField();
-        rdoManage = new javax.swing.JRadioButton();
         txtName = new javax.swing.JTextField();
-        rdoEmployees = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtPhoneNumber = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAddress = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        rdoMale = new javax.swing.JRadioButton();
+        rdoFemale = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        rdoManage = new javax.swing.JRadioButton();
+        rdoEmployees = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Employees");
 
-        jPanel1.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel6.setBackground(new java.awt.Color(250, 250, 250));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        rdoManage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rdoManage.setText("Manage");
-        rdoManage.addActionListener(new java.awt.event.ActionListener() {
+        txtIdEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoManageActionPerformed(evt);
+                txtIdEmployeesActionPerformed(evt);
             }
         });
-
-        rdoEmployees.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rdoEmployees.setText("Employee");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Name :");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -151,11 +152,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("IdEmployees :");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Role :");
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         jLabel5.setBackground(new java.awt.Color(250, 250, 250));
@@ -166,37 +163,108 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jLabel5.setText("Employees");
         jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Name :");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Phone Number : ");
+
+        txtAddress.setColumns(20);
+        txtAddress.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtAddress.setRows(5);
+        jScrollPane1.setViewportView(txtAddress);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Address :");
+
+        rdoMale.setText("Male");
+
+        rdoFemale.setText("Female");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Sex :");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Role :");
+
+        rdoManage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rdoManage.setText("Manager");
+        rdoManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoManageActionPerformed(evt);
+            }
+        });
+
+        rdoEmployees.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rdoEmployees.setText("Employee");
+        rdoEmployees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoEmployeesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(rdoManage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rdoEmployees)
-                        .addGap(70, 70, 70))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 22, Short.MAX_VALUE))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(28, 28, 28))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(77, 77, 77)
+                                .addComponent(rdoMale)
+                                .addGap(113, 113, 113)
+                                .addComponent(rdoFemale))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(rdoManage)
+                                .addGap(74, 74, 74)
+                                .addComponent(rdoEmployees))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAge)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(37, 37, 37))
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel6, jLabel7});
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAge, txtIdEmployees, txtName});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rdoEmployees, rdoManage});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAge, txtIdEmployees, txtName, txtPhoneNumber});
 
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,30 +272,44 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                    .addComponent(jLabel6)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdoFemale)
+                            .addComponent(rdoMale))
+                        .addGap(57, 57, 57))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(38, 38, 38)))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoManage)
                     .addComponent(rdoEmployees)
+                    .addComponent(rdoManage)
                     .addComponent(jLabel4))
-                .addGap(77, 77, 77))
+                .addGap(20, 20, 20))
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAge, txtIdEmployees, txtName});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel6, jLabel7, jLabel8});
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAge, txtIdEmployees, txtName, txtPhoneNumber});
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
         jButton2.setText("Cancel");
@@ -237,7 +319,6 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             }
         });
 
-        btnOk.setBackground(new java.awt.Color(255, 255, 255));
         btnOk.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_success_1646004.png"))); // NOI18N
         btnOk.setText("OK");
@@ -247,7 +328,6 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-clear_118917.png"))); // NOI18N
         jButton1.setText("Clear");
@@ -257,15 +337,13 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setBackground(java.awt.Color.white);
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-rtl_23350.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-rtl_23350.png"))); // NOI18N
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
-        btnNext.setBackground(java.awt.Color.white);
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-ltr_23349.png"))); // NOI18N
         btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNext.setFocusCycleRoot(true);
@@ -292,14 +370,6 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jButton3)
-                .addGap(45, 45, 45)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btnNext)
-                .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,47 +377,55 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addComponent(jButton2)
-                .addGap(76, 76, 76))
+                .addGap(185, 185, 185))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNext)
+                .addGap(12, 12, 12))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnOk, jButton1, jButton2});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnNext, jButton3});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBack, btnNext});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(btnNext))
+                        .addGap(290, 290, 290)
+                        .addComponent(btnBack))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(btnNext)))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnOk, jButton1, jButton2});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnNext, jButton3});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBack, btnNext});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -356,12 +434,11 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-       if (employeesFrame.employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
+        if (employeesFrame.employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
             add();
         } else {
             update();
         }
-        employeesFrame.employees = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void rdoManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoManageActionPerformed
@@ -374,31 +451,40 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+        clearForm();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        if(EmployeeJFrame.index < EmployeeJFrame.list.size() - 1 ){
+        if (EmployeeJFrame.index < EmployeeJFrame.list.size() - 1) {
             loadFormList(++EmployeeJFrame.index);
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(EmployeeJFrame.index > 0){
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        if (EmployeeJFrame.index > 0) {
             loadFormList(--EmployeeJFrame.index);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseMoved
 
     }//GEN-LAST:event_btnNextMouseMoved
 
     private void btnNextMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseDragged
-        
+
     }//GEN-LAST:event_btnNextMouseDragged
 
     private void btnNextMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_btnNextMouseWheelMoved
-        
+
     }//GEN-LAST:event_btnNextMouseWheelMoved
+
+    private void rdoEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEmployeesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoEmployeesActionPerformed
+
+    private void txtIdEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmployeesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdEmployeesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,7 +516,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EmployeeJDiglog dialog = new EmployeeJDiglog(new EmployeeJFrame(), true,null);
+                EmployeeJDiglog dialog = new EmployeeJDiglog(new EmployeeJFrame(), true, new Employees());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -442,25 +528,34 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         });
     }
 
-    private final ButtonGroup GROUP = new ButtonGroup();
+    private final ButtonGroup bgrRole = new ButtonGroup();
+    private final ButtonGroup bgrSex = new ButtonGroup();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnOk;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdoEmployees;
+    private javax.swing.JRadioButton rdoFemale;
+    private javax.swing.JRadioButton rdoMale;
     private javax.swing.JRadioButton rdoManage;
+    private javax.swing.JTextArea txtAddress;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtIdEmployees;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,7 +7,7 @@ package Form;
 
 import DAO.EmployeesDAO;
 import DAO.UserDAO;
-import Library.Show;
+import Library.OptionPane;
 import Model.Employees;
 import Model.Users;
 import java.util.List;
@@ -72,14 +72,14 @@ public class JFrameUsers extends javax.swing.JFrame {
     private void add(){
         if(userDAO.insert(getUsers())){
             reload();
-            Show.success(this, "Insert successfully !");
+            OptionPane.success(this, "Insert successfully !");
         }
     }
     
     private void delete(){
         if(userDAO.delete(txtUserName.getText())){
             reload();
-            Show.success(this, "Deleted !");
+            OptionPane.success(this, "Deleted !");
         }
     }
     

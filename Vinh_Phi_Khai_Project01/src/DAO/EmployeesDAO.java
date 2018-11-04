@@ -14,15 +14,18 @@ import java.util.List;
  *
  * @author Quang Phi
  */
-public class EmployeesDAO extends DAO<Employees> implements IDao<Employees,String>{
+public class EmployeesDAO extends DAO<Employees> implements IDao<Employees, String> {
 
     @Override
     public Employees getModel() throws SQLException {
         return new Employees(
-                rs.getString("IdEmployees"), 
-                rs.getString("Name"), 
-                rs.getInt("Age"), 
-                rs.getInt("Role") != 0
+                rs.getString("IdEmployees"),
+                rs.getString("Name"),
+                rs.getInt("Age"),
+                rs.getInt("Sex") != 0,
+                rs.getString("PhoneNumber"),
+                rs.getInt("Role") != 0,
+                rs.getString("Address")
         );
     }
 
@@ -34,21 +37,31 @@ public class EmployeesDAO extends DAO<Employees> implements IDao<Employees,Strin
     @Override
     public boolean insert(Employees model) {
         return executeUpdate(
-                "insert into Employees(IdEmployees,Name,Age,Role) values (?,?,?,?)", 
+                "insert into Employees"
+                + "(IdEmployees,Name,Age,Sex,PhoneNumber,Role,Address)"
+                + " values (?,?,?,?,?,?,?)",
                 model.getIdEmployees(),
                 model.getName(),
                 model.getAge(),
-                model.isIdRole() ? 1 : 0
+                model.isSex() ? 1 : 0,
+                model.getPhoneNumber(),
+                model.isRole() ? 1 : 0,
+                model.getAddress()
         );
     }
 
     @Override
     public boolean update(Employees model) {
         return executeUpdate(
-                "update Employees set Name = ?,Age = ?,Role = ? where IdEmployees = ?", 
+                "update Employees"
+                + " set Name = ?,Age = ?,Sex = ?,PhoneNumber=?,Role = ?,"
+                + "Address = ? where IdEmployees = ?",
                 model.getName(),
                 model.getAge(),
-                model.isIdRole() ? 1 : 0,
+                model.isSex() ? 1 : 0,
+                model.getPhoneNumber(),
+                model.isRole() ? 1 : 0,
+                model.getAddress(),
                 model.getIdEmployees()
         );
     }
@@ -62,12 +75,12 @@ public class EmployeesDAO extends DAO<Employees> implements IDao<Employees,Strin
     public List<Employees> findModel(String object) {
         return executeQuery("select * from Employees where IdEmployees = ?", object);
     }
-    
-    public boolean isUser(String idEmployees){
+
+    public boolean isUser(String idEmployees) {
         String sql = "Select * from Employees inner join Users on "
                 + "Employees.IdEmployees = Users.IdEmployees where "
                 + "Employees.IdEmployees = ?";
-        return executeQuery(sql, idEmployees).isEmpty();
+        return !executeQuery(sql, idEmployees).isEmpty();
     }
-    
+
 }

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Quang Phi
  */
-public class Show {
+public class OptionPane {
  
     public static final String TILTLE = "HỆ THỐNG QUẢN LÝ NHÀ HÀNG";
     

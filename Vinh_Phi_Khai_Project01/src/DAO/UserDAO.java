@@ -9,7 +9,6 @@ import Interface.IDao;
 import Model.Employees;
 import Model.Users;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,7 +65,7 @@ public class UserDAO extends DAO<Users> implements IDao<Users, String> {
         List<Employees> list = emDAO.getAll();
         for(int i = 0; i < list.size();){
             Employees em = list.get(i);
-            if(!emDAO.isUser(em.getIdEmployees())){
+            if(emDAO.isUser(em.getIdEmployees())){
                 list.remove(em);
             }else{
                 i++;

@@ -10,19 +10,26 @@ package Model;
  * @author Quang Phi
  */
 public class Employees {
+
     private String idEmployees;
     private String name;
     private int age;
-    private boolean idRole = false;
+    private boolean sex = true;
+    private String phoneNumber;
+    private boolean role = false;
+    private String address;
 
     public Employees() {
     }
 
-    public Employees(String idEmployees, String name, int age, boolean idRole) {
+    public Employees(String idEmployees, String name, int age, boolean sex, String phoneNumber, boolean role, String address) {
         this.idEmployees = idEmployees;
         this.name = name;
         this.age = age;
-        this.idRole = idRole;
+        this.sex = sex;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.address = address;
     }
 
     public String getIdEmployees() {
@@ -49,18 +56,41 @@ public class Employees {
         this.age = age;
     }
 
-    public boolean isIdRole() {
-        return idRole;
+    public boolean isSex() {
+        return sex;
     }
 
-    public void setIdRole(boolean idRole) {
-        this.idRole = idRole;
+    public void setSex(boolean sex) {
+        this.sex = sex;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean idRole) {
+        this.role = idRole;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return this.name;
     }
-    
-    
+
 }

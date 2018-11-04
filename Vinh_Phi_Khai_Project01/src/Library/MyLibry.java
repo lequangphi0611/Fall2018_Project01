@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Quang Phi
  */
-public class mylibry {
+public class MyLibry {
 
     static final String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY";
     static final Random RD = new Random();
@@ -19,9 +19,9 @@ public class mylibry {
 
     public static String randomString(int length) {
         String result = "";
-        int lengthAlpha = CHARS.length;
+        int lengthChars = CHARS.length;
         for (int i = 0; i < length;i++) {
-            result += CHARS[RD.nextInt(lengthAlpha)];
+            result += CHARS[RD.nextInt(lengthChars)];
         }
         return result;
     }

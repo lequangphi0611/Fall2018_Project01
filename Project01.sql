@@ -5,10 +5,13 @@ go
 go
 
 create table Employees(
-	IdEmployees varchar(5) primary key not null,
+	IdEmployees varchar(10) primary key not null,
 	Name nvarchar(50) not null,
 	Age int not null,
-	Role bit default 0
+	Sex bit default 0,
+	PhoneNumber varchar(11) unique,
+	Role bit default 0,
+	Address nvarchar(255) not null
 )
 
 
@@ -17,9 +20,9 @@ go
 
 
 create table Users(
-	UserName varchar (5) primary key not null,
-	Pass varchar(16) not null,
-	IdEmployees varchar(5) references Employees(IdEmployees) on Delete cascade unique
+	UserName varchar (10) primary key not null,
+	Pass varchar(20) not null,
+	IdEmployees varchar(10) references Employees(IdEmployees) on Delete cascade unique
 )
 
 go
@@ -40,18 +43,9 @@ create table Item(
 
 go
 
-create table Content(
-	IdContent varchar(7) primary key not null,
-	TableNum int not null,
-	Content nvarchar(max)
-)
-
-go
-
 create table bill(
 	IdBill varchar(5) primary key not null,
-	IdContent varchar(7) references Content(IdContent)on delete cascade,
-	IdEmloyees varchar(5) references Employees(IdEmployees),
+	IdEmloyees varchar(10) references Employees(IdEmployees),
 	DatePayment Date default getDate(),
 	SumPrice money not null
 )
@@ -59,4 +53,16 @@ create table bill(
 go 
 
 
-drop database project01
+create table Content(
+	IdContent int identity(1,1) primary key not null,
+	IdBill varchar(5) references bill(IdBill) on delete cascade unique,
+	TableNum int not null,
+	Content nvarchar(max)
+)
+
+go
+
+
+
+select * from Employees
+
