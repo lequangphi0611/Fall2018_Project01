@@ -5,8 +5,13 @@
  */
 package Form;
 
+import Model.Item;
+import Model.ItemOrder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,23 +20,51 @@ import java.awt.event.MouseEvent;
 public class OrderJDialog extends javax.swing.JDialog {
     
 
-    /**
-     * Creates new form OrderJDialog
-     */
+    
+    int numberItem = 0;
+    int numberOrder = 0;
+    int index = -1;
+    DefaultTableModel modelItem;
+    DefaultTableModel modelOrder;
+    List<Item> listItem = new ArrayList<>();
+    List<ItemOrder> listOrder = new ArrayList<>();
+    
     public OrderJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        tbOrder.getTableHeader().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                super.mouseClicked(me); //To change body of generated methods, choose Tools | Templates.
-                int colum = tbOrder.columnAtPoint(me.getPoint());
-                if(colum == 2){
-                    //Do something  
-                }   
-            }
-        });
+        modelItem = (DefaultTableModel) tbItem.getModel();
+        modelOrder = (DefaultTableModel) tbOrder.getModel();
+        listItem.add(new Item(1,"Thịt Xào chua ngọt",100000,2));
+        listItem.add(new Item(2,"Đậu phộng chiên",400000,2));
+        listItem.add(new Item(3,"Trứng cút lộn",5000,2));
+        listItem.add(new Item(4,"Thịt heo Xào",200000,2));
+        loadItem();
+    }
+    
+    private void loadItem(){
+        modelItem.setRowCount(0);
+        for(Item item : listItem){
+            modelItem.addRow(new Object[]{
+                ++numberItem,
+                item.getItemName(),
+                item.getPrice(),
+                item.getIdCategory()
+            });
+        }
+    }
+    
+    private void loadItemOrder(){
+        modelOrder.setRowCount(0);
+        for(ItemOrder order : listOrder){
+            modelOrder.addRow(new Object[]{
+                ++numberOrder,
+                order.getItemName(),
+                order.getPrice(),
+                order.sumPrice()
+            });
+            
+        }
     }
     
     /**
@@ -48,12 +81,12 @@ public class OrderJDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbOrder = new javax.swing.JTable();
+        tbItem = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbOrder = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -73,7 +106,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
 
-        tbOrder.setModel(new javax.swing.table.DefaultTableModel(
+        tbItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -81,13 +114,18 @@ public class OrderJDialog extends javax.swing.JDialog {
                 "No.", "ItemName", "Price", "Category"
             }
         ));
-        jScrollPane2.setViewportView(tbOrder);
+        tbItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbItemMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbItem);
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel2.setText("Quantity :");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -95,9 +133,14 @@ public class OrderJDialog extends javax.swing.JDialog {
                 "No.", "ItemName", "Price", "Quantity"
             }
         ));
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(tbOrder);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_go-next_79501.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-go-back-ltr_79911.png"))); // NOI18N
 
@@ -207,6 +250,19 @@ public class OrderJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(index >= 0){
+            listOrder.add(new ItemOrder(listItem.get(index),Integer.parseInt(jSpinner1.getValue().toString())));
+            listItem.remove(index);
+            loadItem();
+            loadItemOrder();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbItemMouseClicked
+       index = tbItem.getSelectedRow();
+    }//GEN-LAST:event_tbItemMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -264,7 +320,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbItem;
     private javax.swing.JTable tbOrder;
     // End of variables declaration//GEN-END:variables
 }

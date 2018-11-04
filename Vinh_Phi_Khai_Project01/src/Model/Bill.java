@@ -13,7 +13,6 @@ import java.util.Date;
  */
 public class Bill {
     private String IdBill;
-    private String IdContentBill;
     private String idEmployees;
     private Date datePayment;
     private long sumPrice;
@@ -21,9 +20,8 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(String IdBill, String IdContentBill, String idEmployees, Date datePayment, long sumPrice) {
+    public Bill(String IdBill, String idEmployees, Date datePayment, long sumPrice) {
         this.IdBill = IdBill;
-        this.IdContentBill = IdContentBill;
         this.idEmployees = idEmployees;
         this.datePayment = datePayment;
         this.sumPrice = sumPrice;
@@ -35,14 +33,6 @@ public class Bill {
 
     public void setIdBill(String IdBill) {
         this.IdBill = IdBill;
-    }
-
-    public String getIdContentBill() {
-        return IdContentBill;
-    }
-
-    public void setIdContentBill(String IdContentBill) {
-        this.IdContentBill = IdContentBill;
     }
 
     public String getIdEmployees() {

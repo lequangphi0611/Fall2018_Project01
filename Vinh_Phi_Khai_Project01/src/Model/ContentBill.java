@@ -10,27 +10,37 @@ package Model;
  * @author Quang Phi
  */
 public class ContentBill {
-    private String idContent;
+    private int idContent;
+    private String idBill;
     private int tableNum;
     private String content;
 
     public ContentBill() {
     }
 
-    public ContentBill(String idContent, int tableNum, String content) {
+    public ContentBill(int idContent,String idBill, int tableNum, String content) {
         this.idContent = idContent;
+        this.idBill = idBill;
         this.tableNum = tableNum;
         this.content = content;
     }
 
-    public String getIdContent() {
+    public int getIdContent() {
         return idContent;
     }
 
-    public void setIdContent(String idContent) {
+    public void setIdContent(int idContent) {
         this.idContent = idContent;
     }
 
+    public String getIdBill() {
+        return idBill;
+    }
+
+    public void setIdBill(String idBill) {
+        this.idBill = idBill;
+    }
+    
     public int getTableNum() {
         return tableNum;
     }

@@ -379,7 +379,6 @@ public class JFrameUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
         fillComboBox();
         loadTable();
     }//GEN-LAST:event_formWindowOpened
