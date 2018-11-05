@@ -35,7 +35,7 @@ public class ItemOrder extends Item {
     }
 
     public long sumPrice() {
-        return getPrice() * this.quantity;
+        return super.getPrice() * this.quantity;
     }
 
     @Override

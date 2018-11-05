@@ -17,8 +17,6 @@ create table Employees(
 
 go
 
-
-
 create table Users(
 	UserName varchar (10) primary key not null,
 	Pass varchar(20) not null,
@@ -35,9 +33,10 @@ create table Category(
 go 
 
 create table Item(
-	IdItem int identity(1,1) not null,
+	IdItem int identity(1,1) not null primary key,
 	ItemName nvarchar(30) unique not null,
 	Price money not null,
+	DateAdded Date default getDate(),
 	IdCategory int references Category(IdCategory) on delete set null
 )
 
@@ -64,5 +63,4 @@ go
 
 
 
-select * from Employees
 

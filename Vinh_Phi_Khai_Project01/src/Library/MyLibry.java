@@ -20,7 +20,7 @@ public class MyLibry {
     public static String randomString(int length) {
         String result = "";
         int lengthChars = CHARS.length;
-        for (int i = 0; i < length;i++) {
+        for (int i = 0; i < length; i++) {
             result += CHARS[RD.nextInt(lengthChars)];
         }
         return result;
@@ -36,7 +36,7 @@ public class MyLibry {
                 break;
             } else if (index == 0) {
                 str = str.substring(1);
-            } else{
+            } else {
                 first[i] = str.substring(0, index).trim();
                 str = str.substring(index);
                 i++;

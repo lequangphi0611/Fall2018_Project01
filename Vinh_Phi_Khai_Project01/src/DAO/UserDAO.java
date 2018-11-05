@@ -60,7 +60,7 @@ public class UserDAO extends DAO<Users> implements IDao<Users, String> {
         return executeQuery("select * from Users where UserName = ?", object);
     }
     
-    public List<Employees> getEmployeesForUser(){
+    public List<Employees> getEmployeesIsNotUser(){
         EmployeesDAO emDAO = new EmployeesDAO();
         List<Employees> list = emDAO.getAll();
         for(int i = 0; i < list.size();){
