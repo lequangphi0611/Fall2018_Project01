@@ -1272,16 +1272,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        OrderJDialog orrder = new OrderJDialog(this, true);
-        orrder.setVisible(true);
-        TABLE01.setItemOrder(orrder.listOrder);
-        System.out.println(TABLE01.sumPrice());
-        for(ItemOrder order : TABLE01.getItemOrder()){
-            System.out.println(order.getItemName());
-        }
-        if(!TABLE01.isStatus()){
-            rdoBan1.setSelected(true);
-        }
+        
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel25AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel25AncestorAdded
@@ -1421,16 +1412,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel35MousePressed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        OrderJDialog orrder = new OrderJDialog(this, true);
-        orrder.setVisible(true);
-        TABLE02.setItemOrder(orrder.listOrder);
-        System.out.println(TABLE02.sumPrice());
-        for(ItemOrder order : TABLE02.getItemOrder()){
-            System.out.println(order.getItemName());
-        }
-        if(!TABLE02.isStatus()){
-            rdoBan1.setSelected(true);
-        }
+        
     }//GEN-LAST:event_jLabel2MouseClicked
 
 

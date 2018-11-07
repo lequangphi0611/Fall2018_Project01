@@ -10,26 +10,22 @@ package Model;
  * @author Quang Phi
  */
 public class Category {
-    private int idCategory;
+    private String idCategory;
     private String categoryName;
 
     public Category() {
     }
 
-    public Category(int idCategory,String categoryName) {
+    public Category(String idCategory,String categoryName) {
         this.idCategory = idCategory;
         this.categoryName = categoryName;
     }
-    
-    public Category(String categoryName) {
-        this.categoryName = categoryName;
-    }
 
-    public int getIdCategory() {
+    public String getIdCategory() {
         return idCategory;
     }
 
-    public void setIdCategory(int idCategory) {
+    public void setIdCategory(String idCategory) {
         this.idCategory = idCategory;
     }
 

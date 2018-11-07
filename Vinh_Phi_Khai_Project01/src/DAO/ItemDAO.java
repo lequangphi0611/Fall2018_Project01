@@ -22,7 +22,7 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
                 rs.getInt("IdItem"),
                 rs.getString("ItemName"),
                 rs.getLong("Price"),
-                rs.getInt("IdCategory")
+                rs.getString("IdCategory")
         );
     }
 
@@ -54,12 +54,12 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public boolean delete(Integer object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executeUpdate("delete from Item where IdItem = ?", object);
     }
 
     @Override
     public List<Item> findModel(Integer object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

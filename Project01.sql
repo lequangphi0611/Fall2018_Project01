@@ -26,7 +26,7 @@ create table Users(
 go
 
 create table Category(
-	IdCategory int identity(1,1) primary key not null,
+	IdCategory varchar(5) primary key not null,
 	CategoryName nvarchar(30) unique not null
 )
 
@@ -36,8 +36,7 @@ create table Item(
 	IdItem int identity(1,1) not null primary key,
 	ItemName nvarchar(30) unique not null,
 	Price money not null,
-	DateAdded Date default getDate(),
-	IdCategory int references Category(IdCategory) on delete set null
+	IdCategory varchar(5) references Category(IdCategory) on delete set null
 )
 
 go
@@ -46,20 +45,25 @@ create table bill(
 	IdBill varchar(5) primary key not null,
 	IdEmloyees varchar(10) references Employees(IdEmployees),
 	DatePayment Date default getDate(),
+	TableNumber int not null,
 	SumPrice money not null
 )
 
 go 
 
 
-create table Content(
-	IdContent int identity(1,1) primary key not null,
-	IdBill varchar(5) references bill(IdBill) on delete cascade unique,
-	TableNum int not null,
-	Content nvarchar(max)
+create table BillDetail(
+	IdBill varchar(5) references bill(IdBill) on delete cascade unique ,
+	IdItem int references Item(IdItem) on update no action,
+	Quantity int not null,
+	Price money not null
 )
 
 go
+
+
+
+
 
 
 

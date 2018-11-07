@@ -5,6 +5,8 @@
  */
 package Model;
 
+
+
 /**
  *
  * @author Quang Phi
@@ -13,18 +15,18 @@ public class Item {
     private int idItem;
     private String itemName;
     private long price;
-    private int idCategory;
+    private String idCategory;
 
     public Item() {
     }
 
-    public Item(int idItem, String itemName, long price, int idCategory) {
+    public Item(int idItem, String itemName, long price, String idCategory) {
         this.idItem = idItem;
         this.itemName = itemName;
         this.price = price;
         this.idCategory = idCategory;
     }
-    public Item(String itemName, long price, int idCategory) {
+    public Item(String itemName, long price, String idCategory) {
         this.itemName = itemName;
         this.price = price;
         this.idCategory = idCategory;
@@ -53,12 +55,12 @@ public class Item {
     public void setPrice(long price) {
         this.price = price;
     }
-
-    public int getIdCategory() {
+    
+    public String getIdCategory() {
         return idCategory;
     }
 
-    public void setIdCategory(int idCategory) {
+    public void setIdCategory(String idCategory) {
         this.idCategory = idCategory;
     }
 

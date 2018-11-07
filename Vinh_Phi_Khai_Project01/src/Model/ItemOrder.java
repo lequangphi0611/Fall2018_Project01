@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author Quang Phi
@@ -16,7 +18,7 @@ public class ItemOrder extends Item {
     public ItemOrder() {
     }
 
-    public ItemOrder(int idItem, String itemName, long price, int idCategory, int quantity) {
+    public ItemOrder(int idItem, String itemName, long price, String idCategory, int quantity) {
         super(idItem, itemName, price, idCategory);
         this.quantity = quantity;
     }

@@ -17,46 +17,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class OrderJDialog extends javax.swing.JDialog {
     
-    DefaultTableModel modelItem;
-    DefaultTableModel modelOrder;
-    List<Item> listItem = new ArrayList<>();
-    public List<ItemOrder> listOrder = new ArrayList<>();
     
     public OrderJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        modelItem = (DefaultTableModel) tbItem.getModel();
-        modelOrder = (DefaultTableModel) tbOrder.getModel();
-        listItem.add(new Item(1,"Thịt Xào chua ngọt",100000,2));
-        listItem.add(new Item(2,"Đậu phộng chiên",400000,2));
-        listItem.add(new Item(3,"Trứng cút lộn",5000,2));
-        listItem.add(new Item(4,"Thịt heo Xào",200000,2));
-        loadItem();
     }
-    
-    private void loadItem(){
-        modelItem.setRowCount(0);
-        for(Item item : listItem){
-            modelItem.addRow(new Object[]{
-                modelItem.getRowCount() + 1,
-                item.getItemName(),
-                item.getPrice()
-            });
-        }
-    }
-    
-    private void loadItemOrder(){
-        modelOrder.setRowCount(0);
-        for(ItemOrder order : listOrder){
-            modelOrder.addRow(new Object[]{
-                modelOrder.getRowCount() + 1,
-                order.getItemName(),
-                order.getPrice(),
-                order.getQuantity()
-            });
-        }
-    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -265,13 +232,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int index = tbItem.getSelectedRow();
-        if(index >= 0){
-            listOrder.add(new ItemOrder(listItem.get(index),Integer.parseInt(jSpinner1.getValue().toString())));
-            listItem.remove(index);
-            loadItem();
-            loadItemOrder();
-        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbItemMouseClicked
@@ -279,7 +240,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbItemMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

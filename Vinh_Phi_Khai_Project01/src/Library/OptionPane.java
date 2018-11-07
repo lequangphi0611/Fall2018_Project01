@@ -27,7 +27,7 @@ public class OptionPane {
     }
     
     public static void success(Component parent, String message){
-        JOptionPane.showMessageDialog(parent, message, TILTLE,-1);
+        JOptionPane.showMessageDialog(parent, message, TILTLE,JOptionPane.DEFAULT_OPTION);
     }
     
     public static boolean confirm(Component parent, String message){
