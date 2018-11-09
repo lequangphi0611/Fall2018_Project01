@@ -13,15 +13,24 @@ import java.util.Random;
  */
 public class MyLibry {
 
-    static final String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY";
-    static final Random RD = new Random();
-    static final char[] CHARS = ALPHABET.toCharArray();
+    private static final String FIRSTBILL = "HD0";
+    private static final String NUM = "0123456789";//Bổ sung ký tự alphabet
+    private static final Random RD = new Random();
 
-    public static String randomString(int length) {
-        String result = "";
-        int lengthChars = CHARS.length;
-        for (int i = 0; i < length; i++) {
-            result += CHARS[RD.nextInt(lengthChars)];
+    private static char[] getCharArr() {
+        return NUM.toCharArray();
+    }
+
+    public static String getRandomIdBill(int length) {
+        String result = FIRSTBILL;
+        if (length > result.length()) {
+            length -= result.length();
+            char[] chr = getCharArr();
+            int lengthOfChr = chr.length;
+            for (int i = 0; i < length; i++) {
+                int rdIndex = RD.nextInt(lengthOfChr);
+                result += chr[rdIndex];
+            }
         }
         return result;
     }

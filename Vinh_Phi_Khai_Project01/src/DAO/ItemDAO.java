@@ -21,6 +21,7 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
         return new Item(
                 rs.getInt("IdItem"),
                 rs.getString("ItemName"),
+                rs.getString("Unit"),
                 rs.getLong("Price"),
                 rs.getString("IdCategory")
         );
@@ -28,14 +29,15 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public List<Item> getAll() {
-        return executeQuery("select * from Item");
+        return executeQuery("select * from Item order by IdItem desc");
     }
 
     @Override
     public boolean insert(Item model) {
-        return executeUpdate("insert into Item (ItemName,Price,IdCategory)"
-                + "values (?,?,?)",
+        return executeUpdate("insert into Item (ItemName,Unit,Price,IdCategory)"
+                + "values (?,?,?,?)",
                 model.getItemName(),
+                model.getUnit(),
                 model.getPrice(),
                 model.getIdCategory()
         );
@@ -43,9 +45,10 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public boolean update(Item model) {
-        return executeUpdate("update Item set ItemName = ?, Price = ?, IdCategory = ?"
-                + " where IdItem = ?", 
+        return executeUpdate("update Item set ItemName = ?,Unit = ?, Price = ?, IdCategory = ?"
+                + " where IdItem = ?",
                 model.getItemName(),
+                model.getUnit(),
                 model.getPrice(),
                 model.getIdCategory(),
                 model.getIdItem()
@@ -61,5 +64,14 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
     public List<Item> findModel(Integer object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public List<Item> getItemByCategory(String category) {
+        return executeQuery(
+                "select * from Item inner join Category on Item.IdCategory = "
+                + "Category.IdCategory where Category.CategoryName = ? order by"
+                + " Item.Price asc",
+                category
+        );
+    }
+
 }

@@ -11,25 +11,30 @@ package Model;
  *
  * @author Quang Phi
  */
-public class Item {
+public class Item{
     private int idItem;
     private String itemName;
+    private String unit;
     private long price;
     private String idCategory;
 
     public Item() {
     }
 
-    public Item(int idItem, String itemName, long price, String idCategory) {
+    public Item(int idItem, String itemName,String unit, long price, String idCategory) {
         this.idItem = idItem;
         this.itemName = itemName;
+        this.unit = unit;
         this.price = price;
         this.idCategory = idCategory;
     }
-    public Item(String itemName, long price, String idCategory) {
-        this.itemName = itemName;
-        this.price = price;
-        this.idCategory = idCategory;
+    
+    public Item(Item item){
+        this.idItem = item.getIdItem();
+        this.itemName = item.getItemName();
+        this.price = item.getPrice();
+        this.unit = item.getUnit();
+        this.idCategory = item.getIdCategory();
     }
 
     public int getIdItem() {
@@ -46,6 +51,14 @@ public class Item {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public long getPrice() {
@@ -69,5 +82,14 @@ public class Item {
         return this.itemName+":"+this.price; //To change body of generated methods, choose Tools | Templates.
     }
     
+    //So sánh hai Item vs nhau
+    public int equals(Item item){
+        if(this.price > item.price){
+            return 1;
+        }else if(this.price < item.price){
+            return -1;
+        }
+        return 0;
+    }
     
 }

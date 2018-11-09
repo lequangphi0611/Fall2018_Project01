@@ -32,16 +32,20 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         list = employeeDO.getAll();
         model.setRowCount(0);
         for (Employees emp : list) {
-            model.addRow(new Object[]{
-                emp.getIdEmployees(),
-                emp.getName(),
-                emp.getAge(),
-                emp.isSex() ? "Nam" : "Nữ",
-                emp.getPhoneNumber(),
-                emp.isRole() ? "Quản lý" : "Nhân viên",
-                emp.getAddress()
-            });
+            model.addRow(employeesToObjectArr(emp));
         }
+    }
+
+    private Object[] employeesToObjectArr(Employees emp) {
+        return new Object[]{
+            emp.getIdEmployees(),
+            emp.getName(),
+            emp.getAge(),
+            emp.isSex() ? "Nam" : "Nữ",
+            emp.getPhoneNumber(),
+            emp.isRole() ? "Quản lý" : "Nhân viên",
+            emp.getAddress()
+        };
     }
 
     private void delete() {
@@ -223,7 +227,9 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tbJtableMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(index < 0) index = 0;
+        if (index < 0) {
+            index = 0;
+        }
         new EmployeeJDiglog(this, true, list.get(index)).setVisible(true);
 
     }//GEN-LAST:event_jButton10ActionPerformed

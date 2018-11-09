@@ -27,11 +27,11 @@ public class ConnectionDB {
         }
     }
 
-    public static Connection openConnect() throws SQLException {
+    private static Connection openConnect() throws SQLException {
         return DriverManager.getConnection(ConnectInfo.URL, ConnectInfo.USER, ConnectInfo.PASS);
     }
 
-    public static PreparedStatement prepareExecuted(String sql, Object... ob) throws SQLException {
+    public static PreparedStatement prepareUpdate(String sql, Object... ob) throws SQLException {
         PreparedStatement prepare = openConnect().prepareStatement(sql);
         if (ob.length > 0) {
             for (int i = 0; i < ob.length; i++) {
@@ -41,8 +41,8 @@ public class ConnectionDB {
         return prepare;
     }
 
-    public static ResultSet resultExeQuery(String sql, Object... ob) throws SQLException {
-        PreparedStatement prepare = prepareExecuted(sql, ob);
+    public static ResultSet resultQuery(String sql, Object... ob) throws SQLException {
+        PreparedStatement prepare = prepareUpdate(sql, ob);
         return prepare.executeQuery();
     }
 

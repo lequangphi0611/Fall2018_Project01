@@ -16,12 +16,12 @@ import java.util.Date;
  */
 public class Convert {
 
-    public static String toMoney(double money, String... pattern) {
+    public static String toMoney(long money, String... pattern) {
         DecimalFormat format = new DecimalFormat("###,###,###.##");
         if (pattern.length > 0) {
             format.applyPattern(pattern[0]);
         }
-        return format.format(money) + " đ";
+        return format.format(money) + " Đ";
     }
 
     public static Date getNow() {

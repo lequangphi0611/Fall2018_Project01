@@ -11,28 +11,33 @@ import java.util.Date;
  *
  * @author Quang Phi
  */
-public class Bill {
-    private String IdBill;
+public class Bill{
+
+    private String idBill;
     private String idEmployees;
-    private Date datePayment;
+    private Date datrPayment;
+    private int tableNumber;
     private long sumPrice;
+    private long sale;
 
     public Bill() {
     }
 
-    public Bill(String IdBill, String idEmployees, Date datePayment, long sumPrice) {
-        this.IdBill = IdBill;
+    public Bill(String idBill, String idEmployees, Date datrPayment, int tableNumber, long sumPrice, long sale) {
+        this.idBill = idBill;
         this.idEmployees = idEmployees;
-        this.datePayment = datePayment;
+        this.datrPayment = datrPayment;
+        this.tableNumber = tableNumber;
         this.sumPrice = sumPrice;
+        this.sale = sale;
     }
 
     public String getIdBill() {
-        return IdBill;
+        return idBill;
     }
 
-    public void setIdBill(String IdBill) {
-        this.IdBill = IdBill;
+    public void setIdBill(String idBill) {
+        this.idBill = idBill;
     }
 
     public String getIdEmployees() {
@@ -43,12 +48,20 @@ public class Bill {
         this.idEmployees = idEmployees;
     }
 
-    public Date getDatePayment() {
-        return datePayment;
+    public Date getDatrPayment() {
+        return datrPayment;
     }
 
-    public void setDatePayment(Date datePayment) {
-        this.datePayment = datePayment;
+    public void setDatrPayment(Date datrPayment) {
+        this.datrPayment = datrPayment;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
     public long getSumPrice() {
@@ -58,5 +71,21 @@ public class Bill {
     public void setSumPrice(long sumPrice) {
         this.sumPrice = sumPrice;
     }
+
+    public long getSale() {
+        return sale;
+    }
+
+    public void setSale(long sale) {
+        this.sale = sale;
+    }
+
+    public void setSaleToPercent(int percent) {
+        this.sale = (this.sumPrice * percent) / 100;
+    }
     
+    public long getTotal(){
+        return this.sumPrice - this.sale;
+    }
+
 }

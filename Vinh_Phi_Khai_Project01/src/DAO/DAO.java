@@ -17,19 +17,19 @@ import java.util.logging.Logger;
 /**
  *
  * @author Quang Phi
- * @param <Model>
+ * @param <M>
  */
-public abstract class DAO<Model> {
+public abstract class DAO<M> {
 
     PreparedStatement prepare = null;
     ResultSet rs = null;
 
-    public abstract Model getModel() throws SQLException;
+    public abstract M getModel() throws SQLException;
 
-    public List<Model> executeQuery(String sql, Object... ob) {
-        List<Model> list = new ArrayList<>();
+    public List<M> executeQuery(String sql, Object... ob) {
+        List<M> list = new ArrayList<>();
         try {
-            rs = ConnectionDB.resultExeQuery(sql, ob);
+            rs = ConnectionDB.resultQuery(sql, ob);
             while (rs.next()) {
                 list.add(getModel());
             }
@@ -47,7 +47,7 @@ public abstract class DAO<Model> {
 
     public boolean executeUpdate(String sql, Object... ob) {
         try {
-            prepare = ConnectionDB.prepareExecuted(sql, ob);
+            prepare = ConnectionDB.prepareUpdate(sql, ob);
             if (prepare.executeUpdate() > 0) {
                 return true;
             }

@@ -9,7 +9,7 @@ package Model;
  *
  * @author Quang Phi
  */
-public class Users {
+public class Users{
     private String userName;
     private String pass;
     private String IdEmployees;

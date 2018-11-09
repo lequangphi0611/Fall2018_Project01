@@ -8,6 +8,7 @@ package Form;
 import Library.OptionPane;
 import Model.Employees;
 import javax.swing.ButtonGroup;
+import static Form.EmployeeJFrame.*;
 
 /**
  *
@@ -19,12 +20,12 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
     public EmployeeJDiglog(EmployeeJFrame parent, boolean modal, Employees employees) {
         super(parent, modal);
-        contrustorBody();
+        init();
         employeesFrame = parent;
         loadForm(employees);
     }
 
-    private void contrustorBody() {
+    private void init() {
         initComponents();
         bgrRole.add(rdoEmployees);
         bgrRole.add(rdoManage);
@@ -80,12 +81,12 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }
 
     private void loadFormList(int index) {
-        loadForm(EmployeeJFrame.list.get(index));
+        loadForm(list.get(index));
     }
 
     private void clearForm() {
         loadForm(new Employees());
-        EmployeeJFrame.index = -1;
+        index = -1;
     }
 
     private boolean checkEmpty() {
@@ -455,14 +456,14 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        if (EmployeeJFrame.index < EmployeeJFrame.list.size() - 1) {
-            loadFormList(++EmployeeJFrame.index);
+        if (index < list.size() - 1) {
+            loadFormList(++index);
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        if (EmployeeJFrame.index > 0) {
-            loadFormList(--EmployeeJFrame.index);
+        if (index > 0) {
+            loadFormList(--index);
         }
     }//GEN-LAST:event_btnBackActionPerformed
 

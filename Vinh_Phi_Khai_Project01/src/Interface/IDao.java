@@ -10,18 +10,18 @@ import java.util.List;
 /**
  *
  * @author Quang Phi
- * @param <Model>
- * @param <Object>
+ * @param <M> là các class trong Pakage Model
+ * @param <O> Là cái kiểu dữ liệu Integer,String
  */
-public interface IDao<Model, Object> {
+public interface IDao<M, O> {
 
-    List<Model> getAll();
+    List<M> getAll();
 
-    boolean insert(Model model);
+    boolean insert(M model);
 
-    boolean update(Model model);
+    boolean update(M model);
 
-    boolean delete(Object object);
+    boolean delete(O object);
 
-    List<Model> findModel(Object object);
+    List<M> findModel(O object);
 }

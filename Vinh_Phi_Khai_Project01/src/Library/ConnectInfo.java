@@ -11,9 +11,9 @@ package Library;
  */
 public class ConnectInfo {
 
-    public static final String USER = "sa";
-    public static final String PASS = "123";
-    public static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Project01";
-    public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    protected static final String USER = "sa";
+    protected static final String PASS = "123";
+    protected static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Project01";
+    protected static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 }

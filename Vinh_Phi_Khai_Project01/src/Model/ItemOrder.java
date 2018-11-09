@@ -5,8 +5,6 @@
  */
 package Model;
 
-import java.util.Date;
-
 /**
  *
  * @author Quang Phi
@@ -18,13 +16,13 @@ public class ItemOrder extends Item {
     public ItemOrder() {
     }
 
-    public ItemOrder(int idItem, String itemName, long price, String idCategory, int quantity) {
-        super(idItem, itemName, price, idCategory);
+    public ItemOrder(int idItem, String itemName, String unit, long price, String idCategory, int quantity) {
+        super(idItem, itemName, unit, price, idCategory);
         this.quantity = quantity;
     }
 
     public ItemOrder(Item item, int quantity) {
-        super(item.getIdItem(), item.getItemName(), item.getPrice(), item.getIdCategory());
+        super(item.getIdItem(), item.getItemName(), item.getUnit(), item.getPrice(), item.getIdCategory());
         this.quantity = quantity;
     }
 
@@ -40,8 +38,33 @@ public class ItemOrder extends Item {
         return super.getPrice() * this.quantity;
     }
 
-    @Override
-    public String toString() {
-        return super.toString()+":"+this.quantity ;
+    //Hợp nhất 2 mặt hàng giống nhau (Hợp nhất số lượng của 2 mặt hàng)
+    //Dùng cho khi gọi thêm món...
+    public static ItemOrder merge(ItemOrder itemOrder1, ItemOrder itemOrder2) {
+        if (itemOrder1.equals(itemOrder2)) {
+            int newQuantity = itemOrder1.getQuantity() + itemOrder2.getQuantity();
+            itemOrder1.setQuantity(newQuantity);
+        }
+        return itemOrder1;
     }
+
+    //Sữ dụng khi người dùng trả lại  hàng
+    public static ItemOrder giveBackItem(ItemOrder item, int giveBackNum) {
+        if (item.getQuantity() < giveBackNum || giveBackNum < 0) {
+            throw new Error(
+                    "Lỗi ! giveBackNum phải bé hơn hoặc bằng số lượng của item "
+                    + "và phải lớn hơn 0"
+            );
+        }
+        int newQuantity = item.getQuantity() - giveBackNum;
+        item.setQuantity(newQuantity);
+        return item;
+    }
+
+    //So sánh 2 mặt hàng(so sánh tên và giá)
+    public boolean equals(ItemOrder item) {
+        return this.getItemName().equals(item.getItemName())
+                && this.getPrice() == item.getPrice();
+    }
+
 }

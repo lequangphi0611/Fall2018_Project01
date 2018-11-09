@@ -9,7 +9,7 @@ package Model;
  *
  * @author Quang Phi
  */
-public class Category {
+public class Category{
     private String idCategory;
     private String categoryName;
 
