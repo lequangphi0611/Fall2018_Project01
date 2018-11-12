@@ -26,6 +26,11 @@ public class ItemOrder extends Item {
         this.quantity = quantity;
     }
 
+    public ItemOrder(ItemOrder order) {
+        super(order.getIdItem(), order.getItemName(), order.getUnit(), order.getPrice(), order.getIdCategory());
+        this.quantity = order.quantity;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -42,10 +47,15 @@ public class ItemOrder extends Item {
     //Dùng cho khi gọi thêm món...
     public static ItemOrder merge(ItemOrder itemOrder1, ItemOrder itemOrder2) {
         if (itemOrder1.equals(itemOrder2)) {
-            int newQuantity = itemOrder1.getQuantity() + itemOrder2.getQuantity();
-            itemOrder1.setQuantity(newQuantity);
+            ItemOrder result = new ItemOrder(itemOrder1);
+            int newQuantity = result.getQuantity() + itemOrder2.getQuantity();
+            result.setQuantity(newQuantity);
+            return result;
+        } else {
+            throw new Error(
+                    "Lỗi ! không thể hợp nhất hai mặt hàng khác nhau"
+            );
         }
-        return itemOrder1;
     }
 
     //Sữ dụng khi người dùng trả lại  hàng
@@ -56,9 +66,10 @@ public class ItemOrder extends Item {
                     + "và phải lớn hơn 0"
             );
         }
-        int newQuantity = item.getQuantity() - giveBackNum;
-        item.setQuantity(newQuantity);
-        return item;
+        ItemOrder result = new ItemOrder(item);
+        int newQuantity = result.getQuantity() - giveBackNum;
+        result.setQuantity(newQuantity);
+        return result;
     }
 
     //So sánh 2 mặt hàng(so sánh tên và giá)

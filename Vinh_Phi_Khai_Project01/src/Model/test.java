@@ -5,8 +5,6 @@
  */
 package Model;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +19,7 @@ public class test {
         Item item = new Item(1, "Thịt ba rọi", "Kg", 100, "4445");
         Item item2 = new Item(1, "Thịt ba rọi", "Kg", 100, "4445");
         
-        ItemOrder itemOrder1 = new ItemOrder(item, 5);
+        ItemOrder itemOrder1 = new ItemOrder(item, 1);
         ItemOrder itemOrder2 = new ItemOrder(item2, 2);
         Table tb = new Table(1);
         tb.push(itemOrder1);
@@ -29,7 +27,17 @@ public class test {
             System.out.println(i.getItemName() + "--" +i.getQuantity());
         }
         System.out.println("----------Sau khi trừ----------");
-        tb.giveBackItem(itemOrder1, 4);
+        tb.giveBackItem(itemOrder1, 1);
+        System.out.println("STT "+itemOrder1.getQuantity());
+        if(tb.isEmpty()){System.out.println("Trống hàng");}
+        for(ItemOrder i : tb.getItemOrder()){
+            System.out.println(i.getItemName() + "--" +i.getQuantity());
+        }
+        for(int i = 0; i< 30; i++){
+            tb.push(itemOrder2);
+            System.out.println(i +" : "+itemOrder1.getQuantity());
+        }
+        if(tb.isEmpty()){System.out.println("Trống hàng");}
         for(ItemOrder i : tb.getItemOrder()){
             System.out.println(i.getItemName() + "--" +i.getQuantity());
         }

@@ -16,12 +16,14 @@ import java.util.Date;
  */
 public class Convert {
 
+    private static final SimpleDateFormat FORMATDATE = new SimpleDateFormat("dd/MM/yyyy");
+    private static final DecimalFormat FORMATDECIMAL = new DecimalFormat("###,###,###");
+
     public static String toMoney(long money, String... pattern) {
-        DecimalFormat format = new DecimalFormat("###,###,###.##");
         if (pattern.length > 0) {
-            format.applyPattern(pattern[0]);
+            return new DecimalFormat(pattern[0]).format(money);
         }
-        return format.format(money) + " Đ";
+        return FORMATDECIMAL.format(money) + " đ";
     }
 
     public static Date getNow() {
@@ -29,24 +31,21 @@ public class Convert {
     }
 
     public static String formatDate(Date date, String... pattern) {
-        SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
         if (pattern.length > 0) {
-            try {
-                simpleDate.applyPattern(pattern[0]);
-            } catch (java.lang.IllegalArgumentException ex) {
-            }
+            return new SimpleDateFormat(pattern[0]).format(date);
         }
-        return simpleDate.format(date);
+        return FORMATDATE.format(date);
+    }
+
+    public static Date parseDate(String date, String... pattern) {
+        try {
+            if (pattern.length > 0) {
+                return new SimpleDateFormat(pattern[0]).parse(date);
+            }
+            return FORMATDATE.parse(date);
+        } catch (ParseException ex) {
+            throw new RuntimeException(ex);
+        }
     }
     
-    public static Date parseDate(String date, String... pattern) throws ParseException{
-        SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
-        if(pattern.length > 0){
-            try {
-                simpleDate.applyPattern(pattern[0]);
-            } catch (java.lang.IllegalArgumentException ex) {
-            }
-        }
-        return simpleDate.parse(date);
-    }
 }

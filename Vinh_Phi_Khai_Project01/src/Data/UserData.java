@@ -5,6 +5,7 @@
  */
 package Data;
 
+import DAO.UserDAO;
 import Model.Users;
 
 /**
@@ -14,10 +15,6 @@ import Model.Users;
 public class UserData {
 
     private static Users user = null;
-
-    public static void login(Users user) {
-        UserData.user = user;
-    }
 
     public static void logOut() {
         UserData.user = null;
@@ -29,6 +26,22 @@ public class UserData {
 
     public static Users getUserInfor() {
         return UserData.user;
+    }
+
+    public static boolean login(String user, String password) throws Error {
+        try {
+            Users users = new UserDAO().findModel(user).get(0);
+
+            if (!users.getPassword().equals(password)) {
+                throw new Error("Sai mật khẩu ! Vui lòng nhập lại !");
+            }
+
+            UserData.user = users;
+            return true;
+
+        } catch (IndexOutOfBoundsException ex) {
+            throw new Error("Không tìm thấy thông tin đăng nhập !");
+        }
     }
 
 }

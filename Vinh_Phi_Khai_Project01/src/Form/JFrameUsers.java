@@ -120,7 +120,6 @@ public class JFrameUsers extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        rdoShowHidePass = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -185,13 +184,6 @@ public class JFrameUsers extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        rdoShowHidePass.setText("show");
-        rdoShowHidePass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdoShowHidePassMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -201,8 +193,6 @@ public class JFrameUsers extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rdoShowHidePass)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -216,8 +206,7 @@ public class JFrameUsers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtPass)
-                    .addComponent(rdoShowHidePass))
+                    .addComponent(txtPass))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -392,16 +381,6 @@ public class JFrameUsers extends javax.swing.JFrame {
         loadForm(tbJtable.getSelectedRow());
     }//GEN-LAST:event_tbJtableMouseClicked
 
-    private void rdoShowHidePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoShowHidePassMouseClicked
-        if(rdoShowHidePass.isSelected()){
-            rdoShowHidePass.setText("Hide");
-            txtPass.setEchoChar((char)0);
-        }else{
-            rdoShowHidePass.setText("Show");
-            txtPass.setEchoChar('*');
-        }
-    }//GEN-LAST:event_rdoShowHidePassMouseClicked
-
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -456,7 +435,6 @@ public class JFrameUsers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rdoShowHidePass;
     private javax.swing.JTable tbJtable;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUserName;

@@ -71,6 +71,8 @@ public class Table {
         return index;
     }
 
+    //Tạo các hàm remove , set, push tối ưu hóa sữ dụng list
+    //Thay vì table.list.add(Item) thì table.push(Item);
     public void remove(int index) {
         itemOrder.remove(index);
     }
@@ -92,11 +94,11 @@ public class Table {
     public void giveBackItem(ItemOrder itemOrder, int giveBackNum) {
         int index = indexOf(itemOrder);
         if (index >= 0) {
-            itemOrder = ItemOrder.giveBackItem(itemOrder, giveBackNum);
-            if (itemOrder.getQuantity() == 0) {
+            ItemOrder newItemOrder = ItemOrder.giveBackItem(itemOrder, giveBackNum);
+            if (newItemOrder.getQuantity() == 0) {
                 remove(index);
             } else {
-                set(index, itemOrder);
+                set(index, newItemOrder);
             }
         }
     }

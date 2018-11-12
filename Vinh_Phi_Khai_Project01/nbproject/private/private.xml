@@ -4,23 +4,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/ConnectionDB.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/BillDetail.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/EmployeesDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Interface/IDao.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/ItemOrder.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/new_Main.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/ItemDAO.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/CategoryJDialog.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/UserDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/EmployeeJFrame.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/DAO.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/ConnectInfo.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/test.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/JFrameUsers.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Data/UserData.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/ItemJFrame.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/MyLibry.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Data/UserData.java</file>
             <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Table.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Bill.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Users.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Employees.java</file>
-            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/OptionPane.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/Convert.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/Project01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/EmployeeJDiglog.java</file>
         </group>
     </open-files>
 </project-private>
