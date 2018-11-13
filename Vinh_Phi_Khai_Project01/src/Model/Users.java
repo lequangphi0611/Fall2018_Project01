@@ -9,7 +9,8 @@ package Model;
  *
  * @author Quang Phi
  */
-public class Users{
+public class Users {
+
     private String userName;
     private String pass;
     private String IdEmployees;
@@ -49,8 +50,7 @@ public class Users{
 
     @Override
     public String toString() {
-        return "UserName : "+userName + " , Pass "+ pass + " , IdEmployee : "+ IdEmployees;
+        return "UserName : " + userName + " , Pass " + pass + " , IdEmployee : " + IdEmployees;
     }
-    
-    
+
 }

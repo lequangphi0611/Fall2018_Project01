@@ -62,7 +62,7 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public List<Item> findModel(Integer object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executeQuery("Select * from Item where IdItem = ?", object);
     }
 
     public List<Item> getItemByCategory(String category) {

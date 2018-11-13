@@ -5,9 +5,18 @@
  */
 package Form;
 
+import DAO.BillDAO;
+import DAO.BillDetailDAO;
+import DAO.CategoryDAO;
+import DAO.ItemDAO;
+import DAO.UserDAO;
+import Data.UserData;
+import Library.Convert;
+import Model.Bill;
+import Model.BillDetail;
 import Model.Item;
 import Model.ItemOrder;
-import java.util.ArrayList;
+import Model.Table;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,15 +25,142 @@ import javax.swing.table.DefaultTableModel;
  * @author Quang Phi
  */
 public class OrderJDialog extends javax.swing.JDialog {
-    
-    
-    public OrderJDialog(java.awt.Frame parent, boolean modal) {
+
+    Table tableMain;
+    List<Item> listAllItem;
+    ItemDAO itemDO = new ItemDAO();
+    CategoryDAO cateDO = new CategoryDAO();
+    int index = -1;
+    BillDAO billDAO = new BillDAO();
+    Bill billMain = new Bill();
+    BillDetailDAO detailDAO = new BillDetailDAO();
+
+    public OrderJDialog(java.awt.Frame parent, boolean modal, Table table) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        tableMain = table;
+        modelInforBill = (DefaultTableModel) tbInforBill.getModel();
+        modelAllItem = (DefaultTableModel) tbAllItem.getModel();
+        loadToTableInforBill();
+        loadAllItem();
+        txtSumPrice.setText(tableMain.sumPrice() + "");
+        lblTable.setText("Bàn số "+table.getTableNum());
     }
 
+    private void loadAllItem() {
+        modelAllItem.setRowCount(0);
+        listAllItem = itemDO.getAll();
+        for (Item item : listAllItem) {
+            modelAllItem.addRow(new Object[]{
+                item.getItemName(),
+                Convert.toMoney(item.getPrice()),
+                item.getUnit(),
+                cateDO.findModel(item.getIdCategory()).get(0)
+            });
+        }
+    }
+
+    private void loadToTableInforBill() {
+        modelInforBill.setRowCount(0);
+        for (ItemOrder item : tableMain.getItemOrder()) {
+            modelInforBill.addRow(new Object[]{
+                modelInforBill.getRowCount() + 1,
+                item.getItemName(),
+                item.getUnit(),
+                Convert.toMoney(item.getPrice()),
+                item.getQuantity(),
+                Convert.toMoney(item.sumPrice())
+            });
+        }
+    }
+
+    private Bill getBill() {
+        return new Bill(
+                billDAO.getIDBill(),
+                UserData.getUserInfor().getIdEmployees(),
+                Convert.getNow(),
+                tableMain.getTableNum(),
+                tableMain.sumPrice(),
+                getSale()
+        );
+    }
+
+    private long getSale() {
+        try {
+            return Long.parseLong(txtSale.getText());
+        } catch (NumberFormatException ex) {
+            //Do nothing
+        }
+        return 0;
+    }
+
+    private int getPercent() {
+        try {
+            return Integer.parseInt(txtPercent.getText());
+        } catch (NumberFormatException ex) {
+            //Do nothing
+        }
+        return 0;
+    }
+
+    private int getQuantity() {
+        return (Integer) spnQuantity.getValue();
+    }
+
+    private void addItem() {
+        int i = tbAllItem.getSelectedRow();
+        tableMain.push(new ItemOrder(listAllItem.get(i), getQuantity()));
+        loadToTableInforBill();
+        txtSumPrice.setText(tableMain.sumPrice() + "");
+
+    }
+
+    private void giveBackItem() {
+        if (index >= 0) {
+            tableMain.giveBackItem(tableMain.getItemOrder().get(index), getQuantity());
+            loadToTableInforBill();
+            if (!tableMain.isEmpty()) {
+                tbInforBill.setRowSelectionInterval(index, index);
+            }
+            txtSumPrice.setText(tableMain.sumPrice() + "");
+
+        }
+    }
+
+    private void loadForm(Item item, int quantity) {
+        txtItemName.setText(item.getItemName());
+        txtPrice.setText(item.getPrice() + "");
+        spnQuantity.setValue(quantity);
+    }
+
+    private void action() {
+        Bill bill = getBill();
+        if (billDAO.insert(bill)) {
+            for (ItemOrder item : tableMain.getItemOrder()) {
+                detailDAO.insert(new BillDetail(
+                        bill.getIdBill(),
+                        item.getIdItem(),
+                        item.getQuantity(),
+                        item.getPrice()
+                ));
+            }
+        }
+        tableMain.clear();
+        loadToTableInforBill();
+        resetPayForm();
+        clearForm();
+        new BillDetailJDialog(null, true, bill).setVisible(true);
+    }
+
+    private void clearForm(){
+        loadForm(new Item(), 1);
+    }
     
+    private void resetPayForm(){
+        txtSumPrice.setText("0");
+        txtPercent.setText("0");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,182 +171,205 @@ public class OrderJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbItem = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbOrder = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tbAllItem = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbInforBill = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtPercent = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtSumPrice = new javax.swing.JTextField();
+        txtSale = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtItemName = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        btnAddItem = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        spnQuantity = new javax.swing.JSpinner();
+        lblTable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setBackground(new java.awt.Color(245, 245, 245));
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("No. ");
-        jPanel1.add(jLabel3, java.awt.BorderLayout.CENTER);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("DANH SÁCH THỰC ĐƠN");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
-
-        tbItem.setModel(new javax.swing.table.DefaultTableModel(
+        tbAllItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.", "ItemName", "Price"
+                "Tên mặt hàng", "Đơn giá", "ĐVT", "Loại mặt hàng"
             }
         ));
-        tbItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbAllItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbItemMouseClicked(evt);
+                tbAllItemMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbItem);
-        if (tbItem.getColumnModel().getColumnCount() > 0) {
-            tbItem.getColumnModel().getColumn(0).setMaxWidth(40);
+        jScrollPane2.setViewportView(tbAllItem);
+        if (tbAllItem.getColumnModel().getColumnCount() > 0) {
+            tbAllItem.getColumnModel().getColumn(0).setMinWidth(150);
+            tbAllItem.getColumnModel().getColumn(0).setMaxWidth(150);
+            tbAllItem.getColumnModel().getColumn(1).setMinWidth(100);
+            tbAllItem.getColumnModel().getColumn(1).setMaxWidth(100);
+            tbAllItem.getColumnModel().getColumn(2).setMinWidth(100);
+            tbAllItem.getColumnModel().getColumn(2).setMaxWidth(100);
         }
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 460, 311));
 
-        jLabel2.setText("Quantity :");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("THÔNG TIN HÓA ĐƠN");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
 
-        tbOrder.setModel(new javax.swing.table.DefaultTableModel(
+        tbInforBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.", "ItemName", "Price", "Quantity"
+                "STT", "Mặt hàng", "ĐVT", "Đơn giá", "Số lượng", "Tổng"
             }
         ));
-        jScrollPane1.setViewportView(tbOrder);
-        if (tbOrder.getColumnModel().getColumnCount() > 0) {
-            tbOrder.getColumnModel().getColumn(0).setMaxWidth(40);
-        }
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_go-next_79501.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        tbInforBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbInforBillMouseClicked(evt);
             }
         });
+        jScrollPane3.setViewportView(tbInforBill);
+        if (tbInforBill.getColumnModel().getColumnCount() > 0) {
+            tbInforBill.getColumnModel().getColumn(0).setMinWidth(50);
+            tbInforBill.getColumnModel().getColumn(0).setMaxWidth(50);
+            tbInforBill.getColumnModel().getColumn(1).setMinWidth(200);
+            tbInforBill.getColumnModel().getColumn(1).setMaxWidth(270);
+        }
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-go-back-ltr_79911.png"))); // NOI18N
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 680, 310));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-cancel_79836.png"))); // NOI18N
-        jButton4.setText("Cancel");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_success_1646004.png"))); // NOI18N
-        jButton3.setText("OK");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Money_206469.png"))); // NOI18N
+        jButton3.setText("Thanh toán");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, -1, 40));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Filter :");
+        jLabel8.setText("Giảm giá:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 105, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        txtPercent.setText("0");
+        txtPercent.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtPercentCaretUpdate(evt);
+            }
+        });
+        jPanel2.add(txtPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 40, 30));
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton3, jButton4});
+        jLabel9.setText("%");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 20, 20));
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+        jLabel10.setText("Tổng:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
 
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel11.setText("Giảm trừ:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton3, jButton4});
+        jLabel12.setText("Phải thu:");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, -1, -1));
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2});
+        txtSumPrice.setText("0");
+        txtSumPrice.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSumPriceCaretUpdate(evt);
+            }
+        });
+        jPanel2.add(txtSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 130, -1));
+
+        txtSale.setText("0");
+        txtSale.setEnabled(false);
+        txtSale.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSaleCaretUpdate(evt);
+            }
+        });
+        txtSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSaleActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, 130, -1));
+
+        txtTotal.setText("0");
+        jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 130, -1));
+
+        jLabel13.setText("Tên mặt hàng:");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+
+        jLabel14.setText("Đơn giá:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, -1));
+        jPanel2.add(txtItemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 110, -1));
+        jPanel2.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 110, -1));
+
+        btnAddItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Create.png"))); // NOI18N
+        btnAddItem.setText("Gọi");
+        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddItemActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAddItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 80, 40));
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_minus_remove_green_61638.png"))); // NOI18N
+        jButton5.setText("Trả");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 80, 40));
+
+        jLabel5.setText("Số lượng:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+
+        spnQuantity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel2.add(spnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 60, -1));
+
+        lblTable.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTable.setForeground(new java.awt.Color(0, 153, 0));
+        lblTable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTable.setText("Bàn số");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1220, Short.MAX_VALUE)
+                    .addComponent(lblTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,24 +383,52 @@ public class OrderJDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
+        addItem();
+    }//GEN-LAST:event_btnAddItemActionPerformed
 
-    private void tbItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbItemMouseClicked
+    private void txtSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSaleActionPerformed
 
-    }//GEN-LAST:event_tbItemMouseClicked
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        giveBackItem();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tbAllItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseClicked
+        loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
+    }//GEN-LAST:event_tbAllItemMouseClicked
+
+    private void tbInforBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInforBillMouseClicked
+        index = tbInforBill.getSelectedRow();
+        ItemOrder item = tableMain.getItemOrder().get(index);
+        loadForm(item, item.getQuantity());
+    }//GEN-LAST:event_tbInforBillMouseClicked
+
+    private void txtPercentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPercentCaretUpdate
+        long percentSale = tableMain.sumPrice() * getPercent() / 100;
+        txtSale.setText(percentSale+"");
+    }//GEN-LAST:event_txtPercentCaretUpdate
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        action();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtSumPriceCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSumPriceCaretUpdate
+        txtTotal.setText(getBill().getTotal()+"");
+    }//GEN-LAST:event_txtSumPriceCaretUpdate
+
+    private void txtSaleCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSaleCaretUpdate
+        txtTotal.setText(getBill().getTotal()+"");
+    }//GEN-LAST:event_txtSaleCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -269,11 +456,14 @@ public class OrderJDialog extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(OrderJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                OrderJDialog dialog = new OrderJDialog(new javax.swing.JFrame(), true);
+                OrderJDialog dialog = new OrderJDialog(new javax.swing.JFrame(), true, new Table(0));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -285,22 +475,35 @@ public class OrderJDialog extends javax.swing.JDialog {
         });
     }
 
+    private DefaultTableModel modelInforBill;
+    private DefaultTableModel modelAllItem;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAddItem;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable tbItem;
-    private javax.swing.JTable tbOrder;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblTable;
+    private javax.swing.JSpinner spnQuantity;
+    private javax.swing.JTable tbAllItem;
+    private javax.swing.JTable tbInforBill;
+    private javax.swing.JTextField txtItemName;
+    private javax.swing.JTextField txtPercent;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSale;
+    private javax.swing.JTextField txtSumPrice;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

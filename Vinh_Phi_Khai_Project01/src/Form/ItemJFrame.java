@@ -50,7 +50,7 @@ public class ItemJFrame extends javax.swing.JFrame {
             }
         }
         );
-        
+
     }
 
     //Sắp xếp list theo giá - giảm dần
@@ -171,7 +171,7 @@ public class ItemJFrame extends javax.swing.JFrame {
         } catch (ClassCastException ex) {
             Category cate = (Category) cboIdCategoryFilter.getSelectedItem();
             list = itemDAO.getItemByCategory(cate.getCategoryName());
-        }catch(NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println(ex.fillInStackTrace());
         }
         loadTable(list);

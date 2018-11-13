@@ -11,11 +11,11 @@ import java.util.Date;
  *
  * @author Quang Phi
  */
-public class Bill{
+public class Bill {
 
     private String idBill;
     private String idEmployees;
-    private Date datrPayment;
+    private Date datePayment;
     private int tableNumber;
     private long sumPrice;
     private long sale;
@@ -23,10 +23,10 @@ public class Bill{
     public Bill() {
     }
 
-    public Bill(String idBill, String idEmployees, Date datrPayment, int tableNumber, long sumPrice, long sale) {
+    public Bill(String idBill, String idEmployees, Date datePayment, int tableNumber, long sumPrice, long sale) {
         this.idBill = idBill;
         this.idEmployees = idEmployees;
-        this.datrPayment = datrPayment;
+        this.datePayment = datePayment;
         this.tableNumber = tableNumber;
         this.sumPrice = sumPrice;
         this.sale = sale;
@@ -48,12 +48,12 @@ public class Bill{
         this.idEmployees = idEmployees;
     }
 
-    public Date getDatrPayment() {
-        return datrPayment;
+    public Date getDatePayment() {
+        return datePayment;
     }
 
-    public void setDatrPayment(Date datrPayment) {
-        this.datrPayment = datrPayment;
+    public void setDatePayment(Date datePayment) {
+        this.datePayment = datePayment;
     }
 
     public int getTableNumber() {
@@ -83,8 +83,8 @@ public class Bill{
     public void setSaleToPercent(int percent) {
         this.sale = (this.sumPrice * percent) / 100;
     }
-    
-    public long getTotal(){
+
+    public long getTotal() {
         return this.sumPrice - this.sale;
     }
 

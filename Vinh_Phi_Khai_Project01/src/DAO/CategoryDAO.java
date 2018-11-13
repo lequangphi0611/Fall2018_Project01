@@ -19,7 +19,7 @@ public class CategoryDAO extends DAO<Category> implements IDao<Category, String>
     @Override
     public Category getModel() throws SQLException {
         return new Category(
-                rs.getString("IdCategory"), 
+                rs.getString("IdCategory"),
                 rs.getString("CategoryName")
         );
     }

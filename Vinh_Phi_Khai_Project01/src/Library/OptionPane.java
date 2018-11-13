@@ -13,26 +13,26 @@ import javax.swing.JOptionPane;
  * @author Quang Phi
  */
 public class OptionPane {
- 
+
     public static final String TILTLE = "HỆ THỐNG QUẢN LÝ NHÀ HÀNG";
-    
-    public static boolean error(Component combonent,String message){
+
+    public static boolean error(Component combonent, String message) {
         combonent.requestFocus();
         alert(combonent, message);
         return false;
     }
-    
-    public static void alert(Component parent,String message){
-        JOptionPane.showMessageDialog(parent,message, TILTLE,  JOptionPane.ERROR_MESSAGE);
+
+    public static void alert(Component parent, String message) {
+        JOptionPane.showMessageDialog(parent, message, TILTLE, JOptionPane.ERROR_MESSAGE);
     }
-    
-    public static void success(Component parent, String message){
-        JOptionPane.showMessageDialog(parent, message, TILTLE,JOptionPane.DEFAULT_OPTION);
+
+    public static void success(Component parent, String message) {
+        JOptionPane.showMessageDialog(parent, message, TILTLE, JOptionPane.DEFAULT_OPTION);
     }
-    
-    public static boolean confirm(Component parent, String message){
+
+    public static boolean confirm(Component parent, String message) {
         int confirm = JOptionPane.showConfirmDialog(parent, message, TILTLE, JOptionPane.QUESTION_MESSAGE);
         return confirm == JOptionPane.YES_OPTION;
     }
-    
+
 }

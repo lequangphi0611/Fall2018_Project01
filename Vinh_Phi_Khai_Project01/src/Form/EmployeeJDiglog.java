@@ -66,9 +66,9 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         txtIdEmployees.setText(em.getIdEmployees());
         txtName.setText(em.getName());
         txtAge.setText(em.getAge() + "");
-        if(em.isSex()){
+        if (em.isSex()) {
             rdoMale.setSelected(true);
-        }else{
+        } else {
             rdoFemale.setSelected(true);
         }
         txtPhoneNumber.setText(em.getPhoneNumber());

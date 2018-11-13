@@ -9,14 +9,15 @@ package Model;
  *
  * @author Quang Phi
  */
-public class Category{
+public class Category {
+
     private String idCategory;
     private String categoryName;
 
     public Category() {
     }
 
-    public Category(String idCategory,String categoryName) {
+    public Category(String idCategory, String categoryName) {
         this.idCategory = idCategory;
         this.categoryName = categoryName;
     }
@@ -41,6 +42,5 @@ public class Category{
     public String toString() {
         return this.categoryName; //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

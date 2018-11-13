@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package Form;
+
 import DAO.CategoryDAO;
 import Library.OptionPane;
 import Model.Category;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 /**
  *
  * @author ➻❥ ๖Kɦaї Ꮭε ๖➻❥
@@ -19,8 +21,10 @@ public class CategoryJDialog extends javax.swing.JDialog {
     ItemJFrame itemFrame;
     CategoryDAO cateDAO = new CategoryDAO();
     DefaultTableModel model;
+
     /**
      * Creates new form NewJDialog
+     *
      * @param parent
      * @param modal
      */
@@ -32,10 +36,10 @@ public class CategoryJDialog extends javax.swing.JDialog {
         loadTable();
     }
 
-    private void loadTable(){
+    private void loadTable() {
         List<Category> list = cateDAO.getAll();
         model.setRowCount(0);
-        for(Category category : list){
+        for (Category category : list) {
             model.addRow(new Object[]{
                 model.getRowCount() + 1,
                 category.getIdCategory(),
@@ -43,66 +47,65 @@ public class CategoryJDialog extends javax.swing.JDialog {
             });
         }
     }
-   
-    
-    private void add(){
-        if(cateDAO.insert(getCategory())){
+
+    private void add() {
+        if (cateDAO.insert(getCategory())) {
             reload();
             OptionPane.success(this, "Thêm thành công !");
         }
     }
-    
-    private void edit(){
+
+    private void edit() {
         int index = tblTable.getSelectedRow();
-        if(index == -1){
+        if (index == -1) {
             OptionPane.alert(this, "Vui lòng chọn dữ liệu trên bảng để tiếp tục !");
-        }else{
-            if(cateDAO.update(getCategoryFromTable(index))){
+        } else {
+            if (cateDAO.update(getCategoryFromTable(index))) {
                 reload();
                 OptionPane.success(this, "Cập nhật thành công !");
             }
         }
     }
-    
-    private void delele(){
+
+    private void delele() {
         int index = tblTable.getSelectedRow();
-        if(index == -1){
+        if (index == -1) {
             OptionPane.alert(this, "Vui lòng chọn dữ liệu trên bảng để tiếp tục !");
-        }else{
-            if(cateDAO.delete(getCategoryFromTable(index).getIdCategory())){
+        } else {
+            if (cateDAO.delete(getCategoryFromTable(index).getIdCategory())) {
                 reload();
                 OptionPane.success(this, "Xóa thành công !");
             }
         }
     }
-    
-    private Category getCategoryFromTable(int index){
+
+    private Category getCategoryFromTable(int index) {
         Category cate = new Category();
-        if(index >= 0){
+        if (index >= 0) {
             cate.setIdCategory(model.getValueAt(index, 1).toString());
             cate.setCategoryName(model.getValueAt(index, 2).toString());
         }
         return cate;
     }
-    
-    private Category getCategory(){
+
+    private Category getCategory() {
         return new Category(
                 txtIdCategory.getText(),
                 txtCategory.getText()
         );
     }
-    
-    private void reset(){
+
+    private void reset() {
         txtCategory.setText(null);
         txtIdCategory.setText(null);
     }
-    
-    private void reload(){
+
+    private void reload() {
         reset();
         itemFrame.fillCategory();
         loadTable();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -9,7 +9,7 @@ package Model;
  *
  * @author Quang Phi
  */
-public class BillDetail{
+public class BillDetail {
 
     private String idBill;
     private int idItem;
@@ -57,6 +57,10 @@ public class BillDetail{
 
     public void setPrice(long Price) {
         this.Price = Price;
+    }
+    
+    public long sumPrice(){
+        return quantity * Price;
     }
 
 }

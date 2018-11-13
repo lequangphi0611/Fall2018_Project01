@@ -46,7 +46,7 @@ go
 
 create table bill(
 	IdBill varchar(10) primary key not null,
-	IdEmloyees varchar(10) references Employees(IdEmployees) on delete no action,
+	IdEmployees varchar(10) references Employees(IdEmployees) on delete no action,
 	DatePayment Date default getDate(),
 	TableNumber int not null,
 	SumPrice money not null,
@@ -58,15 +58,13 @@ go
 
 
 create table BillDetail(
-	IdBill varchar(10) references bill(IdBill) on delete cascade unique ,
+	IdBill varchar(10) references bill(IdBill) on delete cascade,
 	IdItem int references Item(IdItem) on update no action,
 	Quantity int not null,
 	Price money not null
 )
 
 go
-
-
 
 
 

@@ -16,7 +16,7 @@ import java.util.Date;
 public class new_Main {
 
     public static void main(String[] args) {
-      diff();
+        diff();
     }
 
     static void diff() {

@@ -5,13 +5,12 @@
  */
 package Model;
 
-
-
 /**
  *
  * @author Quang Phi
  */
-public class Item{
+public class Item {
+
     private int idItem;
     private String itemName;
     private String unit;
@@ -21,15 +20,15 @@ public class Item{
     public Item() {
     }
 
-    public Item(int idItem, String itemName,String unit, long price, String idCategory) {
+    public Item(int idItem, String itemName, String unit, long price, String idCategory) {
         this.idItem = idItem;
         this.itemName = itemName;
         this.unit = unit;
         this.price = price;
         this.idCategory = idCategory;
     }
-    
-    public Item(Item item){
+
+    public Item(Item item) {
         this.idItem = item.getIdItem();
         this.itemName = item.getItemName();
         this.price = item.getPrice();
@@ -68,7 +67,7 @@ public class Item{
     public void setPrice(long price) {
         this.price = price;
     }
-    
+
     public String getIdCategory() {
         return idCategory;
     }
@@ -79,17 +78,17 @@ public class Item{
 
     @Override
     public String toString() {
-        return this.itemName+":"+this.price; //To change body of generated methods, choose Tools | Templates.
+        return this.itemName + ":" + this.price; //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     //So sánh hai Item vs nhau
-    public int equals(Item item){
-        if(this.price > item.price){
+    public int equals(Item item) {
+        if (this.price > item.price) {
             return 1;
-        }else if(this.price < item.price){
+        } else if (this.price < item.price) {
             return -1;
         }
         return 0;
     }
-    
+
 }
