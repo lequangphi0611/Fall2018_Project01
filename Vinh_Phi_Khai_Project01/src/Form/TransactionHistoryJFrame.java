@@ -34,10 +34,8 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         list = billDAO.getAll();
         for (Bill bill : list) {
-            String time = Convert.formatDate(bill.getTimePayment(), "HH:mm:ss");
-            time += Convert.formatDate(bill.getDatePayment(), " dd/MM/yyyy");
             model.addRow(new Object[]{
-                time,
+                bill.getFullTime(),
                 bill.getIdBill(),
                 bill.getIdEmployees(),
                 bill.getTableNumber(),

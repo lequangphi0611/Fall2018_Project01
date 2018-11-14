@@ -10,8 +10,6 @@ import DAO.ItemDAO;
 import Library.Convert;
 import Model.Category;
 import Model.Item;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;

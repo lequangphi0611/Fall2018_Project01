@@ -13,37 +13,38 @@ import Model.BillDetail;
 import Model.Item;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
-/**
- *
- * @author Quang Phi
- */
 public class BillDetailJDialog extends javax.swing.JDialog {
 
     DefaultTableModel model;
     BillDetailDAO detailDAO = new BillDetailDAO();
     Bill bill;
     ItemDAO itemDO = new ItemDAO();
-    public BillDetailJDialog(java.awt.Frame parent, boolean modal,Bill bill) {
+
+    public BillDetailJDialog(java.awt.Frame parent, boolean modal, Bill bill) {
         super(parent, modal);
         initComponents();
-        lblIDBill.setText("Mã hóa đơn : "+bill.getIdBill());
-        String time = Convert.formatDate(bill.getTimePayment(),"HH:mm:ss");
-        time += Convert.formatDate(bill.getDatePayment(), " dd/MM/yyyy");
-        lblDate.setText(time);
-        this.bill = bill;
-        model = (DefaultTableModel) tbTable.getModel();
-        loadTable();
+        model = (DefaultTableModel) tblTable.getModel();
         setLocationRelativeTo(null);
+        lblTable.setText("BÀN SỐ " + bill.getTableNumber());
+        lblIdBill1.setText(bill.getIdBill());
+        lblDayPayMent.setText(bill.getFullTime());
+        this.bill = bill;
+        load();
+        lblSumPrice.setText(Convert.toMoney(bill.getSumPrice()));
+        lblSale.setText(Convert.toMoney(bill.getSale()));
+        lblTotal.setText(Convert.toMoney(bill.getTotal()));
+
     }
-    
-    private void loadTable(){
+
+    private void load() {
         List<BillDetail> list = detailDAO.getAllOfBill(bill.getIdBill());
         model.setRowCount(0);
-        for(BillDetail billDT : list){
+        for (BillDetail billDT : list) {
             Item item = itemDO.findModel(billDT.getIdItem()).get(0);
             model.addRow(new Object[]{
-                model.getRowCount()+1,
+                model.getRowCount() + 1,
                 item.getItemName(),
                 Convert.toMoney(billDT.getPrice()),
                 item.getUnit(),
@@ -51,31 +52,6 @@ public class BillDetailJDialog extends javax.swing.JDialog {
                 Convert.toMoney(billDT.sumPrice())
             });
         }
-        model.addRow(new Object[]{});
-        model.addRow(new Object[]{
-            null,
-            null,
-            null,
-            "Tổng phụ",
-            null,
-            Convert.toMoney(bill.getSumPrice())
-        });
-        model.addRow(new Object[]{
-            null,
-            null,
-            null,
-            "Giảm giá",
-            null,
-            Convert.toMoney(bill.getSale())
-        });
-        model.addRow(new Object[]{
-            null,
-            null,
-            null,
-            "Tổng tiền",
-            null,
-            Convert.toMoney(bill.getTotal())
-        });
     }
 
     /**
@@ -88,70 +64,122 @@ public class BillDetailJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblIDBill = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbTable = new javax.swing.JTable();
-        lblDate = new javax.swing.JLabel();
+        lblDayPayMent = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblTable = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTable = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblSale = new javax.swing.JLabel();
+        lblSumPrice = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lblIdBill1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblIDBill.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
-        lblIDBill.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIDBill.setText("Hóa đơn");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbTable.setModel(new javax.swing.table.DefaultTableModel(
+        lblDayPayMent.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(lblDayPayMent, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 580, 30));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PHIẾU THANH TOÁN");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 775, -1));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 129, 729, -1));
+
+        lblTable.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        lblTable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTable.setText("BÀN SỐ ");
+        jPanel1.add(lblTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 45, 775, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("   Mã hóa đơn: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 150, 30));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("   Ngày xuất hóa đơn: ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 30));
+
+        tblTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tblTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mặt hàng", "Đơn giá", "Đơn vị tính", "Số lượng", "Tổng tiền"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tbTable);
-        if (tbTable.getColumnModel().getColumnCount() > 0) {
-            tbTable.getColumnModel().getColumn(0).setMinWidth(50);
-            tbTable.getColumnModel().getColumn(0).setMaxWidth(60);
-            tbTable.getColumnModel().getColumn(3).setMinWidth(70);
-            tbTable.getColumnModel().getColumn(3).setMaxWidth(80);
-            tbTable.getColumnModel().getColumn(4).setMinWidth(60);
-            tbTable.getColumnModel().getColumn(4).setMaxWidth(70);
+        ));
+        header = tblTable.getTableHeader();
+        header.setFont(new java.awt.Font("Times New Roman",0,20));
+        jScrollPane1.setViewportView(tblTable);
+        if (tblTable.getColumnModel().getColumnCount() > 0) {
+            tblTable.getColumnModel().getColumn(0).setMinWidth(50);
+            tblTable.getColumnModel().getColumn(0).setMaxWidth(60);
+            tblTable.getColumnModel().getColumn(1).setMinWidth(180);
+            tblTable.getColumnModel().getColumn(1).setMaxWidth(200);
+            tblTable.getColumnModel().getColumn(4).setMinWidth(90);
+            tblTable.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        lblDate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 780, 220));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIDBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
-            .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Giảm giá:");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Tổng phụ:");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel9.setText("Tổng tiền:");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 40));
+
+        lblSale.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel4.add(lblSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 180, 30));
+
+        lblSumPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel4.add(lblSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 180, 30));
+
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jPanel4.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 180, 40));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, 360, 130));
+
+        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 1, true), "HÂN HẠNH PHỤC VỤ QUÝ KHÁCH", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 20), new java.awt.Color(204, 0, 0))); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 320, 30));
+
+        lblIdBill1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(lblIdBill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 610, 30));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -181,11 +209,13 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BillDetailJDialog dialog = new BillDetailJDialog(new javax.swing.JFrame(), true,new Bill());
+                BillDetailJDialog dialog = new BillDetailJDialog(new javax.swing.JFrame(), true, new Bill());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -198,10 +228,24 @@ public class BillDetailJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblDate;
-    private javax.swing.JLabel lblIDBill;
-    private javax.swing.JTable tbTable;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDayPayMent;
+    private javax.swing.JLabel lblIdBill1;
+    private javax.swing.JLabel lblSale;
+    private javax.swing.JLabel lblSumPrice;
+    private javax.swing.JLabel lblTable;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tblTable;
+    private JTableHeader header;
     // End of variables declaration//GEN-END:variables
 }

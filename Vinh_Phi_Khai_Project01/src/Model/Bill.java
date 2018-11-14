@@ -5,7 +5,9 @@
  */
 package Model;
 
+import Library.Convert;
 import java.util.Date;
+
 
 /**
  *
@@ -58,7 +60,10 @@ public class Bill {
         this.timePayment = timePayment;
     }
     
-    
+    public String getFullTime(){
+        String time = Convert.formatDate(timePayment, "HH:mm:ss");
+        return time + Convert.formatDate(datePayment, " dd-MM-yyyy");
+    }
 
     public Date getDatePayment() {
         return datePayment;
