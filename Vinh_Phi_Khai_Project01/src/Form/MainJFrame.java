@@ -83,53 +83,53 @@ public class MainJFrame extends javax.swing.JFrame {
         btnTable02 = new javax.swing.JLabel();
         rdoTable02 = new javax.swing.JRadioButton();
         jPanel17 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        btnTable04 = new javax.swing.JLabel();
+        rdoTable04 = new javax.swing.JRadioButton();
         jPanel11 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        btnTable03 = new javax.swing.JLabel();
+        rdoTable03 = new javax.swing.JRadioButton();
         jPanel18 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        btnTable06 = new javax.swing.JLabel();
+        rdoTable06 = new javax.swing.JRadioButton();
         jPanel12 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        btnTable05 = new javax.swing.JLabel();
+        rdoTable05 = new javax.swing.JRadioButton();
         jPanel19 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jRadioButton7 = new javax.swing.JRadioButton();
+        btnTable07 = new javax.swing.JLabel();
+        rdoTable07 = new javax.swing.JRadioButton();
         jPanel14 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jRadioButton10 = new javax.swing.JRadioButton();
+        btnTable10 = new javax.swing.JLabel();
+        rdoTable10 = new javax.swing.JRadioButton();
         jPanel13 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        btnTable08 = new javax.swing.JLabel();
+        rdoTable08 = new javax.swing.JRadioButton();
         jPanel20 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        btnTable09 = new javax.swing.JLabel();
+        rdoTable09 = new javax.swing.JRadioButton();
         jPanel15 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jRadioButton12 = new javax.swing.JRadioButton();
+        btnTable12 = new javax.swing.JLabel();
+        rdoTable12 = new javax.swing.JRadioButton();
         jPanel21 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jRadioButton11 = new javax.swing.JRadioButton();
+        btnTable11 = new javax.swing.JLabel();
+        rdoTable11 = new javax.swing.JRadioButton();
         jPanel23 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jRadioButton14 = new javax.swing.JRadioButton();
+        btnTable14 = new javax.swing.JLabel();
+        rdoTable14 = new javax.swing.JRadioButton();
         jPanel22 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jRadioButton13 = new javax.swing.JRadioButton();
+        btnTable13 = new javax.swing.JLabel();
+        rdoTable13 = new javax.swing.JRadioButton();
         jPanel26 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jRadioButton16 = new javax.swing.JRadioButton();
+        btnTable16 = new javax.swing.JLabel();
+        rdoTable16 = new javax.swing.JRadioButton();
         jPanel27 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jRadioButton17 = new javax.swing.JRadioButton();
+        btnTable17 = new javax.swing.JLabel();
+        rdoTable17 = new javax.swing.JRadioButton();
         jPanel25 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jRadioButton15 = new javax.swing.JRadioButton();
+        btnTable15 = new javax.swing.JLabel();
+        rdoTable15 = new javax.swing.JRadioButton();
         jPanel28 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jRadioButton18 = new javax.swing.JRadioButton();
+        btnTable18 = new javax.swing.JLabel();
+        rdoTable18 = new javax.swing.JRadioButton();
         jPanel39 = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -463,31 +463,36 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel17.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel17.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel4.setBackground(new java.awt.Color(224, 222, 222));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel4.setText("Bàn 4");
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable04.setBackground(new java.awt.Color(224, 222, 222));
+        btnTable04.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable04.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable04.setText("Bàn 4");
+        btnTable04.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable04.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable04.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable04MouseClicked(evt);
+            }
+        });
 
-        jRadioButton4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton4.setRolloverEnabled(false);
-        jRadioButton4.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable04.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable04.setRolloverEnabled(false);
+        rdoTable04.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable04, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable04, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable04, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton4)
+                .addComponent(rdoTable04)
                 .addContainerGap())
         );
 
@@ -496,31 +501,36 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel11.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel3.setBackground(new java.awt.Color(224, 222, 222));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel3.setText("Bàn 3");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable03.setBackground(new java.awt.Color(224, 222, 222));
+        btnTable03.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable03.setText("Bàn 3");
+        btnTable03.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable03.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable03.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable03MouseClicked(evt);
+            }
+        });
 
-        jRadioButton3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton3.setRolloverEnabled(false);
-        jRadioButton3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable03.setRolloverEnabled(false);
+        rdoTable03.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable03, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable03, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable03, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton3)
+                .addComponent(rdoTable03)
                 .addContainerGap())
         );
 
@@ -529,31 +539,36 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel18.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel18.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel6.setBackground(new java.awt.Color(224, 222, 222));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel6.setText("Bàn 6");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable06.setBackground(new java.awt.Color(224, 222, 222));
+        btnTable06.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable06.setText("Bàn 6");
+        btnTable06.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable06.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable06.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable06MouseClicked(evt);
+            }
+        });
 
-        jRadioButton6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton6.setRolloverEnabled(false);
-        jRadioButton6.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable06.setRolloverEnabled(false);
+        rdoTable06.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable06, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable06, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable06, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton6)
+                .addComponent(rdoTable06)
                 .addContainerGap())
         );
 
@@ -562,31 +577,36 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel12.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel5.setBackground(new java.awt.Color(224, 222, 222));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel5.setText("Bàn 5");
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable05.setBackground(new java.awt.Color(224, 222, 222));
+        btnTable05.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable05.setText("Bàn 5");
+        btnTable05.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable05.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable05.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable05MouseClicked(evt);
+            }
+        });
 
-        jRadioButton5.setAutoscrolls(true);
-        jRadioButton5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton5.setRolloverEnabled(false);
+        rdoTable05.setAutoscrolls(true);
+        rdoTable05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable05.setRolloverEnabled(false);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable05, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable05, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable05, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton5)
+                .addComponent(rdoTable05)
                 .addContainerGap())
         );
 
@@ -595,30 +615,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel19.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel19.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel7.setText("Bàn 7");
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable07.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable07.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable07.setText("Bàn 7");
+        btnTable07.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable07.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable07.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable07MouseClicked(evt);
+            }
+        });
 
-        jRadioButton7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton7.setRolloverEnabled(false);
-        jRadioButton7.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable07.setRolloverEnabled(false);
+        rdoTable07.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable07, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable07, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable07, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton7)
+                .addComponent(rdoTable07)
                 .addContainerGap())
         );
 
@@ -627,30 +652,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel14.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel10.setText("Bàn 10");
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable10.setText("Bàn 10");
+        btnTable10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable10MouseClicked(evt);
+            }
+        });
 
-        jRadioButton10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton10.setRolloverEnabled(false);
-        jRadioButton10.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable10.setRolloverEnabled(false);
+        rdoTable10.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRadioButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton10)
+                .addComponent(rdoTable10)
                 .addContainerGap())
         );
 
@@ -659,30 +689,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel13.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel13.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel8.setText("Bàn 8");
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable08.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable08.setText("Bàn 8");
+        btnTable08.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable08.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable08.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable08MouseClicked(evt);
+            }
+        });
 
-        jRadioButton8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton8.setRolloverEnabled(false);
-        jRadioButton8.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable08.setRolloverEnabled(false);
+        rdoTable08.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable08, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable08, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable08, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton8)
+                .addComponent(rdoTable08)
                 .addContainerGap())
         );
 
@@ -691,30 +726,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel20.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel20.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel9.setText("Bàn 9");
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable09.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable09.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable09.setText("Bàn 9");
+        btnTable09.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable09.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable09.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable09MouseClicked(evt);
+            }
+        });
 
-        jRadioButton9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton9.setRolloverEnabled(false);
-        jRadioButton9.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable09.setRolloverEnabled(false);
+        rdoTable09.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRadioButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable09, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable09, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable09, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton9)
+                .addComponent(rdoTable09)
                 .addContainerGap())
         );
 
@@ -723,30 +763,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel15.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel15.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel12.setText("Bàn 12");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable12.setText("Bàn 12");
+        btnTable12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable12MouseClicked(evt);
+            }
+        });
 
-        jRadioButton12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton12.setRolloverEnabled(false);
-        jRadioButton12.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable12.setRolloverEnabled(false);
+        rdoTable12.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton12)
+                .addComponent(rdoTable12)
                 .addContainerGap())
         );
 
@@ -755,30 +800,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel21.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel21.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel11.setText("Bàn 11");
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable11.setText("Bàn 11");
+        btnTable11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable11MouseClicked(evt);
+            }
+        });
 
-        jRadioButton11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton11.setRolloverEnabled(false);
-        jRadioButton11.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable11.setRolloverEnabled(false);
+        rdoTable11.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRadioButton11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton11)
+                .addComponent(rdoTable11)
                 .addContainerGap())
         );
 
@@ -787,30 +837,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel23.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel23.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel14.setText("Bàn 14");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable14.setText("Bàn 14");
+        btnTable14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable14MouseClicked(evt);
+            }
+        });
 
-        jRadioButton14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton14.setRolloverEnabled(false);
-        jRadioButton14.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable14.setRolloverEnabled(false);
+        rdoTable14.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRadioButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton14)
+                .addComponent(rdoTable14)
                 .addContainerGap())
         );
 
@@ -819,30 +874,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel22.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel22.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel13.setText("Bàn 13");
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable13.setText("Bàn 13");
+        btnTable13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable13MouseClicked(evt);
+            }
+        });
 
-        jRadioButton13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton13.setRolloverEnabled(false);
-        jRadioButton13.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable13.setRolloverEnabled(false);
+        rdoTable13.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton13)
+                .addComponent(rdoTable13)
                 .addContainerGap())
         );
 
@@ -851,30 +911,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel26.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel26.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel16.setText("Bàn 16");
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable16.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable16.setText("Bàn 16");
+        btnTable16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable16MouseClicked(evt);
+            }
+        });
 
-        jRadioButton16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton16.setRolloverEnabled(false);
-        jRadioButton16.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable16.setRolloverEnabled(false);
+        rdoTable16.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable16, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton16)
+                .addComponent(rdoTable16)
                 .addContainerGap())
         );
 
@@ -883,30 +948,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel27.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel27.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel17.setText("Bàn 17");
-        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel17.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable17.setText("Bàn 17");
+        btnTable17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable17.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable17MouseClicked(evt);
+            }
+        });
 
-        jRadioButton17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton17.setRolloverEnabled(false);
-        jRadioButton17.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable17.setRolloverEnabled(false);
+        rdoTable17.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable17, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton17)
+                .addComponent(rdoTable17)
                 .addContainerGap())
         );
 
@@ -915,30 +985,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel25.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel25.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel15.setText("Bàn 15");
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable15.setText("Bàn 15");
+        btnTable15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable15MouseClicked(evt);
+            }
+        });
 
-        jRadioButton15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton15.setRolloverEnabled(false);
-        jRadioButton15.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable15.setRolloverEnabled(false);
+        rdoTable15.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-            .addComponent(jRadioButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton15)
+                .addComponent(rdoTable15)
                 .addContainerGap())
         );
 
@@ -947,30 +1022,35 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel28.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED)));
         jPanel28.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
-        jLabel18.setText("Bàn 18");
-        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel18.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable18.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTable18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTable18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dinner.png"))); // NOI18N
+        btnTable18.setText("Bàn 18");
+        btnTable18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTable18.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTable18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTable18MouseClicked(evt);
+            }
+        });
 
-        jRadioButton18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton18.setRolloverEnabled(false);
-        jRadioButton18.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
+        rdoTable18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdoTable18.setRolloverEnabled(false);
+        rdoTable18.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trangthaihd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRadioButton18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addComponent(rdoTable18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTable18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel28Layout.createSequentialGroup()
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTable18, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton18)
+                .addComponent(rdoTable18)
                 .addContainerGap())
         );
 
@@ -1064,6 +1144,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_slice56_2835272.png"))); // NOI18N
         jButton8.setText("Mặt hàng");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
@@ -1167,6 +1252,74 @@ public class MainJFrame extends javax.swing.JFrame {
         openOrder(TABLE02, rdoTable02);
     }//GEN-LAST:event_btnTable02MouseClicked
 
+    private void btnTable03MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable03MouseClicked
+        openOrder(TABLE03, rdoTable03);
+    }//GEN-LAST:event_btnTable03MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       new ItemJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void btnTable04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable04MouseClicked
+        openOrder(TABLE04, rdoTable04);
+    }//GEN-LAST:event_btnTable04MouseClicked
+
+    private void btnTable05MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable05MouseClicked
+        openOrder(TABLE05, rdoTable05);
+    }//GEN-LAST:event_btnTable05MouseClicked
+
+    private void btnTable06MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable06MouseClicked
+        openOrder(TABLE06, rdoTable06);
+    }//GEN-LAST:event_btnTable06MouseClicked
+
+    private void btnTable07MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable07MouseClicked
+        openOrder(TABLE07, rdoTable07);
+    }//GEN-LAST:event_btnTable07MouseClicked
+
+    private void btnTable08MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable08MouseClicked
+        openOrder(TABLE08, rdoTable08);
+    }//GEN-LAST:event_btnTable08MouseClicked
+
+    private void btnTable09MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable09MouseClicked
+       openOrder(TABLE09, rdoTable09);
+    }//GEN-LAST:event_btnTable09MouseClicked
+
+    private void btnTable10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable10MouseClicked
+       openOrder(TABLE10, rdoTable10);
+    }//GEN-LAST:event_btnTable10MouseClicked
+
+    private void btnTable11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable11MouseClicked
+       openOrder(TABLE11, rdoTable11);
+    }//GEN-LAST:event_btnTable11MouseClicked
+
+    private void btnTable12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable12MouseClicked
+        openOrder(TABLE12, rdoTable12);
+    }//GEN-LAST:event_btnTable12MouseClicked
+
+    private void btnTable13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable13MouseClicked
+        openOrder(TABLE13, rdoTable13);
+    }//GEN-LAST:event_btnTable13MouseClicked
+
+    private void btnTable14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable14MouseClicked
+        openOrder(TABLE14, rdoTable14);
+    }//GEN-LAST:event_btnTable14MouseClicked
+
+    private void btnTable15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable15MouseClicked
+        openOrder(TABLE15, rdoTable15);
+    }//GEN-LAST:event_btnTable15MouseClicked
+
+    private void btnTable16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable16MouseClicked
+        openOrder(TABLE16, rdoTable16);
+    }//GEN-LAST:event_btnTable16MouseClicked
+
+    private void btnTable17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable17MouseClicked
+        openOrder(TABLE17, rdoTable17);
+    }//GEN-LAST:event_btnTable17MouseClicked
+
+    private void btnTable18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable18MouseClicked
+        openOrder(TABLE18, rdoTable18);
+    }//GEN-LAST:event_btnTable18MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1206,6 +1359,22 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnTable01;
     private javax.swing.JLabel btnTable02;
+    private javax.swing.JLabel btnTable03;
+    private javax.swing.JLabel btnTable04;
+    private javax.swing.JLabel btnTable05;
+    private javax.swing.JLabel btnTable06;
+    private javax.swing.JLabel btnTable07;
+    private javax.swing.JLabel btnTable08;
+    private javax.swing.JLabel btnTable09;
+    private javax.swing.JLabel btnTable10;
+    private javax.swing.JLabel btnTable11;
+    private javax.swing.JLabel btnTable12;
+    private javax.swing.JLabel btnTable13;
+    private javax.swing.JLabel btnTable14;
+    private javax.swing.JLabel btnTable15;
+    private javax.swing.JLabel btnTable16;
+    private javax.swing.JLabel btnTable17;
+    private javax.swing.JLabel btnTable18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1214,24 +1383,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1265,25 +1418,25 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblUser;
     private javax.swing.JRadioButton rdoTable01;
     private javax.swing.JRadioButton rdoTable02;
+    private javax.swing.JRadioButton rdoTable03;
+    private javax.swing.JRadioButton rdoTable04;
+    private javax.swing.JRadioButton rdoTable05;
+    private javax.swing.JRadioButton rdoTable06;
+    private javax.swing.JRadioButton rdoTable07;
+    private javax.swing.JRadioButton rdoTable08;
+    private javax.swing.JRadioButton rdoTable09;
+    private javax.swing.JRadioButton rdoTable10;
+    private javax.swing.JRadioButton rdoTable11;
+    private javax.swing.JRadioButton rdoTable12;
+    private javax.swing.JRadioButton rdoTable13;
+    private javax.swing.JRadioButton rdoTable14;
+    private javax.swing.JRadioButton rdoTable15;
+    private javax.swing.JRadioButton rdoTable16;
+    private javax.swing.JRadioButton rdoTable17;
+    private javax.swing.JRadioButton rdoTable18;
     // End of variables declaration//GEN-END:variables
 }

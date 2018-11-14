@@ -9,7 +9,6 @@ import DAO.BillDAO;
 import DAO.BillDetailDAO;
 import DAO.CategoryDAO;
 import DAO.ItemDAO;
-import DAO.UserDAO;
 import Data.UserData;
 import Library.Convert;
 import Model.Bill;
@@ -30,7 +29,6 @@ public class OrderJDialog extends javax.swing.JDialog {
     List<Item> listAllItem;
     ItemDAO itemDO = new ItemDAO();
     CategoryDAO cateDO = new CategoryDAO();
-    int index = -1;
     BillDAO billDAO = new BillDAO();
     Bill billMain = new Bill();
     BillDetailDAO detailDAO = new BillDetailDAO();
@@ -80,6 +78,7 @@ public class OrderJDialog extends javax.swing.JDialog {
                 billDAO.getIDBill(),
                 UserData.getUserInfor().getIdEmployees(),
                 Convert.getNow(),
+                Convert.getNow(),
                 tableMain.getTableNum(),
                 tableMain.sumPrice(),
                 getSale()
@@ -117,6 +116,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }
 
     private void giveBackItem() {
+        int index = tbInforBill.getSelectedRow();
         if (index >= 0) {
             tableMain.giveBackItem(tableMain.getItemOrder().get(index), getQuantity());
             loadToTableInforBill();
@@ -407,7 +407,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAllItemMouseClicked
 
     private void tbInforBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInforBillMouseClicked
-        index = tbInforBill.getSelectedRow();
+        int index = tbInforBill.getSelectedRow();
         ItemOrder item = tableMain.getItemOrder().get(index);
         loadForm(item, item.getQuantity());
     }//GEN-LAST:event_tbInforBillMouseClicked

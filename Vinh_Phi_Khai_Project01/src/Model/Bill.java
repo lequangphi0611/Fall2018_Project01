@@ -15,6 +15,7 @@ public class Bill {
 
     private String idBill;
     private String idEmployees;
+    private Date timePayment;
     private Date datePayment;
     private int tableNumber;
     private long sumPrice;
@@ -23,9 +24,10 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(String idBill, String idEmployees, Date datePayment, int tableNumber, long sumPrice, long sale) {
+    public Bill(String idBill, String idEmployees,Date timePayment, Date datePayment, int tableNumber, long sumPrice, long sale) {
         this.idBill = idBill;
         this.idEmployees = idEmployees;
+        this.timePayment = timePayment;
         this.datePayment = datePayment;
         this.tableNumber = tableNumber;
         this.sumPrice = sumPrice;
@@ -47,6 +49,16 @@ public class Bill {
     public void setIdEmployees(String idEmployees) {
         this.idEmployees = idEmployees;
     }
+
+    public Date getTimePayment() {
+        return timePayment;
+    }
+
+    public void setTimePayment(Date timePayment) {
+        this.timePayment = timePayment;
+    }
+    
+    
 
     public Date getDatePayment() {
         return datePayment;

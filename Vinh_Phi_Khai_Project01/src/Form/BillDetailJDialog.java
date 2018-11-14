@@ -28,7 +28,9 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lblIDBill.setText("Mã hóa đơn : "+bill.getIdBill());
-        lblDate.setText(Convert.formatDate(bill.getDatePayment(),"hh:mm dd/MM/yyyy"));
+        String time = Convert.formatDate(bill.getTimePayment(),"HH:mm:ss");
+        time += Convert.formatDate(bill.getDatePayment(), " dd/MM/yyyy");
+        lblDate.setText(time);
         this.bill = bill;
         model = (DefaultTableModel) tbTable.getModel();
         loadTable();

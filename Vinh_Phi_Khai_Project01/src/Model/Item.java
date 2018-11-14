@@ -81,14 +81,5 @@ public class Item {
         return this.itemName + ":" + this.price; //To change body of generated methods, choose Tools | Templates.
     }
 
-    //So sánh hai Item vs nhau
-    public int equals(Item item) {
-        if (this.price > item.price) {
-            return 1;
-        } else if (this.price < item.price) {
-            return -1;
-        }
-        return 0;
-    }
 
 }

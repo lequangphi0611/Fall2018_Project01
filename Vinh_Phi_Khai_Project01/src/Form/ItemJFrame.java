@@ -40,33 +40,9 @@ public class ItemJFrame extends javax.swing.JFrame {
         this.modelTable = (DefaultTableModel) tblTable.getModel();
         txtIdItem.setText("0");
         txtPrice.setText("0");
-        tblTable.getTableHeader().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                int colum = tblTable.columnAtPoint(me.getPoint());
-                if (colum == 3) {
-                    loadTable(orderByPrice(list));
-                }
-            }
-        }
-        );
 
     }
 
-    //Sắp xếp list theo giá - giảm dần
-    private List<Item> orderByPrice(List<Item> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = i + 1; j < list.size(); j++) {
-                Item item1 = list.get(i);
-                Item item2 = list.get(j);
-                if (item1.equals(item2) == -1) {
-                    list.set(i, item2);
-                    list.set(j, item1);
-                }
-            }
-        }
-        return list;
-    }
 
     private void loadTable(List<Item> listParam) {
         list = listParam;
@@ -172,7 +148,6 @@ public class ItemJFrame extends javax.swing.JFrame {
             Category cate = (Category) cboIdCategoryFilter.getSelectedItem();
             list = itemDAO.getItemByCategory(cate.getCategoryName());
         } catch (NullPointerException ex) {
-            System.out.println(ex.fillInStackTrace());
         }
         loadTable(list);
     }
@@ -210,7 +185,7 @@ public class ItemJFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtUnit = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

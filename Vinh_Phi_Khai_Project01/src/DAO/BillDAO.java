@@ -6,10 +6,16 @@
 package DAO;
 
 import Interface.IDao;
+import Library.ConnectionDB;
+import Library.Convert;
 import Library.MyLibry;
 import Model.Bill;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +28,7 @@ public class BillDAO extends DAO<Bill> {
         return new Bill(
                 rs.getString("IdBill"),
                 rs.getString("IdEmployees"),
+                rs.getTime("TimePayment"),
                 rs.getDate("DatePayment"),
                 rs.getInt("TableNumber"),
                 rs.getLong("SumPrice"),
@@ -30,17 +37,19 @@ public class BillDAO extends DAO<Bill> {
     }
 
     public List<Bill> getAll() {
-        return executeQuery("SELECT * FROM bill");
+        return executeQuery("SELECT * FROM bill order by DatePayment desc, TimePayment desc");
     }
 
     public boolean insert(Bill model) {
+        long milisecond = model.getDatePayment().getTime();
         return executeUpdate(
                 "insert into bill "
-                + "(IdBill,IdEmployees,DatePayment,TableNumber,SumPrice,Sale,Total) "
-                + "values (?,?,?,?,?,?,?)",
+                + "(IdBill,IdEmployees,TimePayment,DatePayment,TableNumber,SumPrice,Sale,Total) "
+                + "values (?,?,?,?,?,?,?,?)",
                 model.getIdBill(),
                 model.getIdEmployees(),
-                new java.sql.Date(model.getDatePayment().getTime()),
+                new java.sql.Time(milisecond),
+                new java.sql.Date(milisecond),
                 model.getTableNumber(),
                 model.getSumPrice(),
                 model.getSale(),
@@ -55,10 +64,32 @@ public class BillDAO extends DAO<Bill> {
     public String getIDBill() {
         while (true) {
             String idBill = MyLibry.getRandomIdBill(10);
-            if(findModel(idBill).isEmpty()){
+            if (findModel(idBill).isEmpty()) {
                 return idBill;
             }
         }
+    }
+
+    public String minDate() {
+        try {
+            rs = ConnectionDB.resultQuery("select min(DatePayment) from bill ");
+            rs.next();
+            return Convert.formatDate(rs.getDate(1), "dd/MM/yyyy");
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String maxDate() {
+        try {
+            rs = ConnectionDB.resultQuery("select max(DatePayment) from bill ");
+            rs.next();
+            return Convert.formatDate(rs.getDate(1), "dd/MM/yyyy");
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }
