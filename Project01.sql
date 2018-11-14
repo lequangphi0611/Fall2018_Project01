@@ -89,6 +89,8 @@ as
 		select 
 			b.DatePayment Ngay,
 			count(b.IdBill) SoLuongGiaoDich,
+			min(b.total) DoanhThuThapNhat,
+			max(b.total) DoanhThuCaoNhat,
 			AVG(b.Total) DoanhThuTrungBinhMoiGiaoDich,
 			SUM(b.Total) TongDoanhThu
 		from bill b group by b.DatePayment
@@ -102,6 +104,8 @@ as
 			month(b.DatePayment) Thang,
 			year(b.DatePayment) Nam,
 			count(b.IdBill) SoluongGiaoDich,
+			min(b.total) DoanhThuThapNhat,
+			max(b.total) DoanhThuCaoNhat,
 			AVG(b.Total) DoanhThuTrungBInhMoiGiaoDich,
 			SUM(b.ToTal) TongDoanhThu
 			
@@ -115,6 +119,8 @@ as
 		select
 			year(b.DatePayment) Nam,
 			count(b.IdBill) SoluongGiaoDich,
+			min(b.total) DoanhThuThapNhat,
+			max(b.total) DoanhThuCaoNhat,
 			AVG(b.Total) DoanhThuTrungBInhMoiGiaoDich,
 			SUM(b.ToTal) TongDoanhThu
 			
@@ -135,3 +141,4 @@ as
 		group by item.ItemName, Item.Unit order by TongSoLuongBanDuoc desc
 	end
 go
+
