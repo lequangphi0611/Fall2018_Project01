@@ -76,7 +76,13 @@ public class BillDAO extends DAO<Bill> {
         try {
             rs = ConnectionDB.resultQuery("select min(DatePayment),max(DatePayment) from bill");
             if (rs.next()) {
-                return new Date[]{rs.getDate(1), rs.getDate(2)};
+                Date minDate = rs.getDate(1);
+                Date maxDate = rs.getDate(2);
+                if(minDate == null && maxDate == null){
+                    minDate = new Date();
+                    maxDate = new Date();
+                }
+                return new Date[]{minDate,maxDate};
             }
         } catch (SQLException ex) {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
