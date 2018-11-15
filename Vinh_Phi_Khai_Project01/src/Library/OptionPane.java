@@ -31,7 +31,7 @@ public class OptionPane {
     }
 
     public static boolean confirm(Component parent, String message) {
-        int confirm = JOptionPane.showConfirmDialog(parent, message, TILTLE, JOptionPane.QUESTION_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(parent, message, TILTLE, JOptionPane.YES_NO_OPTION);
         return confirm == JOptionPane.YES_OPTION;
     }
 

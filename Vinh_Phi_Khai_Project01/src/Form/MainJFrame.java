@@ -34,8 +34,6 @@ public class MainJFrame extends javax.swing.JFrame {
                 lblClock.setText(format.format(new Date()));
             }
         }).start();
-        
-        new LogInJFrame(this, true).setVisible(true);
         lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
     }
     
@@ -48,6 +46,16 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }
 
+    private void logOut(){
+        UserData.logOut();
+        this.setVisible(false);
+        new LogInJFrame(this, true).setVisible(true);
+        if(UserData.isLogin()){
+            this.setVisible(true);
+        }else{
+            System.exit(0);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,6 +221,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_history_58875.png"))); // NOI18N
         jButton1.setText("Lịch sử giao dịch");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
@@ -239,6 +252,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dxuat.png"))); // NOI18N
         jButton4.setText("Đăng xuất");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
@@ -291,6 +309,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_purchase_order_67225.png"))); // NOI18N
         jButton9.setText("Thống kê");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -319,6 +342,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton2.setText("Tài khoản");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1123,6 +1151,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Profile_10593.png"))); // NOI18N
         jButton7.setText("Nhân viên");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1324,6 +1357,26 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnTable18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable18MouseClicked
         openOrder(TABLE18, rdoTable18);
     }//GEN-LAST:event_btnTable18MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new TransactionHistoryJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        new StatisticalJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new JFrameUsers().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        new EmployeeJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        logOut();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

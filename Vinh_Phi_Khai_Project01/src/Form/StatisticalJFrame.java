@@ -4,17 +4,46 @@
  * and open the template in the editor.
  */
 package Form;
+import DAO.StatisticalDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
  
 public class StatisticalJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StatisticalJFrame
-     */
+    List<Object[]> listRevenue;
+    List<Object[]> listItem;
+    DefaultTableModel modelRevenue;
+    DefaultTableModel modelItem;
+    StatisticalDAO statisticalDAO = new StatisticalDAO();
     public StatisticalJFrame() {
         initComponents();
+        modelRevenue = (DefaultTableModel) tblTableRevenue.getModel();
+        modelItem = (DefaultTableModel) tblTableItem.getModel();
+        loadRevenueStatistical();
+        loadItemStatistical();
     }
 
+    
+    private String getTypeStatisticsForRevenue(){
+        return  cboType.getSelectedItem().toString();
+    }
+    
+    private void loadRevenueStatistical(){
+        listRevenue = statisticalDAO.getRevenueStatistics(getTypeStatisticsForRevenue());
+        modelRevenue.setRowCount(0);
+        for(Object[] ob : listRevenue){
+            modelRevenue.addRow(ob);
+        }
+    }
+    
+    private void loadItemStatistical(){
+        listItem = statisticalDAO.getListForItemStatistical();
+        modelItem.setRowCount(0);
+        for(Object[] ob : listItem){
+            modelItem.addRow(ob);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,14 +58,14 @@ public class StatisticalJFrame extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTable = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
+        tblTableRevenue = new javax.swing.JTable();
+        cboType = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblTable1 = new javax.swing.JTable();
+        tblTableItem = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -47,21 +76,34 @@ public class StatisticalJFrame extends javax.swing.JFrame {
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        tblTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblTableRevenue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblTableRevenue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Thời gian", "Số lượng giao dịch", "Doanh thu thấp nhất", "Doanh thu cao nhất", "Doanh thu trung bình", "Tổng doanh thu"
             }
-        ));
-        header = tblTable.getTableHeader();
-        header.setFont(new java.awt.Font("Times New Roman",0,20));
-        jScrollPane1.setViewportView(tblTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "Năm" }));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        header = tblTableRevenue.getTableHeader();
+        header.setFont(new java.awt.Font("Times New Roman",0,20));
+        jScrollPane1.setViewportView(tblTableRevenue);
+
+        cboType.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        cboType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "Tháng", "Năm" }));
+        cboType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTypeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel2.setText("Tìm kiếm theo:");
@@ -74,7 +116,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel2)
                 .addGap(27, 27, 27)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboType, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
@@ -85,7 +127,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -96,17 +138,25 @@ public class StatisticalJFrame extends javax.swing.JFrame {
 
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        tblTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTableItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tên mặt hàng", "Tổng số lượng đã bán", "Đơn vị tính", "Tổng tiền"
+                "Tên mặt hàng", "Tổng số lượng đã bán", "Bán được ít nhất", "Bán được nhiều nhất", "Tổng tiền"
             }
-        ));
-        headerSP = tblTable1.getTableHeader();
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        headerSP = tblTableItem.getTableHeader();
         headerSP.setFont(new java.awt.Font("Times New Roman",0,20));
-        jScrollPane2.setViewportView(tblTable1);
+        jScrollPane2.setViewportView(tblTableItem);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -162,6 +212,10 @@ public class StatisticalJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTypeActionPerformed
+        loadRevenueStatistical();
+    }//GEN-LAST:event_cboTypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,7 +252,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox cboType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -207,9 +261,9 @@ public class StatisticalJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblTable;
-    private JTableHeader header;
-    private javax.swing.JTable tblTable1;
+    private javax.swing.JTable tblTableItem;
     private JTableHeader headerSP;
+    private javax.swing.JTable tblTableRevenue;
+    private JTableHeader header;
     // End of variables declaration//GEN-END:variables
 }

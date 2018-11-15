@@ -67,12 +67,6 @@ create table BillDetail(
 
 go
 
-select min(DatePayment) from bill 
-select max(DatePayment) from bill 
-
-select * from bill
-select * from BillDetail
-
 
 
 create proc sp_LichSuGiaoDich @minDate date, @maxDate date
@@ -83,12 +77,14 @@ as
 	order by DatePayment desc, TimePayment desc
 go
 
+
+
 create proc sp_ThongKeDoanhThuTheoNgay 
 as
 	begin
 		select 
-			b.DatePayment Ngay,
-			count(b.IdBill) SoLuongGiaoDich,
+			b.DatePayment times,
+			count(b.IdBill) SoluongGiaoDich,
 			min(b.total) DoanhThuThapNhat,
 			max(b.total) DoanhThuCaoNhat,
 			AVG(b.Total) DoanhThuTrungBinhMoiGiaoDich,
@@ -106,7 +102,7 @@ as
 			count(b.IdBill) SoluongGiaoDich,
 			min(b.total) DoanhThuThapNhat,
 			max(b.total) DoanhThuCaoNhat,
-			AVG(b.Total) DoanhThuTrungBInhMoiGiaoDich,
+			AVG(b.Total) DoanhThuTrungBinhMoiGiaoDich,
 			SUM(b.ToTal) TongDoanhThu
 			
 		from bill b group by month(b.DatePayment),year(b.DatePayment)
@@ -116,15 +112,15 @@ go
 create proc sp_ThongKeDoanhThuTheoNam
 as
 	begin
-		select
-			year(b.DatePayment) Nam,
-			count(b.IdBill) SoluongGiaoDich,
-			min(b.total) DoanhThuThapNhat,
-			max(b.total) DoanhThuCaoNhat,
-			AVG(b.Total) DoanhThuTrungBInhMoiGiaoDich,
-			SUM(b.ToTal) TongDoanhThu
+			select
+				year(b.DatePayment) times,
+				count(b.IdBill) SoluongGiaoDich,
+				min(b.total) DoanhThuThapNhat,
+				max(b.total) DoanhThuCaoNhat,
+				AVG(b.Total) DoanhThuTrungBinhMoiGiaoDich,
+				SUM(b.ToTal) TongDoanhThu
 			
-		from bill b group by year(b.DatePayment)
+			from bill b group by year(b.DatePayment)
 	end
 go
 
@@ -134,11 +130,14 @@ as
 		select 
 			item.ItemName TenMatHang,
 			SUM(BD.Quantity) TongSoLuongBanDuoc,
-			item.Unit DVT,
+			Min((item.Price * BD.Quantity)) BanDuocItNhat,
+			max((item.Price * BD.Quantity)) BanDuocNhieuNhat,
 			SUM((item.Price * BD.Quantity)) TongTien
 		from BillDetail BD 
 				inner join Item item on BD.IdItem = item.IdItem
 		group by item.ItemName, Item.Unit order by TongSoLuongBanDuoc desc
 	end
 go
+
+
 

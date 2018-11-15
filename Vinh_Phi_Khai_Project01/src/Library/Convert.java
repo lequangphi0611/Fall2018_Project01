@@ -16,13 +16,9 @@ import java.util.Date;
  */
 public class Convert {
 
-    private static final SimpleDateFormat FORMATDATE = new SimpleDateFormat("dd/MM/yyyy");
     private static final DecimalFormat FORMATDECIMAL = new DecimalFormat("###,###,###");
 
-    public static String toMoney(long money, String... pattern) {
-        if (pattern.length > 0) {
-            return new DecimalFormat(pattern[0]).format(money);
-        }
+    public static String toMoney(long money) {
         return FORMATDECIMAL.format(money) + " đ";
     }
 
@@ -30,22 +26,21 @@ public class Convert {
         return new Date();
     }
 
-    public static String formatDate(Date date, String... pattern) {
-        if (pattern.length > 0) {
-            return new SimpleDateFormat(pattern[0]).format(date);
-        }
-        return FORMATDATE.format(date);
+    public static String formatDate(Date date, String pattern) {
+        return new SimpleDateFormat(pattern).format(date);
     }
 
-    public static Date parseDate(String date, String... pattern) {
+    public static Date parseDate(String date, String pattern) {
         try {
-            if (pattern.length > 0) {
-                return new SimpleDateFormat(pattern[0]).parse(date);
-            }
-            return FORMATDATE.parse(date);
+            return new SimpleDateFormat(pattern).parse(date);
         } catch (ParseException ex) {
-            throw new RuntimeException(ex);
+            throw new Error("Không thể định dạng ngày !");
         }
+    }
+    
+    public static Date addDate(Date dateInPut, int day){
+        long milisecond = dateInPut.getTime() + (day * 24 * 60 * 60 * 1000);
+        return new Date(milisecond);
     }
 
 }

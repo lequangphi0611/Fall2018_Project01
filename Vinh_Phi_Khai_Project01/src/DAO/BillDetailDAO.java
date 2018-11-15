@@ -26,7 +26,7 @@ public class BillDetailDAO extends DAO<BillDetail> {
     }
 
     public List<BillDetail> getAllOfBill(String IdBill) {
-        return executeQuery("Select * from BillDetail where IdBill = ?", IdBill);
+        return executeQuery("Select * from BillDetail where IdBill = ? order by (Price * Quantity) asc", IdBill);
     }
 
     public boolean insert(BillDetail model) {

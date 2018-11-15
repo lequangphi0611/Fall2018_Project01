@@ -5,13 +5,11 @@
  */
 package DAO;
 
-import Interface.IDao;
 import Library.ConnectionDB;
-import Library.Convert;
 import Library.MyLibry;
 import Model.Bill;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,10 +32,6 @@ public class BillDAO extends DAO<Bill> {
                 rs.getLong("SumPrice"),
                 rs.getLong("Sale")
         );
-    }
-
-    public List<Bill> getAll() {
-        return executeQuery("SELECT * FROM bill order by DatePayment desc, TimePayment desc");
     }
 
     public boolean insert(Bill model) {
@@ -70,26 +64,38 @@ public class BillDAO extends DAO<Bill> {
         }
     }
 
-    public String minDate() {
-        try {
-            rs = ConnectionDB.resultQuery("select min(DatePayment) from bill ");
-            rs.next();
-            return Convert.formatDate(rs.getDate(1), "dd/MM/yyyy");
-        } catch (SQLException ex) {
-            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public Date minDate() {
+        return getMinMaxDate()[0];
     }
 
-    public String maxDate() {
+    public Date maxDate() {
+        return getMinMaxDate()[1];
+    }
+
+    private Date[] getMinMaxDate() {
         try {
-            rs = ConnectionDB.resultQuery("select max(DatePayment) from bill ");
-            rs.next();
-            return Convert.formatDate(rs.getDate(1), "dd/MM/yyyy");
+            rs = ConnectionDB.resultQuery("select min(DatePayment),max(DatePayment) from bill");
+            if (rs.next()) {
+                return new Date[]{rs.getDate(1), rs.getDate(2)};
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ConnectionDB.closeConnect(rs, (PreparedStatement) rs.getStatement());
+            } catch (SQLException ex) {
+                Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return null;
+        return new Date[]{new Date(), new Date()};
+    }
+
+    public List<Bill> getListForDate(Date dateBefore, Date dateAfter) {
+        return executeQuery(
+                "exec sp_LichSuGiaoDich ?, ?",
+                new java.sql.Date(dateBefore.getTime()),
+                new java.sql.Date(dateAfter.getTime())
+        );
     }
 
 }

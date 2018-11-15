@@ -32,6 +32,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     BillDAO billDAO = new BillDAO();
     Bill billMain = new Bill();
     BillDetailDAO detailDAO = new BillDetailDAO();
+    final String IDBILL;
 
     public OrderJDialog(java.awt.Frame parent, boolean modal, Table table) {
         super(parent, modal);
@@ -44,6 +45,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         loadAllItem();
         txtSumPrice.setText(tableMain.sumPrice() + "");
         lblTable.setText("Bàn số "+table.getTableNum());
+        IDBILL = billDAO.getIDBill();
     }
 
     private void loadAllItem() {
@@ -75,7 +77,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private Bill getBill() {
         return new Bill(
-                billDAO.getIDBill(),
+                IDBILL,
                 UserData.getUserInfor().getIdEmployees(),
                 Convert.getNow(),
                 Convert.getNow(),
@@ -424,6 +426,8 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void txtSumPriceCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSumPriceCaretUpdate
         txtTotal.setText(getBill().getTotal()+"");
+        int percent = Integer.parseInt(txtPercent.getText());
+        txtPercent.setText(percent+"");
     }//GEN-LAST:event_txtSumPriceCaretUpdate
 
     private void txtSaleCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSaleCaretUpdate
