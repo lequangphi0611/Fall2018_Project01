@@ -5,8 +5,10 @@
  */
 package Form;
 
+import DAO.EmployeesDAO;
 import static Data.TableData.*;
 import Data.UserData;
+import Model.Employees;
 import Model.Table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +37,8 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }).start();
         lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
+        Employees em = new EmployeesDAO().findModel(UserData.getUserInfor().getIdEmployees()).get(0);
+        lblUser.setToolTipText(em.getName());
     }
     
     private void openOrder(Table table, JRadioButton radio){

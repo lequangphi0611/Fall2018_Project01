@@ -49,7 +49,7 @@ public class LogInJFrame extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        chkShowHidPass = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -81,7 +81,12 @@ public class LogInJFrame extends javax.swing.JDialog {
             }
         });
 
-        jCheckBox1.setText("Show/Hide Password");
+        chkShowHidPass.setText("Show Password");
+        chkShowHidPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chkShowHidPassMouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +121,7 @@ public class LogInJFrame extends javax.swing.JDialog {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCheckBox1)
+                    .addComponent(chkShowHidPass)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
@@ -136,7 +141,7 @@ public class LogInJFrame extends javax.swing.JDialog {
                             .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)
+                        .addComponent(chkShowHidPass)
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +207,16 @@ public class LogInJFrame extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void chkShowHidPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkShowHidPassMouseClicked
+        if(chkShowHidPass.isSelected()){
+            chkShowHidPass.setText("Hide password");
+            txtPass.setEchoChar((char)0);
+        }else{
+            chkShowHidPass.setText("Show password");
+            txtPass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chkShowHidPassMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -245,9 +260,9 @@ public class LogInJFrame extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chkShowHidPass;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
