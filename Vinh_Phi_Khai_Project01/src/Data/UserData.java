@@ -44,4 +44,12 @@ public class UserData {
         }
     }
 
+    public static void changePassword(String oldPassword , String newPassword) throws Error{
+        if(!oldPassword.equals(user.getPassword())){
+            throw new Error("Mật khẩu cũ không chính xác !");
+        }
+        UserData.user.setPassword(newPassword);
+        new UserDAO().update(UserData.user);
+    }
+    
 }
