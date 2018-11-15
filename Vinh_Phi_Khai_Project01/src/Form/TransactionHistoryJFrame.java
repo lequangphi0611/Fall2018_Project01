@@ -19,12 +19,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Quang Phi
  */
 public class TransactionHistoryJFrame extends javax.swing.JFrame {
-    
+
     List<Bill> list;
     DefaultTableModel model;
     BillDAO billDAO = new BillDAO();
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     public TransactionHistoryJFrame() {
         initComponents();
         setLocationRelativeTo(null);
@@ -32,8 +32,8 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         initSetDate();
         load();
     }
-    
-    private void initSetDate(){
+
+    private void initSetDate() {
         Date min = billDAO.minDate();
         Date max = billDAO.maxDate();
         dateChooseMin.setDateFormat(format);
@@ -51,21 +51,21 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         calSetMax.setTime(max);
         dateChooseMax.setSelectedDate(calSetMax);
     }
-    
-    private Date getMinDate(){
+
+    private Date getMinDate() {
         Calendar cal = dateChooseMin.getSelectedDate();
         return cal.getTime();
     }
-    
-    private Date getMaxDate(){
+
+    private Date getMaxDate() {
         Calendar cal = dateChooseMax.getSelectedDate();
         return cal.getTime();
     }
-    
-    private List<Bill> getListForDate(){
+
+    private List<Bill> getListForDate() {
         return billDAO.getListForDate(getMinDate(), getMaxDate());
     }
-    
+
     private void load() {
         model.setRowCount(0);
         for (Bill bill : list) {

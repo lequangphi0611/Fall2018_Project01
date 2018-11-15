@@ -78,11 +78,9 @@ public class BillDAO extends DAO<Bill> {
             if (rs.next()) {
                 Date minDate = rs.getDate(1);
                 Date maxDate = rs.getDate(2);
-                if(minDate == null && maxDate == null){
-                    minDate = new Date();
-                    maxDate = new Date();
+                if (minDate != null && maxDate != null) {
+                    return new Date[]{minDate, maxDate};
                 }
-                return new Date[]{minDate,maxDate};
             }
         } catch (SQLException ex) {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +91,7 @@ public class BillDAO extends DAO<Bill> {
                 Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return new Date[]{new Date(), new Date()};
+        return new Date[]{new Date(),new Date()};
     }
 
     public List<Bill> getListForDate(Date dateBefore, Date dateAfter) {
