@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -105,23 +106,32 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_history_58875.png"))); // NOI18N
         jLabel1.setText("Lịch sử giao dịch");
 
+        tbTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Ngày giao dich", "Mã giao dịch", "Mã Nhân viên", "Số bàn", "Tổng phụ", "Giảm trừ", "Tổng giá"
             }
         ));
+        header = tbTable.getTableHeader();
+        header.setFont(new java.awt.Font("Times New Roman",0,20));
+        tbTable.setRowHeight(26);
         jScrollPane1.setViewportView(tbTable);
+        if (tbTable.getColumnModel().getColumnCount() > 0) {
+            tbTable.getColumnModel().getColumn(0).setMinWidth(200);
+            tbTable.getColumnModel().getColumn(0).setMaxWidth(210);
+            tbTable.getColumnModel().getColumn(3).setMinWidth(80);
+            tbTable.getColumnModel().getColumn(3).setMaxWidth(90);
+        }
 
+        btnShowDetail.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnShowDetail.setText("Xem chi tiết");
         btnShowDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,8 +139,10 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText("Từ ngày :");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setText("Đến ngày :");
 
         dateChooseMin.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
@@ -237,18 +249,18 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
             .addContainerGap())
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnShowDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(36, 36, 36))
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(24, 24, 24)
+            .addGap(66, 66, 66)
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(dateChooseMin, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(99, 99, 99)
+            .addGap(76, 76, 76)
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(dateChooseMax, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,5 +354,6 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbTable;
+    private JTableHeader header;
     // End of variables declaration//GEN-END:variables
 }

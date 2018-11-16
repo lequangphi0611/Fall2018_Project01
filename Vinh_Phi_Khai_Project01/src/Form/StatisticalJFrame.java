@@ -76,7 +76,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        tblTableRevenue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblTableRevenue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblTableRevenue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -93,6 +93,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblTableRevenue.setRowHeight(24);
         header = tblTableRevenue.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
         jScrollPane1.setViewportView(tblTableRevenue);
@@ -138,6 +139,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
 
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        tblTableItem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblTableItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -154,6 +156,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblTableItem.setRowHeight(24);
         headerSP = tblTableItem.getTableHeader();
         headerSP.setFont(new java.awt.Font("Times New Roman",0,20));
         jScrollPane2.setViewportView(tblTableItem);
@@ -171,7 +174,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("   Thống kê sản phẩm bán ra   ", new javax.swing.ImageIcon(getClass().getResource("/Icon/tksp.png")), jPanel3); // NOI18N
