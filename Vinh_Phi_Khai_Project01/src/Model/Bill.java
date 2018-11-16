@@ -97,10 +97,6 @@ public class Bill {
         this.sale = sale;
     }
 
-    public void setSaleToPercent(int percent) {
-        this.sale = (this.sumPrice * percent) / 100;
-    }
-
     public long getTotal() {
         return this.sumPrice - this.sale;
     }

@@ -44,8 +44,8 @@ public class OrderJDialog extends javax.swing.JDialog {
         modelAllItem = (DefaultTableModel) tbAllItem.getModel();
         loadToTableInforBill();
         loadAllItem();
-        txtSumPrice.setText(tableMain.sumPrice() + "");
-        lblTable.setText("Bàn số "+table.getTableNum());
+        txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
+        lblTable.setText("Bàn số " + table.getTableNum());
         IDBILL = billDAO.getIDBill();
     }
 
@@ -89,17 +89,12 @@ public class OrderJDialog extends javax.swing.JDialog {
     }
 
     private long getSale() {
-        try {
-            return Long.parseLong(txtSale.getText());
-        } catch (NumberFormatException ex) {
-            //Do nothing
-        }
-        return 0;
+        return (long) (tableMain.sumPrice() * getPercent() / 100);
     }
 
-    private int getPercent() {
+    private double getPercent() {
         try {
-            return Integer.parseInt(txtPercent.getText());
+            return Double.parseDouble(txtPercent.getText());
         } catch (NumberFormatException ex) {
             //Do nothing
         }
@@ -114,8 +109,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         int i = tbAllItem.getSelectedRow();
         tableMain.push(new ItemOrder(listAllItem.get(i), getQuantity()));
         loadToTableInforBill();
-        txtSumPrice.setText(tableMain.sumPrice() + "");
-
+        txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
     }
 
     private void giveBackItem() {
@@ -126,14 +120,13 @@ public class OrderJDialog extends javax.swing.JDialog {
             if (!tableMain.isEmpty()) {
                 tbInforBill.setRowSelectionInterval(index, index);
             }
-            txtSumPrice.setText(tableMain.sumPrice() + "");
-
+            txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         }
     }
 
     private void loadForm(Item item, int quantity) {
         txtItemName.setText(item.getItemName());
-        txtPrice.setText(item.getPrice() + "");
+        txtPrice.setText(Convert.toMoney(item.getPrice()));
         spnQuantity.setValue(quantity);
     }
 
@@ -153,17 +146,18 @@ public class OrderJDialog extends javax.swing.JDialog {
         loadToTableInforBill();
         resetPayForm();
         clearForm();
-        new BillDetailJDialog(null, true, bill).setVisible(true);
+        new BillDetailJDialog(null, true,"Phiếu Thanh Toán", bill).setVisible(true);
     }
 
-    private void clearForm(){
+    private void clearForm() {
         loadForm(new Item(), 1);
     }
-    
-    private void resetPayForm(){
-        txtSumPrice.setText("0");
-        txtPercent.setText("0");
+
+    private void resetPayForm() {
+        txtSumPrice.setText(Convert.toMoney(0));
+        txtPercent.setText(Convert.toMoney(0));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -218,7 +212,15 @@ public class OrderJDialog extends javax.swing.JDialog {
             new String [] {
                 "Tên mặt hàng", "Đơn giá", "ĐVT", "Loại mặt hàng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbAllItem.setRowHeight(26);
         header = tbAllItem.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
@@ -242,7 +244,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 510, 311));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("THÔNG TIN HÓA ĐƠN");
+        jLabel4.setText("THÔNG TIN CỦA BÀN");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
 
         tbInforBill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -253,7 +255,15 @@ public class OrderJDialog extends javax.swing.JDialog {
             new String [] {
                 "STT", "Mặt hàng", "ĐVT", "Đơn giá", "Số lượng", "Tổng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         headers = tbInforBill.getTableHeader();
         headers.setFont(new java.awt.Font("Times New Roman",0,20));
         tbInforBill.setRowHeight(26);
@@ -287,17 +297,18 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, -1, -1));
 
         txtPercent.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtPercent.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPercent.setText("0");
         txtPercent.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtPercentCaretUpdate(evt);
             }
         });
-        jPanel2.add(txtPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 40, -1));
+        jPanel2.add(txtPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 70, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel9.setText("%");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 20, 30));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 20, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel10.setText("Tổng:");
@@ -312,6 +323,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 540, -1, -1));
 
         txtSumPrice.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtSumPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSumPrice.setText("0");
         txtSumPrice.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -321,6 +333,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(txtSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 130, -1));
 
         txtSale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtSale.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSale.setText("0");
         txtSale.setEnabled(false);
         txtSale.addCaretListener(new javax.swing.event.CaretListener() {
@@ -336,6 +349,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(txtSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 130, -1));
 
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotal.setText("0");
         jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 540, 130, -1));
 
@@ -351,6 +365,8 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(txtItemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 180, -1));
 
         txtPrice.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrice.setText("0");
         jPanel2.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 110, -1));
 
         btnAddItem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -378,7 +394,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, -1, -1));
 
         spnQuantity.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        spnQuantity.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spnQuantity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         jPanel2.add(spnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 60, -1));
 
         lblTable.setFont(new java.awt.Font("Tahoma", 1, 34)); // NOI18N
@@ -446,8 +462,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbInforBillMouseClicked
 
     private void txtPercentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPercentCaretUpdate
-        long percentSale = tableMain.sumPrice() * getPercent() / 100;
-        txtSale.setText(percentSale+"");
+        txtSale.setText(Convert.toMoney(getSale()));
     }//GEN-LAST:event_txtPercentCaretUpdate
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -456,13 +471,13 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtSumPriceCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSumPriceCaretUpdate
-        txtTotal.setText(getBill().getTotal()+"");
-        int percent = Integer.parseInt(txtPercent.getText());
-        txtPercent.setText(percent+"");
+        txtTotal.setText(Convert.toMoney(getBill().getTotal()));
+        String percent = txtPercent.getText();
+        txtPercent.setText(percent);
     }//GEN-LAST:event_txtSumPriceCaretUpdate
 
     private void txtSaleCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSaleCaretUpdate
-        txtTotal.setText(getBill().getTotal()+"");
+        txtTotal.setText(Convert.toMoney(getBill().getTotal()));
     }//GEN-LAST:event_txtSaleCaretUpdate
 
     /**

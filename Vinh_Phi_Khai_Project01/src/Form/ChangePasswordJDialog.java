@@ -6,6 +6,8 @@
 package Form;
 
 import static Data.UserData.*;
+import Library.OptionPane;
+import java.security.cert.PKIXRevocationChecker;
 
 /**
  *
@@ -13,20 +15,27 @@ import static Data.UserData.*;
  */
 public class ChangePasswordJDialog extends javax.swing.JDialog {
 
-<<<<<<< HEAD:Vinh_Phi_Khai_Project01/src/Form/ChangePasswordJFrame.java
-    
-    public ChangePasswordJFrame() {
-=======
-    /**
-     * Creates new form ChangePasswordJDialog
-     */
     public ChangePasswordJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
->>>>>>> 99a8282f091c388711124058582d4d28320cfbe4:Vinh_Phi_Khai_Project01/src/Form/ChangePasswordJDialog.java
         initComponents();
     }
 
-    
+    private void changePass() {
+        String oldPass = new String(txtOldPassword.getPassword());
+        if (oldPass.equals(getUserInfor().getPassword())) {
+            String newPass = new String(txtNewPassword.getPassword());
+            if (newPass.equals(new String(txtConfirmNewPass.getPassword()))) {
+                changePassword(newPass);
+                OptionPane.success(this, "Thành công !");
+                this.dispose();
+            } else {
+                OptionPane.alert(this, "Xác nhận mật khẩu không chính xác !");
+            }
+        } else {
+            OptionPane.alert(this, "Mật khẩu cũ không chính xác !");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +93,11 @@ public class ChangePasswordJDialog extends javax.swing.JDialog {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
         jButton2.setText(" Đóng  ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 140, 50));
 
         txtOldPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -138,8 +152,12 @@ public class ChangePasswordJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        changePass();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -14,7 +14,7 @@ public class Item {
     private int idItem;
     private String itemName;
     private String unit;
-    private long price;
+    private long price = 0;
     private String idCategory;
 
     public Item() {

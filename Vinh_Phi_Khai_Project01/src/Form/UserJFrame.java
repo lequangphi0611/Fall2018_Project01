@@ -122,7 +122,7 @@ public class UserJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        cboEmployees = new javax.swing.JComboBox<String>();
+        cboEmployees = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -274,7 +274,7 @@ public class UserJFrame extends javax.swing.JFrame {
 
         btnClean.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-delete_23231.png"))); // NOI18N
-        btnClean.setText("Làm mới");
+        btnClean.setText("Mới");
         btnClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCleanActionPerformed(evt);
@@ -317,7 +317,15 @@ public class UserJFrame extends javax.swing.JFrame {
             new String [] {
                 "Tên đăng nhập", "Mật khẩu", "Tên nhân viên"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         header = tbJtable.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
         tbJtable.setRowHeight(26);
@@ -378,7 +386,7 @@ public class UserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-        reset();
+        reload();
     }//GEN-LAST:event_btnCleanActionPerformed
 
     /**

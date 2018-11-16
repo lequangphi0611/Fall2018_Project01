@@ -7,7 +7,11 @@ package Library;
 
 import Data.UserData;
 import Model.Users;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +20,13 @@ import java.util.Date;
 public class new_Main {
 
     public static void main(String[] args) {
-        diff();
+        DecimalFormat decimal = new DecimalFormat("###,###,###");
+        String t = "900,000";
+        try {
+            System.out.println(decimal.parse(t));
+        } catch (ParseException ex) {
+            Logger.getLogger(new_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     static void diff() {
