@@ -82,6 +82,13 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         }
     }
 
+    
+    private void showDetail(){
+        int i = tbTable.getSelectedRow();
+        if (i >= 0) {
+            new BillDetailJDialog(this, true, list.get(i)).setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,10 +126,26 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
             new String [] {
                 "Ngày giao dich", "Mã giao dịch", "Mã Nhân viên", "Số bàn", "Tổng phụ", "Giảm trừ", "Tổng giá"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         header = tbTable.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
         tbTable.setRowHeight(26);
+        tbTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbTableMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbTable);
         if (tbTable.getColumnModel().getColumnCount() > 0) {
             tbTable.getColumnModel().getColumn(0).setMinWidth(200);
@@ -292,10 +315,7 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowDetailActionPerformed
-        int i = tbTable.getSelectedRow();
-        if (i >= 0) {
-            new BillDetailJDialog(this, true, list.get(i)).setVisible(true);
-        }
+        showDetail();
     }//GEN-LAST:event_btnShowDetailActionPerformed
 
     private void dateChooseMinOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooseMinOnSelectionChange
@@ -307,6 +327,16 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
         list = getListForDate();
         load();
     }//GEN-LAST:event_dateChooseMaxOnSelectionChange
+
+    private void tbTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTableMouseClicked
+        
+    }//GEN-LAST:event_tbTableMouseClicked
+
+    private void tbTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTableMousePressed
+        if(evt.getClickCount() == 2){
+            showDetail();
+        }
+    }//GEN-LAST:event_tbTableMousePressed
 
     /**
      * @param args the command line arguments

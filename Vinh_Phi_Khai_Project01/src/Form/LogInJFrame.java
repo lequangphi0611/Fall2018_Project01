@@ -221,10 +221,10 @@ public class LogInJFrame extends javax.swing.JDialog {
 
     private void chkShowHidPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkShowHidPassMouseClicked
         if(chkShowHidPass.isSelected()){
-            chkShowHidPass.setText("Hiển thị mật khẩu");
+            chkShowHidPass.setText("Ẩn mật khẩu");
             txtPass.setEchoChar((char)0);
         }else{
-            chkShowHidPass.setText("Ẩn mật khẩu");
+            chkShowHidPass.setText("Hiển thị mật khẩu");
             txtPass.setEchoChar('*');
         }
     }//GEN-LAST:event_chkShowHidPassMouseClicked
