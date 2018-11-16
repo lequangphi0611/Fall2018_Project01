@@ -106,19 +106,26 @@ public class OrderJDialog extends javax.swing.JDialog {
     }
 
     private void addItem() {
-        int i = tbAllItem.getSelectedRow();
-        if (i >= 0) {
-            tableMain.push(new ItemOrder(listAllItem.get(i), getQuantity()));
+        int index = tbAllItem.getSelectedRow();
+        Item item = null;
+        if(index > 0){
+            item = listAllItem.get(index);
+        } else if(!txtItemName.getText().isEmpty()){
+            item = findItemInList(txtItemName.getText());
+        }
+        if (item != null) {
+            tableMain.push(new ItemOrder(item, getQuantity()));
             loadToTableInforBill();
             txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         }
+        turnOffSelection(tbAllItem);
     }
 
     private void giveBackItem() {
         int index = tbInforBill.getSelectedRow();
         Item item;
-        if (index < 0 && !tableMain.isEmpty()) {
-            item = listAllItem.get(tbAllItem.getSelectedRow());
+        if (index < 0 && !txtItemName.getText().isEmpty() && !tableMain.isEmpty()) {
+            item = findItemInList(txtItemName.getText());
             index = tableMain.indexOf(new ItemOrder(item, 0));
         }
         if (index >= 0) {
@@ -144,7 +151,6 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void loadForm(Item item, int quantity) {
         txtItemName.setText(item.getItemName());
-        txtPrice.setText(Convert.toMoney(item.getPrice()));
         spnQuantity.setValue(quantity);
     }
 
@@ -174,6 +180,24 @@ public class OrderJDialog extends javax.swing.JDialog {
     private void resetPayForm() {
         txtSumPrice.setText(Convert.toMoney(0));
         txtPercent.setText(Convert.toMoney(0));
+    }
+    
+    private Item findItemInList(String itemName){
+        Item result = null;
+        for(Item item : listAllItem){
+            if(item.getItemName().equals(itemName)){
+                result = item;
+            }
+        }
+        return result;
+    }
+    
+    private void turnOffSelection(javax.swing.JTable table){
+        try {
+            table.setSelectionMode(-1);
+        } catch (java.lang.IllegalArgumentException ex) {
+
+        }
     }
 
     /**
@@ -379,13 +403,21 @@ public class OrderJDialog extends javax.swing.JDialog {
         jLabel14.setText("Đơn giá:");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
 
+        txtItemName.setEditable(false);
         txtItemName.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtItemName.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtItemName.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtItemNameCaretUpdate(evt);
+            }
+        });
         jPanel2.add(txtItemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 180, -1));
 
+        txtPrice.setEditable(false);
         txtPrice.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPrice.setText("0");
-        jPanel2.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 110, -1));
+        jPanel2.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 180, -1));
 
         btnAddItem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnAddItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Create.png"))); // NOI18N
@@ -471,22 +503,14 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void tbAllItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseClicked
         loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
-        try {
-            tbInforBill.setSelectionMode(-1);
-        } catch (java.lang.IllegalArgumentException ex) {
-
-        }
+        turnOffSelection(tbInforBill);
     }//GEN-LAST:event_tbAllItemMouseClicked
 
     private void tbInforBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInforBillMouseClicked
         int index = tbInforBill.getSelectedRow();
         ItemOrder item = tableMain.getItemOrder().get(index);
         loadForm(item, item.getQuantity());
-        try {
-            tbAllItem.setSelectionMode(-1);
-        } catch (java.lang.IllegalArgumentException ex) {
-
-        }
+        turnOffSelection(tbAllItem);
     }//GEN-LAST:event_tbInforBillMouseClicked
 
     private void txtPercentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPercentCaretUpdate
@@ -507,6 +531,16 @@ public class OrderJDialog extends javax.swing.JDialog {
     private void txtSaleCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSaleCaretUpdate
         txtTotal.setText(Convert.toMoney(getBill().getTotal()));
     }//GEN-LAST:event_txtSaleCaretUpdate
+
+    private void txtItemNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtItemNameCaretUpdate
+        long price = 0;
+        try{
+            price = findItemInList(txtItemName.getText()).getPrice();
+
+        }catch(NullPointerException ex){
+        }
+        txtPrice.setText(Convert.toMoney(price));
+    }//GEN-LAST:event_txtItemNameCaretUpdate
 
     /**
      * @param args the command line arguments
