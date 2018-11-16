@@ -107,19 +107,37 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void addItem() {
         int i = tbAllItem.getSelectedRow();
-        tableMain.push(new ItemOrder(listAllItem.get(i), getQuantity()));
-        loadToTableInforBill();
-        txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
+        if (i >= 0) {
+            tableMain.push(new ItemOrder(listAllItem.get(i), getQuantity()));
+            loadToTableInforBill();
+            txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
+        }
     }
 
     private void giveBackItem() {
         int index = tbInforBill.getSelectedRow();
+        Item item;
+        if (index < 0 && !tableMain.isEmpty()) {
+            item = listAllItem.get(tbAllItem.getSelectedRow());
+            index = tableMain.indexOf(new ItemOrder(item, 0));
+        }
         if (index >= 0) {
-            tableMain.giveBackItem(tableMain.getItemOrder().get(index), getQuantity());
+            ItemOrder itemOrder = tableMain.getItemOrder().get(index);
+            int quantity = getQuantity();
+            int size = tableMain.getItemOrder().size();
+            tableMain.giveBackItem(itemOrder, quantity);
             loadToTableInforBill();
-            if (!tableMain.isEmpty()) {
+            if (!tableMain.isEmpty() && size == tableMain.getItemOrder().size()) {
                 tbInforBill.setRowSelectionInterval(index, index);
+                itemOrder = tableMain.getItemOrder().get(index);
+                if (quantity > itemOrder.getQuantity()) {
+                    quantity = itemOrder.getQuantity();
+                }
+                loadForm(itemOrder, quantity);
+            } else {
+                loadForm(new Item(), 1);
             }
+
             txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         }
     }
@@ -146,7 +164,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         loadToTableInforBill();
         resetPayForm();
         clearForm();
-        new BillDetailJDialog(null, true,"Phiếu Thanh Toán", bill).setVisible(true);
+        new BillDetailJDialog(null, true, "Phiếu Thanh Toán", bill).setVisible(true);
     }
 
     private void clearForm() {
@@ -453,12 +471,22 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void tbAllItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseClicked
         loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
+        try {
+            tbInforBill.setSelectionMode(-1);
+        } catch (java.lang.IllegalArgumentException ex) {
+
+        }
     }//GEN-LAST:event_tbAllItemMouseClicked
 
     private void tbInforBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInforBillMouseClicked
         int index = tbInforBill.getSelectedRow();
         ItemOrder item = tableMain.getItemOrder().get(index);
         loadForm(item, item.getQuantity());
+        try {
+            tbAllItem.setSelectionMode(-1);
+        } catch (java.lang.IllegalArgumentException ex) {
+
+        }
     }//GEN-LAST:event_tbInforBillMouseClicked
 
     private void txtPercentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPercentCaretUpdate
