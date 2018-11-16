@@ -33,7 +33,6 @@ public class OrderJDialog extends javax.swing.JDialog {
     BillDAO billDAO = new BillDAO();
     Bill billMain = new Bill();
     BillDetailDAO detailDAO = new BillDetailDAO();
-    final String IDBILL;
 
     public OrderJDialog(java.awt.Frame parent, boolean modal, Table table) {
         super(parent, modal);
@@ -46,7 +45,6 @@ public class OrderJDialog extends javax.swing.JDialog {
         loadAllItem();
         txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         lblTable.setText("Bàn số " + table.getTableNum());
-        IDBILL = billDAO.getIDBill();
     }
 
     private void loadAllItem() {
@@ -78,7 +76,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private Bill getBill() {
         return new Bill(
-                IDBILL,
+                billDAO.getIDBill(),
                 UserData.getUserInfor().getIdEmployees(),
                 Convert.getNow(),
                 Convert.getNow(),

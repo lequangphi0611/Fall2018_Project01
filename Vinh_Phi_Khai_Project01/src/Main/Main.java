@@ -14,8 +14,18 @@ import Form.*;
  */
 public class Main {
 
+    public static void runningSystem(MainJFrame frame) {
+        new LogInJFrame(null, true).setVisible(true);
+        if (UserData.isLogin()) {
+            frame.setVisible(true);
+        } else {
+            System.exit(0);
+        }
+    }
+    
+
     public static void main(String[] args) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -34,16 +44,11 @@ public class Main {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LogInJFrame(null, true).setVisible(true);
-                if (UserData.isLogin()) {
-                    new MainJFrame().setVisible(true);
-                } else {
-                    System.exit(0);
-                }
+                runningSystem(new MainJFrame());
             }
         });
     }

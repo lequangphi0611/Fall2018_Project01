@@ -8,6 +8,8 @@ package Form;
 import DAO.EmployeesDAO;
 import static Data.TableData.*;
 import Data.UserData;
+import Library.OptionPane;
+import Main.Main;
 import Model.Employees;
 import Model.Table;
 import java.awt.event.ActionEvent;
@@ -36,9 +38,6 @@ public class MainJFrame extends javax.swing.JFrame {
                 lblClock.setText(format.format(new Date()));
             }
         }).start();
-        lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
-        Employees em = new EmployeesDAO().findModel(UserData.getUserInfor().getIdEmployees()).get(0);
-        lblUser.setToolTipText(em.getName());
     }
     
     private void openOrder(Table table, JRadioButton radio){
@@ -53,11 +52,17 @@ public class MainJFrame extends javax.swing.JFrame {
     private void logOut(){
         UserData.logOut();
         this.setVisible(false);
-        new LogInJFrame(this, true).setVisible(true);
-        if(UserData.isLogin()){
-            this.setVisible(true);
+        Main.runningSystem(this);
+    }
+    
+    private void changePassAction(){
+        this.setVisible(false);
+        new ChangePasswordJDialog(this, true).setVisible(true);
+        if(ChangePasswordJDialog.isChanged){
+            OptionPane.success(this, "Đổi mật khẩu thành công ! Nhấp ok để Đăng nhập lại !");
+            Main.runningSystem(this);
         }else{
-            System.exit(0);
+            this.setVisible(true);
         }
     }
     
@@ -81,7 +86,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel32 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        btnChangePass = new javax.swing.JButton();
         jPanel40 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -154,6 +159,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -284,12 +294,12 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/change pass.png"))); // NOI18N
-        jButton5.setText("Đổi mật khẩu");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnChangePass.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnChangePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/change pass.png"))); // NOI18N
+        btnChangePass.setText("Đổi mật khẩu");
+        btnChangePass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnChangePassActionPerformed(evt);
             }
         });
 
@@ -297,11 +307,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel34.setLayout(jPanel34Layout);
         jPanel34Layout.setHorizontalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+            .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 300, 80));
@@ -1130,10 +1140,10 @@ public class MainJFrame extends javax.swing.JFrame {
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblClock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21))
                 .addContainerGap())
         );
 
@@ -1380,9 +1390,13 @@ public class MainJFrame extends javax.swing.JFrame {
         logOut();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new ChangePasswordJDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
+        changePassAction();
+    }//GEN-LAST:event_btnChangePassActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -1421,6 +1435,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChangePass;
     private javax.swing.JLabel btnTable01;
     private javax.swing.JLabel btnTable02;
     private javax.swing.JLabel btnTable03;
@@ -1443,7 +1458,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

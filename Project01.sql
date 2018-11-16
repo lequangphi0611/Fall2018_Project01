@@ -39,7 +39,8 @@ create table Item(
 	ItemName nvarchar(30) unique not null,
 	Unit nvarchar(20) not null,
 	Price money not null,
-	IdCategory varchar(6) references Category(IdCategory) on delete set null
+	IdCategory varchar(6) references Category(IdCategory) on delete set null,
+	isSell bit default 1
 )
 
 go
@@ -60,7 +61,7 @@ go
 
 create table BillDetail(
 	IdBill varchar(10) references bill(IdBill) on delete cascade,
-	IdItem int references Item(IdItem) on update no action,
+	IdItem int references Item(IdItem) on update no action on delete cascade,
 	Quantity int not null,
 	Price money not null
 )
@@ -140,5 +141,3 @@ as
 go
 
 
-
-select * from users

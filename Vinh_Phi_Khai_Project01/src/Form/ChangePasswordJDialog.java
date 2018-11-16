@@ -7,7 +7,6 @@ package Form;
 
 import static Data.UserData.*;
 import Library.OptionPane;
-import java.security.cert.PKIXRevocationChecker;
 
 /**
  *
@@ -15,9 +14,12 @@ import java.security.cert.PKIXRevocationChecker;
  */
 public class ChangePasswordJDialog extends javax.swing.JDialog {
 
+    public static boolean isChanged = false;
+    
     public ChangePasswordJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        isChanged = false;
     }
 
     private void changePass() {
@@ -26,7 +28,7 @@ public class ChangePasswordJDialog extends javax.swing.JDialog {
             String newPass = new String(txtNewPassword.getPassword());
             if (newPass.equals(new String(txtConfirmNewPass.getPassword()))) {
                 changePassword(newPass);
-                OptionPane.success(this, "Thành công !");
+                isChanged = true;
                 this.dispose();
             } else {
                 OptionPane.alert(this, "Xác nhận mật khẩu không chính xác !");

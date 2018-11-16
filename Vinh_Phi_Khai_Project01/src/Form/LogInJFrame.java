@@ -7,6 +7,8 @@ package Form;
 
 import Data.UserData;
 import Library.OptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,9 +16,6 @@ import Library.OptionPane;
  */
 public class LogInJFrame extends javax.swing.JDialog {
 
-    /**
-     * Creates new form LogInJFrame
-     */
     public LogInJFrame(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -24,13 +23,29 @@ public class LogInJFrame extends javax.swing.JDialog {
     }
 
     private void action_login() {
-        try {
-            if (UserData.login(txtUser.getText(), new String(txtPass.getPassword()))) {
-                this.dispose();
+        setStatusButton(false);
+        loginMain().start();
+    }
+
+    private Thread loginMain() {
+        return new Thread(() -> {
+            try {
+                Thread.sleep(150);
+                if (UserData.login(txtUser.getText(), new String(txtPass.getPassword()))) {
+                    this.dispose();
+                }
+            } catch (Error ex) {
+                setStatusButton(true);
+                OptionPane.alert(this, ex.getMessage());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(LogInJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Error ex) {
-            OptionPane.alert(this, ex.getMessage());
-        }
+        });
+    }
+
+    private void setStatusButton(boolean status) {
+        btnLogin.setEnabled(status);
+        btnExit.setEnabled(status);
     }
 
     /**
@@ -51,7 +66,7 @@ public class LogInJFrame extends javax.swing.JDialog {
         txtPass = new javax.swing.JPasswordField();
         chkShowHidPass = new javax.swing.JCheckBox();
         btnLogin = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,12 +117,12 @@ public class LogInJFrame extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
-        jButton2.setText("Thoát");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
+        btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -135,7 +150,7 @@ public class LogInJFrame extends javax.swing.JDialog {
                         .addGap(95, 95, 95)
                         .addComponent(btnLogin)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
@@ -157,7 +172,7 @@ public class LogInJFrame extends javax.swing.JDialog {
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -213,17 +228,17 @@ public class LogInJFrame extends javax.swing.JDialog {
         action_login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(OptionPane.confirm(this, "Bạn có muốn thoát ứng dụng ? ")){
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        if (OptionPane.confirm(this, "Bạn có muốn thoát ứng dụng ? ")) {
             System.exit(0);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void chkShowHidPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkShowHidPassMouseClicked
-        if(chkShowHidPass.isSelected()){
+        if (chkShowHidPass.isSelected()) {
             chkShowHidPass.setText("Ẩn mật khẩu");
-            txtPass.setEchoChar((char)0);
-        }else{
+            txtPass.setEchoChar((char) 0);
+        } else {
             chkShowHidPass.setText("Hiển thị mật khẩu");
             txtPass.setEchoChar('*');
         }
@@ -272,9 +287,9 @@ public class LogInJFrame extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
     private javax.swing.JCheckBox chkShowHidPass;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
