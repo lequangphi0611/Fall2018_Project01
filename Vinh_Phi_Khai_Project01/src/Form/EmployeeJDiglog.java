@@ -139,70 +139,79 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(250, 250, 250));
 
+        txtAge.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        txtIdEmployees.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtIdEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdEmployeesActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Age :");
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Tuổi:");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("IdEmployees :");
+        jLabel1.setText("Mã nhân viên:");
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         jLabel5.setBackground(new java.awt.Color(250, 250, 250));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Community Help_17879.png"))); // NOI18N
-        jLabel5.setText("Employees");
+        jLabel5.setText("Quản lý nhân viên");
         jPanel2.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Name :");
+        jLabel6.setText("Họ và tên:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Phone Number : ");
+        jLabel7.setText("Số điện thoại:");
+
+        txtPhoneNumber.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         txtAddress.setColumns(20);
-        txtAddress.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtAddress.setRows(5);
         jScrollPane1.setViewportView(txtAddress);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Address :");
+        jLabel8.setText("Địa chỉ:");
 
-        rdoMale.setText("Male");
+        rdoMale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdoMale.setText("Nam");
 
-        rdoFemale.setText("Female");
+        rdoFemale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdoFemale.setText("Nữ");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Sex :");
+        jLabel2.setText("Giới tính:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Role :");
+        jLabel4.setText("Chức vụ:");
 
-        rdoManage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rdoManage.setText("Manager");
+        rdoManage.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdoManage.setText("Quản lý");
         rdoManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoManageActionPerformed(evt);
             }
         });
 
-        rdoEmployees.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rdoEmployees.setText("Employee");
+        rdoEmployees.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdoEmployees.setText("Nhân viên ");
         rdoEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoEmployeesActionPerformed(evt);
@@ -215,42 +224,40 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(28, 28, 28))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(3, 3, 3)
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(77, 77, 77)
+                            .addComponent(rdoMale)
+                            .addGap(113, 113, 113)
+                            .addComponent(rdoFemale))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGap(183, 183, 183)
+                            .addComponent(rdoManage)
+                            .addGap(74, 74, 74)
+                            .addComponent(rdoEmployees)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(28, 28, 28))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)))
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(txtIdEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(77, 77, 77)
-                                .addComponent(rdoMale)
-                                .addGap(113, 113, 113)
-                                .addComponent(rdoFemale))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(183, 183, 183)
-                                .addComponent(rdoManage)
-                                .addGap(74, 74, 74)
-                                .addComponent(rdoEmployees))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel7))
@@ -261,7 +268,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                 .addGap(37, 37, 37))
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel6, jLabel7});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel7});
 
         jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rdoEmployees, rdoManage});
 
@@ -286,16 +293,12 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdoFemale)
-                            .addComponent(rdoMale))
-                        .addGap(57, 57, 57))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(38, 38, 38)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(rdoMale)
+                    .addComponent(rdoFemale))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,16 +314,16 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
         jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAge, txtIdEmployees, txtName, txtPhoneNumber});
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Close_1891023.png"))); // NOI18N
-        jButton2.setText("Cancel");
+        jButton2.setText("Đóng");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        btnOk.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnOk.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_success_1646004.png"))); // NOI18N
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -329,15 +332,16 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_edit-clear_118917.png"))); // NOI18N
-        jButton1.setText("Clear");
+        jButton1.setText("Làm mới");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-rtl_23350.png"))); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,6 +349,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
             }
         });
 
+        btnNext.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_gtk-media-next-ltr_23349.png"))); // NOI18N
         btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNext.setFocusCycleRoot(true);
@@ -411,7 +416,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
                     .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnOk, jButton1, jButton2});

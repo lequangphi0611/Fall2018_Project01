@@ -112,6 +112,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 30));
 
         tblTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tblTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -120,6 +121,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
                 "STT", "Mặt hàng", "Đơn giá", "Đơn vị tính", "Số lượng", "Tổng tiền"
             }
         ));
+        tblTable.setRowHeight(26);
         header = tblTable.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
         jScrollPane1.setViewportView(tblTable);

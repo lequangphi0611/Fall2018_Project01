@@ -138,8 +138,8 @@ public class CategoryJDialog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 255), 2));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel6.setText("Category");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        jLabel6.setText("Loại hàng");
         jLabel6.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -149,9 +149,13 @@ public class CategoryJDialog extends javax.swing.JDialog {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 15, -1, 45));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, 45));
 
-        txtCategory.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jPanel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        txtCategory.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         btnInsert1.setBackground(new java.awt.Color(204, 204, 204));
         btnInsert1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -175,10 +179,12 @@ public class CategoryJDialog extends javax.swing.JDialog {
             }
         });
 
-        txtIdCategory.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtIdCategory.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Mã loại :");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Loại :");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -188,9 +194,9 @@ public class CategoryJDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnInsert1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +209,7 @@ public class CategoryJDialog extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -219,9 +225,9 @@ public class CategoryJDialog extends javax.swing.JDialog {
                 .addGap(30, 30, 30))
         );
 
-        jTabbedPane1.addTab("Category", jPanel3);
+        jTabbedPane1.addTab("  Loại hàng  ", new javax.swing.ImageIcon(getClass().getResource("/Icon/if_category_59028.png")), jPanel3); // NOI18N
 
-        tblTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -232,12 +238,13 @@ public class CategoryJDialog extends javax.swing.JDialog {
         ));
         header = tblTable.getTableHeader();
         header.setFont(new java.awt.Font("Times New Roman",0,20));
+        tblTable.setRowHeight(22);
         jScrollPane1.setViewportView(tblTable);
         if (tblTable.getColumnModel().getColumnCount() > 0) {
             tblTable.getColumnModel().getColumn(0).setMinWidth(40);
             tblTable.getColumnModel().getColumn(0).setMaxWidth(60);
-            tblTable.getColumnModel().getColumn(1).setMinWidth(80);
-            tblTable.getColumnModel().getColumn(1).setMaxWidth(90);
+            tblTable.getColumnModel().getColumn(1).setMinWidth(120);
+            tblTable.getColumnModel().getColumn(1).setMaxWidth(140);
         }
 
         btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
@@ -288,23 +295,19 @@ public class CategoryJDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Table", jPanel4);
+        jTabbedPane1.addTab("  Bảng thống kê  ", new javax.swing.ImageIcon(getClass().getResource("/Icon/if_table_save_64777.png")), jPanel4); // NOI18N
 
-        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 67, 460, 321));
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
         );
 
         pack();
