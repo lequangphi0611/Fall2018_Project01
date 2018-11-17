@@ -52,15 +52,16 @@ public class MainJFrame extends javax.swing.JFrame {
     private void logOut(){
         UserData.logOut();
         this.setVisible(false);
-        Main.runningSystem(this);
+        Main.loginAndRunMainSystem(this);
     }
     
     private void changePassAction(){
         this.setVisible(false);
         new ChangePasswordJDialog(this, true).setVisible(true);
         if(ChangePasswordJDialog.isChanged){
+            UserData.logOut();
             OptionPane.success(this, "Đổi mật khẩu thành công ! Nhấp ok để Đăng nhập lại !");
-            Main.runningSystem(this);
+            Main.loginAndRunMainSystem(this);
         }else{
             this.setVisible(true);
         }
@@ -160,6 +161,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -209,6 +213,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_exit_1736.png"))); // NOI18N
         jButton3.setText("Thoát");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel42Layout = new javax.swing.GroupLayout(jPanel42);
         jPanel42.setLayout(jPanel42Layout);
@@ -1395,8 +1404,16 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangePassActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
+
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Main.turnOffSystem(this);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

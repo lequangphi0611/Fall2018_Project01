@@ -7,6 +7,7 @@ package Main;
 
 import Data.UserData;
 import Form.*;
+import Library.OptionPane;
 
 /**
  *
@@ -14,15 +15,22 @@ import Form.*;
  */
 public class Main {
 
-    public static void runningSystem(MainJFrame frame) {
+    public static void loginAndRunMainSystem(MainJFrame frame) {
         new LogInJFrame(null, true).setVisible(true);
         if (UserData.isLogin()) {
             frame.setVisible(true);
         } else {
-            System.exit(0);
+            turnOffSystem(frame);
         }
     }
-    
+
+    public static void turnOffSystem(MainJFrame frame) {
+        if (OptionPane.confirm(null, "Bạn có muốn thoát chương trình !")) {
+            System.exit(0);
+        } else if (!frame.isVisible()) {
+            loginAndRunMainSystem(frame);
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -48,7 +56,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                runningSystem(new MainJFrame());
+                loginAndRunMainSystem(new MainJFrame());
             }
         });
     }
