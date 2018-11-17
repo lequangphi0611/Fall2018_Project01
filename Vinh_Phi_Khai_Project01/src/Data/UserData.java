@@ -44,7 +44,7 @@ public class UserData {
         }
     }
 
-    public static void changePassword(String newPassword) throws Error{
+    public static void changePassword(String newPassword){
         UserData.user.setPassword(newPassword);
         new UserDAO().update(UserData.user);
     }
