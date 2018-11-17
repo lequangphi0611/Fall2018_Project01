@@ -76,6 +76,9 @@ public class EmployeeJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -228,7 +231,7 @@ public class EmployeeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        load();
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJtableMouseClicked
@@ -258,6 +261,10 @@ public class EmployeeJFrame extends javax.swing.JFrame {
             openDialog(list.get(index));
         }
     }//GEN-LAST:event_tbJtableMousePressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        load();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

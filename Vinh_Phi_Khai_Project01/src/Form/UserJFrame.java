@@ -74,14 +74,21 @@ public class UserJFrame extends javax.swing.JFrame {
     private void add() {
         if (userDAO.insert(getUsers())) {
             reload();
-            OptionPane.success(this, "Insert successfully !");
+            OptionPane.success(this, "Thêm thành công !");
+        }
+    }
+    
+    private void update(){
+        if(userDAO.update(getUsers())){
+            reload();
+            OptionPane.success(this, "Sửa thành công !");
         }
     }
 
     private void delete() {
         if (userDAO.delete(txtUserName.getText())) {
             reload();
-            OptionPane.success(this, "Deleted !");
+            OptionPane.success(this, "Xóa thành công !");
         }
     }
 
@@ -382,7 +389,7 @@ public class UserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tbJtableMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        update();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed

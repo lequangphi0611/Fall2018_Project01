@@ -106,9 +106,9 @@ public class OrderJDialog extends javax.swing.JDialog {
     private void addItem() {
         int index = tbAllItem.getSelectedRow();
         Item item = null;
-        if(index > 0){
+        if (index > 0) {
             item = listAllItem.get(index);
-        } else if(!txtItemName.getText().isEmpty()){
+        } else if (!txtItemName.getText().isEmpty()) {
             item = findItemInList(txtItemName.getText());
         }
         if (item != null) {
@@ -121,9 +121,8 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void giveBackItem() {
         int index = tbInforBill.getSelectedRow();
-        Item item;
         if (index < 0 && !txtItemName.getText().isEmpty() && !tableMain.isEmpty()) {
-            item = findItemInList(txtItemName.getText());
+            Item item = findItemInList(txtItemName.getText());
             index = tableMain.indexOf(new ItemOrder(item, 0));
         }
         if (index >= 0) {
@@ -132,15 +131,14 @@ public class OrderJDialog extends javax.swing.JDialog {
             int size = tableMain.getItemOrder().size();
             tableMain.giveBackItem(itemOrder, quantity);
             loadToTableInforBill();
-            if (!tableMain.isEmpty() && size == tableMain.getItemOrder().size()) {
-                tbInforBill.setRowSelectionInterval(index, index);
+            if (size == tableMain.getItemOrder().size()) {
                 itemOrder = tableMain.getItemOrder().get(index);
                 if (quantity > itemOrder.getQuantity()) {
                     quantity = itemOrder.getQuantity();
                 }
                 loadForm(itemOrder, quantity);
             } else {
-                loadForm(new Item(), 1);
+                clearForm();
             }
 
             txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
@@ -179,18 +177,18 @@ public class OrderJDialog extends javax.swing.JDialog {
         txtSumPrice.setText(Convert.toMoney(0));
         txtPercent.setText(Convert.toMoney(0));
     }
-    
-    private Item findItemInList(String itemName){
+
+    private Item findItemInList(String itemName) {
         Item result = null;
-        for(Item item : listAllItem){
-            if(item.getItemName().equals(itemName)){
+        for (Item item : listAllItem) {
+            if (item.getItemName().equals(itemName)) {
                 result = item;
             }
         }
         return result;
     }
-    
-    private void turnOffSelection(javax.swing.JTable table){
+
+    private void turnOffSelection(javax.swing.JTable table) {
         try {
             table.setSelectionMode(-1);
         } catch (java.lang.IllegalArgumentException ex) {
@@ -532,10 +530,10 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void txtItemNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtItemNameCaretUpdate
         long price = 0;
-        try{
+        try {
             price = findItemInList(txtItemName.getText()).getPrice();
 
-        }catch(NullPointerException ex){
+        } catch (NullPointerException ex) {
         }
         txtPrice.setText(Convert.toMoney(price));
     }//GEN-LAST:event_txtItemNameCaretUpdate

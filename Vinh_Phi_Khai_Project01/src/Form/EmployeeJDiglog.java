@@ -5,6 +5,7 @@
  */
 package Form;
 
+import DAO.EmployeesDAO;
 import Library.OptionPane;
 import Model.Employees;
 import javax.swing.ButtonGroup;
@@ -16,12 +17,11 @@ import static Form.EmployeeJFrame.*;
  */
 public class EmployeeJDiglog extends javax.swing.JDialog {
 
-    EmployeeJFrame employeesFrame;
-
+    EmployeesDAO employeeDO = new EmployeesDAO();
+    
     public EmployeeJDiglog(EmployeeJFrame parent, boolean modal, Employees employees) {
         super(parent, modal);
         init();
-        employeesFrame = parent;
         loadForm(employees);
     }
 
@@ -35,18 +35,16 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }
 
     private void add() {
-        if (employeesFrame.employeeDO.insert(getDataForm())) {
+        if (employeeDO.insert(getDataForm())) {
             clearForm();
-            employeesFrame.load();
-            OptionPane.success(this, "Insert successfully !");
+            OptionPane.success(this, "Thêm thành công !");
         }
     }
 
     private void update() {
-        if (employeesFrame.employeeDO.update(getDataForm())) {
+        if (employeeDO.update(getDataForm())) {
             clearForm();
-            employeesFrame.load();
-            OptionPane.success(this, "Update successfully !");
+            OptionPane.success(this, "Sửa thành công !");
         }
     }
 
@@ -440,7 +438,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        if (employeesFrame.employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
+        if (employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
             add();
         } else {
             update();
