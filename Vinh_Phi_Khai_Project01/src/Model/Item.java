@@ -16,16 +16,18 @@ public class Item {
     private String unit;
     private long price = 0;
     private String idCategory;
+    private boolean isSell = true;
 
     public Item() {
     }
 
-    public Item(int idItem, String itemName, String unit, long price, String idCategory) {
+    public Item(int idItem, String itemName, String unit, long price, String idCategory,boolean isSell) {
         this.idItem = idItem;
         this.itemName = itemName;
         this.unit = unit;
         this.price = price;
         this.idCategory = idCategory;
+        this.isSell = isSell;
     }
 
     public Item(Item item) {
@@ -34,6 +36,7 @@ public class Item {
         this.price = item.getPrice();
         this.unit = item.getUnit();
         this.idCategory = item.getIdCategory();
+        this.isSell = item.isSell();
     }
 
     public int getIdItem() {
@@ -76,10 +79,12 @@ public class Item {
         this.idCategory = idCategory;
     }
 
-    @Override
-    public String toString() {
-        return this.itemName + ":" + this.price; //To change body of generated methods, choose Tools | Templates.
+    public boolean isSell() {
+        return isSell;
     }
 
+    public void setIsSell(boolean isSell) {
+        this.isSell = isSell;
+    }
 
 }

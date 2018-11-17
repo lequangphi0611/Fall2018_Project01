@@ -49,7 +49,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
-        listAllItem = itemDO.getAll();
+        listAllItem = itemDO.getItemIsSell();
         for (Item item : listAllItem) {
             modelAllItem.addRow(new Object[]{
                 item.getItemName(),

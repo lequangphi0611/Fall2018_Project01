@@ -16,18 +16,18 @@ public class ItemOrder extends Item {
     public ItemOrder() {
     }
 
-    public ItemOrder(int idItem, String itemName, String unit, long price, String idCategory, int quantity) {
-        super(idItem, itemName, unit, price, idCategory);
+    public ItemOrder(int idItem, String itemName, String unit, long price, String idCategory, int quantity, boolean isSell) {
+        super(idItem, itemName, unit, price, idCategory, isSell);
         this.quantity = quantity;
     }
 
     public ItemOrder(Item item, int quantity) {
-        super(item.getIdItem(), item.getItemName(), item.getUnit(), item.getPrice(), item.getIdCategory());
+        super(item.getIdItem(), item.getItemName(), item.getUnit(), item.getPrice(), item.getIdCategory(), item.isSell());
         this.quantity = quantity;
     }
 
     public ItemOrder(ItemOrder order) {
-        super(order.getIdItem(), order.getItemName(), order.getUnit(), order.getPrice(), order.getIdCategory());
+        super(order.getIdItem(), order.getItemName(), order.getUnit(), order.getPrice(), order.getIdCategory(),order.isSell());
         this.quantity = order.quantity;
     }
 

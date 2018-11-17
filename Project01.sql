@@ -1,4 +1,4 @@
-
+﻿
 
 create database project01
 
@@ -17,6 +17,7 @@ create table Employees(
 )
 
 
+
 go
 
 create table Users(
@@ -26,6 +27,10 @@ create table Users(
 )
 
 go
+
+insert into Employees values('phi002',N'Lê Quang Phi',19,1,'0773927601',1,N'Thừa Thiên Huế')
+go 
+insert into Users values('admin','123','phi002')
 
 create table Category(
 	IdCategory varchar(6) primary key not null,
