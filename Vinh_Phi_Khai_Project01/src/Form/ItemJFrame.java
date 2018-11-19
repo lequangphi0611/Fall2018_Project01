@@ -98,6 +98,7 @@ public class ItemJFrame extends javax.swing.JFrame {
         }
         reload();
     }
+    
 
     private Category getCategoryByID(String id) {
         List<Category> lists = cateDAO.findModel(id);

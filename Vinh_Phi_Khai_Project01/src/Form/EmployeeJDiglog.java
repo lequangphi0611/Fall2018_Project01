@@ -19,7 +19,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
 
     EmployeesDAO employeeDO = new EmployeesDAO();
     
-    public EmployeeJDiglog(EmployeeJFrame parent, boolean modal, Employees employees) {
+    public EmployeeJDiglog(javax.swing.JFrame parent, boolean modal, Employees employees) {
         super(parent, modal);
         init();
         loadForm(employees);

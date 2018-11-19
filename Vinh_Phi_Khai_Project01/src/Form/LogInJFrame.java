@@ -74,6 +74,11 @@ public class LogInJFrame extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
@@ -225,6 +230,10 @@ public class LogInJFrame extends javax.swing.JDialog {
             txtPass.setEchoChar('*');
         }
     }//GEN-LAST:event_chkShowHidPassMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        txtUser.requestFocus();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

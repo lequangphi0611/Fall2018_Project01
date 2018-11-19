@@ -60,7 +60,6 @@ public class MainJFrame extends javax.swing.JFrame {
         new ChangePasswordJDialog(this, true).setVisible(true);
         if(ChangePasswordJDialog.isChanged){
             UserData.logOut();
-            OptionPane.success(this, "Đổi mật khẩu thành công ! Nhấp ok để Đăng nhập lại !");
             Main.loginAndRunMainSystem(this);
         }else{
             this.setVisible(true);

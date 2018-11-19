@@ -28,9 +28,9 @@ public class UserData {
         return UserData.user;
     }
 
-    public static boolean login(String user, String password) throws Error {
+    public static boolean login(String username, String password) throws Error {
         try {
-            Users users = new UserDAO().findModel(user).get(0);
+            Users users = new UserDAO().findModel(username).get(0);
 
             if (!users.getPassword().equals(password)) {
                 throw new Error("Sai mật khẩu ! Vui lòng nhập lại !");

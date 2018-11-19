@@ -86,7 +86,7 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
     private void showDetail(){
         int i = tbTable.getSelectedRow();
         if (i >= 0) {
-            new BillDetailJDialog(this, true,"Hóa Đơn Chi Tiết", list.get(i)).setVisible(true);
+            new BillDetailJDialog(this, true,"Thông Tin Hóa Đơn", list.get(i)).setVisible(true);
         }
     }
     /**

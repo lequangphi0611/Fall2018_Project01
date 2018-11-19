@@ -145,4 +145,5 @@ as
 	end
 go
 
-
+select * from bill 
+select * from billDetail

@@ -8,20 +8,21 @@ package Form;
 import static Data.UserData.*;
 import Library.OptionPane;
 
+
 /**
  *
  * @author ➻❥ ๖Kɦaї Ꮭε ๖➻❥
  */
 public class ChangePasswordJDialog extends javax.swing.JDialog {
 
-    public static boolean isChanged = false;
+    public static boolean isChanged;
     
     public ChangePasswordJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         isChanged = false;
     }
-
+    
     private void changePass() {
         String oldPass = new String(txtOldPassword.getPassword());
         if (oldPass.equals(getUserInfor().getPassword())) {

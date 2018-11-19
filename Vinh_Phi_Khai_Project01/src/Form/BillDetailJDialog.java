@@ -19,7 +19,6 @@ public class BillDetailJDialog extends javax.swing.JDialog {
 
     DefaultTableModel model;
     BillDetailDAO detailDAO = new BillDetailDAO();
-    Bill bill;
     ItemDAO itemDO = new ItemDAO();
 
     public BillDetailJDialog(java.awt.Frame parent, boolean modal,String title, Bill bill) {
@@ -31,15 +30,14 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         lblTable.setText("BÀN SỐ " + bill.getTableNumber());
         lblIdBill1.setText(bill.getIdBill());
         lblDayPayMent.setText(bill.getFullTime());
-        this.bill = bill;
-        load();
+        load(bill);
         lblSumPrice.setText(Convert.toMoney(bill.getSumPrice()));
         lblSale.setText(Convert.toMoney(bill.getSale()));
         lblTotal.setText(Convert.toMoney(bill.getTotal()));
         
     }
 
-    private void load() {
+    private void load(Bill bill) {
         List<BillDetail> list = detailDAO.getAllOfBill(bill.getIdBill());
         model.setRowCount(0);
         for (BillDetail billDT : list) {

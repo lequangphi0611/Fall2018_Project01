@@ -94,7 +94,6 @@ public class OrderJDialog extends javax.swing.JDialog {
         try {
             return Double.parseDouble(txtPercent.getText());
         } catch (NumberFormatException ex) {
-            //Do nothing
         }
         return 0;
     }
@@ -147,6 +146,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void loadForm(Item item, int quantity) {
         txtItemName.setText(item.getItemName());
+        txtPrice.setText(Convert.toMoney(item.getPrice()));
         spnQuantity.setValue(quantity);
     }
 
@@ -266,6 +266,12 @@ public class OrderJDialog extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbAllItemMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbAllItemMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbAllItemMouseReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(tbAllItem);
         if (tbAllItem.getColumnModel().getColumnCount() > 0) {
@@ -360,6 +366,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         jLabel12.setText("Phải thu:");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 540, -1, -1));
 
+        txtSumPrice.setEditable(false);
         txtSumPrice.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSumPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSumPrice.setText("0");
@@ -368,12 +375,17 @@ public class OrderJDialog extends javax.swing.JDialog {
                 txtSumPriceCaretUpdate(evt);
             }
         });
+        txtSumPrice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSumPriceMouseClicked(evt);
+            }
+        });
         jPanel2.add(txtSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 130, -1));
 
+        txtSale.setEditable(false);
         txtSale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSale.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSale.setText("0");
-        txtSale.setEnabled(false);
         txtSale.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtSaleCaretUpdate(evt);
@@ -386,6 +398,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         });
         jPanel2.add(txtSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 130, -1));
 
+        txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotal.setText("0");
@@ -498,8 +511,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void tbAllItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseClicked
-        loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
-        turnOffSelection(tbInforBill);
+
     }//GEN-LAST:event_tbAllItemMouseClicked
 
     private void tbInforBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInforBillMouseClicked
@@ -529,14 +541,26 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSaleCaretUpdate
 
     private void txtItemNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtItemNameCaretUpdate
-        long price = 0;
-        try {
-            price = findItemInList(txtItemName.getText()).getPrice();
-
-        } catch (NullPointerException ex) {
-        }
-        txtPrice.setText(Convert.toMoney(price));
+    
     }//GEN-LAST:event_txtItemNameCaretUpdate
+
+    private void txtSumPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSumPriceMouseClicked
+
+    }//GEN-LAST:event_txtSumPriceMouseClicked
+
+    private void tbAllItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMousePressed
+        
+    }//GEN-LAST:event_tbAllItemMousePressed
+
+    private void tbAllItemMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseReleased
+        int clickCount = evt.getClickCount();
+        if (clickCount == 1) {
+            loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
+            turnOffSelection(tbInforBill);
+        } else if (evt.getClickCount() == 2) {
+            addItem();
+        }
+    }//GEN-LAST:event_tbAllItemMouseReleased
 
     /**
      * @param args the command line arguments
