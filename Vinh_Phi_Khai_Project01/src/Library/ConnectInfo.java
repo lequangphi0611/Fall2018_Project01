@@ -13,7 +13,7 @@ public class ConnectInfo {
 
     protected static final String USER = "sa";
     protected static final String PASS = "123";
-    protected static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Project01";
+    protected static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Phi_vinh_khai_Project01";
     protected static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 }

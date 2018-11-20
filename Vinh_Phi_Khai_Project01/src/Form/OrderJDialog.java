@@ -9,6 +9,7 @@ import DAO.BillDAO;
 import DAO.BillDetailDAO;
 import DAO.CategoryDAO;
 import DAO.ItemDAO;
+import DAO.WareDAO;
 import Data.UserData;
 import Library.Convert;
 import Model.Bill;
@@ -16,6 +17,7 @@ import Model.BillDetail;
 import Model.Item;
 import Model.ItemOrder;
 import Model.Table;
+import Model.Ware;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -33,6 +35,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     BillDAO billDAO = new BillDAO();
     Bill billMain = new Bill();
     BillDetailDAO detailDAO = new BillDetailDAO();
+    WareDAO wareDAO = new WareDAO();
 
     public OrderJDialog(java.awt.Frame parent, boolean modal, Table table) {
         super(parent, modal);
@@ -49,13 +52,14 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
-        listAllItem = itemDO.getItemIsSell();
+        listAllItem = itemDO.getListForOrder();
         for (Item item : listAllItem) {
             modelAllItem.addRow(new Object[]{
                 item.getItemName(),
                 Convert.toMoney(item.getPrice()),
                 item.getUnit(),
-                cateDO.findModel(item.getIdCategory()).get(0)
+                cateDO.findModel(item.getIdCategory()).get(0),
+                item.getQuantityRemain()
             });
         }
     }
@@ -111,10 +115,13 @@ public class OrderJDialog extends javax.swing.JDialog {
             item = findItemInList(txtItemName.getText());
         }
         if (item != null) {
-            tableMain.push(new ItemOrder(item, getQuantity()));
-            loadToTableInforBill();
+            int quantity = getQuantity();
+            tableMain.push(new ItemOrder(item, quantity));
+            wareDAO.subQuantityRemain(new Ware(item.getIdItem(), quantity));
             txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         }
+        loadAllItem();
+        loadToTableInforBill();
         turnOffSelection(tbAllItem);
     }
 
@@ -129,6 +136,8 @@ public class OrderJDialog extends javax.swing.JDialog {
             int quantity = getQuantity();
             int size = tableMain.getItemOrder().size();
             tableMain.giveBackItem(itemOrder, quantity);
+            wareDAO.addQuantityRemain(new Ware(itemOrder.getIdItem(),quantity));
+            loadAllItem();
             loadToTableInforBill();
             if (size == tableMain.getItemOrder().size()) {
                 itemOrder = tableMain.getItemOrder().get(index);
@@ -248,11 +257,11 @@ public class OrderJDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Tên mặt hàng", "Đơn giá", "ĐVT", "Loại mặt hàng"
+                "Tên mặt hàng", "Đơn giá", "ĐVT", "Loại mặt hàng", "Số lượng còn lại"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -285,11 +294,11 @@ public class OrderJDialog extends javax.swing.JDialog {
             tbAllItem.getColumnModel().getColumn(3).setMaxWidth(180);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 510, 311));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 590, 311));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("THÔNG TIN CỦA BÀN");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         tbInforBill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbInforBill.setModel(new javax.swing.table.DefaultTableModel(
@@ -324,7 +333,7 @@ public class OrderJDialog extends javax.swing.JDialog {
             tbInforBill.getColumnModel().getColumn(1).setMaxWidth(270);
         }
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 640, 310));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 640, 310));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Money_206469.png"))); // NOI18N
@@ -465,11 +474,12 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1220, Short.MAX_VALUE)
-                    .addComponent(lblTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(lblTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 120, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,7 +551,7 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSaleCaretUpdate
 
     private void txtItemNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtItemNameCaretUpdate
-    
+
     }//GEN-LAST:event_txtItemNameCaretUpdate
 
     private void txtSumPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSumPriceMouseClicked
@@ -549,14 +559,16 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSumPriceMouseClicked
 
     private void tbAllItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMousePressed
-        
+
     }//GEN-LAST:event_tbAllItemMousePressed
 
     private void tbAllItemMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseReleased
         int clickCount = evt.getClickCount();
         if (clickCount == 1) {
-            loadForm(listAllItem.get(tbAllItem.getSelectedRow()), 1);
+            Item item = listAllItem.get(tbAllItem.getSelectedRow());
+            loadForm(item, 1);
             turnOffSelection(tbInforBill);
+            
         } else if (evt.getClickCount() == 2) {
             addItem();
         }

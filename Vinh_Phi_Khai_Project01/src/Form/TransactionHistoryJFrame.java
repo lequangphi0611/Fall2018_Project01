@@ -6,12 +6,18 @@
 package Form;
 
 import DAO.BillDAO;
+import DAO.ImportItemDAO;
+import DAO.ItemDAO;
 import Library.Convert;
 import Model.Bill;
+import Model.ImportItem;
+import Model.Item;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -25,13 +31,26 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
     DefaultTableModel model;
     BillDAO billDAO = new BillDAO();
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    DefaultComboBoxModel modelComboBoxFilter;
+    ItemDAO itemDAO = new ItemDAO();
+    ImportItemDAO importDAO = new ImportItemDAO();
+    DefaultTableModel modelTableImport;
+
+    final String[] FILLTER = {
+        "Tất cả",
+        "Theo mặt hàng",
+        "Theo ngày"
+    };
 
     public TransactionHistoryJFrame() {
         initComponents();
         setLocationRelativeTo(null);
         model = (DefaultTableModel) tbTable.getModel();
         initSetDate();
+        modelComboBoxFilter = (DefaultComboBoxModel) cboFiltersDetail.getModel();
+        modelTableImport = (DefaultTableModel) tbTableImportHistory.getModel();
         load();
+        addElementCBOInit();
     }
 
     private void initSetDate() {
@@ -82,13 +101,82 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         }
     }
 
-    
-    private void showDetail(){
+    private void showDetail() {
         int i = tbTable.getSelectedRow();
         if (i >= 0) {
-            new BillDetailJDialog(this, true,"Thông Tin Hóa Đơn", list.get(i)).setVisible(true);
+            new BillDetailJDialog(this, true, "Thông Tin Hóa Đơn", list.get(i)).setVisible(true);
         }
     }
+
+    //--------------------------------------------------------------------//
+    //--------------------------------------------------------------------//
+    //                            Lịch sử Nhập hàng                             
+    //--------------------------------------------------------------------//
+    //--------------------------------------------------------------------//
+    private void addElementCBOInit() {
+        cboFilter.removeAllItems();
+        for (String str : FILLTER) {
+            cboFilter.addItem(str);
+        }
+    }
+
+    private void addItemInCBO() {
+        List<Item> list = itemDAO.getAll();
+        for (Item item : list) {
+            modelComboBoxFilter.addElement(item);
+        }
+    }
+
+    private String getStringCBOFilter() {
+        return (String) cboFilter.getSelectedItem();
+    }
+
+    private void addElementCBOfilter(String filter) {
+        modelComboBoxFilter.removeAllElements();
+        if (filter.equals(FILLTER[1])) {
+            addItemInCBO();
+        } else if (filter.equals(FILLTER[2])) {
+            List<Date> list = importDAO.getAllDate();
+            for (Date date : list) {
+                modelComboBoxFilter.addElement(Convert.formatDate(date, "dd/MM/yyyy"));
+            }
+        }else{
+            loadImportHistory(importDAO.getListForItem(null));
+        }
+    }
+    
+    private Date getDateToCBO(){
+        String date = (String) cboFiltersDetail.getSelectedItem();
+        System.out.println(date);
+        return Convert.parseDate(date, "dd/MM/yyyy");
+    }
+
+    private void loadImportHistory(List<ImportItem> list) {
+        modelTableImport.setRowCount(0);
+        for (ImportItem imports : list) {
+            modelTableImport.addRow(new Object[]{
+                imports.getFullTime(),
+                itemDAO.findModel(imports.getIdItem()).get(0).getItemName(),
+                imports.getIdEmployees(),
+                imports.getQuantityReceived()
+            });
+        }
+    }
+
+
+    private void actionCBOFilter() {
+        List<ImportItem> list = new ArrayList<>();
+        try {
+            Item item = (Item) cboFiltersDetail.getSelectedItem();
+            list = importDAO.getListForItem(item.getIdItem());
+        } catch (NullPointerException ex) {
+            
+        }catch(ClassCastException ex){
+            list = importDAO.selectByDate(getDateToCBO());
+        }
+        loadImportHistory(list);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,15 +187,22 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTable = new javax.swing.JTable();
-        btnShowDetail = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dateChooseMin = new datechooser.beans.DateChooserCombo();
         dateChooseMax = new datechooser.beans.DateChooserCombo();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbTableImportHistory = new javax.swing.JTable();
+        cboFilter = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cboFiltersDetail = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -116,7 +211,7 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_history_58875.png"))); // NOI18N
-        jLabel1.setText("Lịch sử giao dịch");
+        jLabel1.setText("Lịch sử");
 
         tbTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -153,14 +248,6 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
             tbTable.getColumnModel().getColumn(3).setMinWidth(80);
             tbTable.getColumnModel().getColumn(3).setMaxWidth(90);
         }
-
-        btnShowDetail.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btnShowDetail.setText("Xem chi tiết");
-        btnShowDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowDetailActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText("Từ ngày :");
@@ -271,14 +358,6 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
-            .addContainerGap())
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnShowDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(36, 36, 36))
-        .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(66, 66, 66)
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,56 +366,142 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(dateChooseMax, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap(341, Short.MAX_VALUE))
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane1))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(31, 31, 31)
+            .addGap(96, 96, 96)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(dateChooseMax, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(dateChooseMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dateChooseMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(28, 28, 28)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(btnShowDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-            .addGap(5, 5, 5))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     dateChooseMin.getAccessibleContext().setAccessibleName("");
 
-    getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+    jTabbedPane1.addTab("Lịch sử giao dịch", jPanel1);
+
+    tbTableImportHistory.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "Ngày nhập kho", "Mặt hàng", "Mã nhân viên", "Số lượng"
+        }
+    ));
+    jScrollPane2.setViewportView(tbTableImportHistory);
+
+    cboFilter.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cboFilterActionPerformed(evt);
+        }
+    });
+
+    jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel5.setText("Lọc :");
+
+    cboFiltersDetail.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cboFiltersDetailActionPerformed(evt);
+        }
+    });
+
+    jLabel6.setText("Lọc chi tiết:");
+
+    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+    jPanel2.setLayout(jPanel2Layout);
+    jPanel2Layout.setHorizontalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane2)
+        .addGroup(jPanel2Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(140, 140, 140)
+            .addComponent(jLabel6)
+            .addGap(62, 62, 62)
+            .addComponent(cboFiltersDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(138, Short.MAX_VALUE))
+    );
+    jPanel2Layout.setVerticalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(34, 34, 34)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cboFilter, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cboFiltersDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGap(18, 18, 18)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+
+    jTabbedPane1.addTab("Lịch sử nhập hàng vào kho", jPanel2);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+    );
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnShowDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowDetailActionPerformed
-        showDetail();
-    }//GEN-LAST:event_btnShowDetailActionPerformed
-
-    private void dateChooseMinOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooseMinOnSelectionChange
-        list = getListForDate();
-        load();
-    }//GEN-LAST:event_dateChooseMinOnSelectionChange
 
     private void dateChooseMaxOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooseMaxOnSelectionChange
         list = getListForDate();
         load();
     }//GEN-LAST:event_dateChooseMaxOnSelectionChange
 
-    private void tbTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTableMouseClicked
-        
-    }//GEN-LAST:event_tbTableMouseClicked
+    private void dateChooseMinOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooseMinOnSelectionChange
+        list = getListForDate();
+        load();
+    }//GEN-LAST:event_dateChooseMinOnSelectionChange
 
     private void tbTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTableMousePressed
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             showDetail();
         }
     }//GEN-LAST:event_tbTableMousePressed
+
+    private void tbTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTableMouseClicked
+
+    }//GEN-LAST:event_tbTableMouseClicked
+
+    private void cboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboFilterActionPerformed
+        addElementCBOfilter(getStringCBOFilter());
+    }//GEN-LAST:event_cboFilterActionPerformed
+
+    private void cboFiltersDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboFiltersDetailActionPerformed
+        actionCBOFilter();
+    }//GEN-LAST:event_cboFiltersDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,16 +539,23 @@ dateChooseMax.addSelectionChangedListener(new datechooser.events.SelectionChange
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnShowDetail;
+    private javax.swing.JComboBox<String> cboFilter;
+    private javax.swing.JComboBox<String> cboFiltersDetail;
     private datechooser.beans.DateChooserCombo dateChooseMax;
     private datechooser.beans.DateChooserCombo dateChooseMin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbTable;
     private JTableHeader header;
+    private javax.swing.JTable tbTableImportHistory;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package Model;
 
+import DAO.ItemDAO;
+
 /**
  *
  * @author Quang Phi
@@ -86,5 +88,17 @@ public class Item {
     public void setIsSell(boolean isSell) {
         this.isSell = isSell;
     }
+    
+    public int getQuantityRemain(){
+        return new ItemDAO().itemInWare(idItem);
+    }
 
+    @Override
+    public String toString() {
+        return this.itemName;
+    }
+    
+    
+    
+    
 }

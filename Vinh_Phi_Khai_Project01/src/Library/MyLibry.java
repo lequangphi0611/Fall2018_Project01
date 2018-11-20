@@ -13,17 +13,24 @@ import java.util.Random;
  */
 public class MyLibry {
 
-    private static final String FIRSTBILL = "HD";
     private static final Random RD = new Random();
-    private static final String ALANDNUM = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String ALANDNUM = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public static String getRandomIdBill(int length) {
-        String result = FIRSTBILL;
-        if (length > result.length()) {
+    private static int getRamDom(int length) {
+        return RD.nextInt(length);
+    }
+
+    private static char getCharRanDomTo(String str) {
+        return str.charAt(getRamDom(str.length()));
+    }
+
+    public static String getRandomText(String firstText, String ranDomString, int length) {
+        String result = firstText;
+        if (result != null && length > result.length()) {
             length -= result.length();
-            for (int i = 0; i < length; i++) {
-                result += ALANDNUM.charAt(RD.nextInt(ALANDNUM.length()));
-            }
+        }
+        for (int i = 0; i < length; i++) {
+            result += getCharRanDomTo(ranDomString);
         }
         return result;
     }

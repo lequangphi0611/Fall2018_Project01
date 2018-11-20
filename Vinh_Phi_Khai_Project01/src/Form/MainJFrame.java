@@ -185,7 +185,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Globe1_34224.png"))); // NOI18N
-        jButton6.setText("Hướng dẫn");
+        jButton6.setText("Quản lý kho");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
         jPanel41.setLayout(jPanel41Layout);
@@ -242,7 +247,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_history_58875.png"))); // NOI18N
-        jButton1.setText("Lịch sử giao dịch");
+        jButton1.setText("Lịch sử");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1413,6 +1418,10 @@ public class MainJFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
     }//GEN-LAST:event_formWindowActivated
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        new WareJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

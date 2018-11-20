@@ -1,9 +1,9 @@
 ﻿
 
-create database project01
+create database Phi_vinh_khai_Project01
 
 go
-	use project01
+	use Phi_vinh_khai_Project01
 go
 
 create table Employees(
@@ -11,7 +11,7 @@ create table Employees(
 	Name nvarchar(50) not null,
 	Age int not null,
 	Sex bit default 0,
-	PhoneNumber varchar(11) unique,
+	PhoneNumber varchar(11),
 	Role bit default 0,
 	Address nvarchar(255) not null
 )
@@ -46,6 +46,23 @@ create table Item(
 	Price money not null,
 	IdCategory varchar(6) references Category(IdCategory) on delete set null,
 	isSell bit default 1
+)
+
+go
+
+create table Ware(
+	Iditem int references Item(IdItem) on delete no action unique,
+	QuantityRemain int not null
+)
+
+go
+create table Import(
+	IdImport varchar(15) not null primary key,
+	Iditem int references Item(IdItem) on delete no action,
+	IdEmployees varchar(10) references Employees(IdEmployees) on delete no action, 
+	TimeImport time default getdate(),
+	DateImport date default getdate(),
+	QuantityReceived int not null
 )
 
 go
@@ -145,5 +162,34 @@ as
 	end
 go
 
-select * from bill 
-select * from billDetail
+---Bổ sung sp produce
+
+create proc sp_SelectImportHistory @ItemID int
+as 
+	begin
+		if @ItemID is null
+			begin
+				select
+					ip.TimeImport, 
+					ip.DateImport,
+					ip.IdEmployees,
+					ip.Iditem,
+					ip.QuantityReceived				
+				 from Import ip 
+				 order by DateImport desc,TimeImport desc
+			end
+		else
+			begin
+				select
+					ip.TimeImport, 
+					ip.DateImport,
+					ip.IdEmployees,
+					ip.Iditem,
+					ip.QuantityReceived				
+				 from Import ip where ip.Iditem = @ItemID
+				 order by DateImport desc,TimeImport desc
+			end
+	end
+	go
+
+	

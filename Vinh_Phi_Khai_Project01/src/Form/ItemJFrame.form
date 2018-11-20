@@ -29,7 +29,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,7 +70,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnClear" linkSize="2" min="-2" max="-2" attributes="0"/>
@@ -82,9 +81,9 @@
                               <Component id="btnInsert" linkSize="2" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                               <Component id="btnDelete" linkSize="2" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel5" linkSize="1" min="-2" pref="149" max="-2" attributes="0"/>
@@ -137,10 +136,6 @@
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="jPanel2" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -179,6 +174,10 @@
                               <Component id="btnUpdate" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnDelete" linkSize="3" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -366,9 +365,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="730" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="823" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -393,17 +392,17 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="header = tblTable.getTableHeader();&#xa;header.setFont(new java.awt.Font(&quot;Times New Roman&quot;,0,20));">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="true" title="STT" type="java.lang.Object"/>
-                        <Column editable="true" title="T&#xea;n M&#x1eb7;t H&#xe0;ng" type="java.lang.Object"/>
-                        <Column editable="true" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object"/>
-                        <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
-                        <Column editable="true" title="Lo&#x1ea1;i M&#x1eb7;t H&#xe0;ng" type="java.lang.Object"/>
-                        <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+                        <Column editable="false" title="No." type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n M&#x1eb7;t H&#xe0;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object"/>
+                        <Column editable="false" title="Gi&#xe1;" type="java.lang.Object"/>
+                        <Column editable="false" title="Lo&#x1ea1;i M&#x1eb7;t H&#xe0;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="60" minWidth="60" prefWidth="-1" resizable="true">
+                        <Column maxWidth="40" minWidth="30" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -419,6 +418,11 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="200" minWidth="120" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>

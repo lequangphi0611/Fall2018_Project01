@@ -7,6 +7,7 @@ package DAO;
 
 import Interface.IDao;
 import Model.Item;
+import Model.Ware;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
  * @author Quang Phi
  */
 public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
+
+    WareDAO wareDAO = new WareDAO();
+    ImportItemDAO importDO = new ImportItemDAO();
 
     @Override
     public Item getModel() throws SQLException {
@@ -32,44 +36,34 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
     public List<Item> getAll() {
         return executeQuery("select * from Item order by IdItem desc");
     }
-    
-    public List<Item> getItemIsSell(){
-        List<Item> list = getAll();
-        for(int i = 0; i < list.size();){
-            Item item = list.get(i);
-            if(!item.isSell()){
-                list.remove(i);
-            }else{
-                i++;
-            }
-        }
-        return list;
+
+    public List<Item> getItemIsSell() {
+        return executeQuery("select * from Item where isSell=1");
+    }
+
+    public List<Item> getItemStopSell() {
+        return executeQuery("select * from Item where isSell=0");
     }
     
-    public List<Item> getItemStopSell(){
-        List<Item> list = getAll();
-        for(int i = 0; i < list.size();){
-            Item item = list.get(i);
-            if(item.isSell()){
-                list.remove(i);
-            }else{
-                i++;
-            }
-        }
-        return list;
+    public List<Item> getListForOrder(){
+        return executeQuery("select * from Item inner join Ware on Item.IdItem = Ware.IdItem "
+                + "where Item.isSell = 1 and  Ware.QuantityRemain > 0");
+    }
+    
+    public int itemInWare(int idItem){
+        Ware ware = wareDAO.selectByItem(idItem);
+        return ware.getQuantityRemain();
     }
 
     //Kiểm tra xem mặt hàng này đã được bán chưa
-    public boolean checkItemInBill(int id){
+    public boolean checkItemInBill(int id) {
         return !executeQuery(
                 "select * from Item inner join BillDetail "
-                        + "on Item.IdItem = BillDetail.IdItem where item.IdItem = ?",
+                + "on Item.IdItem = BillDetail.IdItem where item.IdItem = ?",
                 id
         ).isEmpty();
     }
-    
-    
-    
+
     @Override
     public boolean insert(Item model) {
         return executeUpdate("insert into Item (ItemName,Unit,Price,IdCategory, isSell)"
@@ -79,7 +73,7 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
                 model.getPrice(),
                 model.getIdCategory(),
                 model.isSell() ? 1 : 0
-        );
+        ) && wareDAO.insert(model.getItemName());
     }
 
     @Override
@@ -104,6 +98,10 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
     public List<Item> findModel(Integer object) {
         return executeQuery("Select * from Item where IdItem = ?", object);
     }
+    
+    public List<Item> findModel(String itemName){
+        return executeQuery("Select * from Item where ItemName=?", itemName);
+    }
 
     public List<Item> getItemByCategory(String category) {
         return executeQuery(
@@ -113,7 +111,5 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
                 category
         );
     }
-    
-    
 
 }

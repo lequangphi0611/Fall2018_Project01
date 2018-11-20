@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.BillDetail;
+import Model.Ware;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
  * @author Quang Phi
  */
 public class BillDetailDAO extends DAO<BillDetail> {
+    
+    WareDAO ware = new WareDAO();
 
     @Override
     public BillDetail getModel() throws SQLException {

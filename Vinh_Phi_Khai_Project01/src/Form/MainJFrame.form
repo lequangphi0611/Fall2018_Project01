@@ -121,8 +121,11 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Icon/if_Globe1_34224.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="H&#x1b0;&#x1edb;ng d&#x1eab;n"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; kho"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -236,7 +239,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Icon/if_history_58875.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed; giao d&#x1ecb;ch"/>
+                    <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed;"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
