@@ -3,19 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/WareDAO.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/WareJFrame.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/ImportItemDAO.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/ImportItem.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/ConnectionDB.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Item.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/Convert.java</file>
             <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/ItemDAO.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/MainJFrame.java</file>
             <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/OrderJDialog.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/BillDetailDAO.java</file>
-            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/ItemJFrame.java</file>
             <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/TransactionHistoryJFrame.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/BillDetailDAO.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/ImportItem.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/WareJFrame.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/ConnectionDB.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/ItemJFrame.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Library/Convert.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/DAO.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/WareDAO.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/StatisticalDAO.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/DAO/ImportItemDAO.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/LogInJFrame.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/CategoryJDialog.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Model/Item.java</file>
+            <file>file:/F:/KyIV/NewProject01/Fall2018_Project01/Vinh_Phi_Khai_Project01/src/Form/MainJFrame.java</file>
         </group>
     </open-files>
 </project-private>

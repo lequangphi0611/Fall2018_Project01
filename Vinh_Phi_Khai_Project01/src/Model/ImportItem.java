@@ -87,6 +87,4 @@ public class ImportItem {
         this.quantityReceived = quantityReceived;
     }
     
-    
-    
 }

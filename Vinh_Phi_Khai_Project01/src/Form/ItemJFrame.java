@@ -29,8 +29,8 @@ public class ItemJFrame extends javax.swing.JFrame {
     ItemDAO itemDAO = new ItemDAO();
     List<Item> list;
 
-    String[] btnDeleteText = {"Xóa","Ngừng bán","Bán trở lại"};
-    
+    String[] btnDeleteText = {"Xóa", "Ngừng bán", "Bán trở lại"};
+
     public ItemJFrame() {
         initComponents();
         modelCategory = (DefaultComboBoxModel) cboCategory.getModel();
@@ -41,12 +41,10 @@ public class ItemJFrame extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
     }
 
-
     private void loadTable(List<Item> listParam) {
         list = listParam;
         modelTable.setRowCount(0);
         for (Item item : list) {
-            int quantityRemain = itemDAO.itemInWare(item.getIdItem());
             modelTable.addRow(new Object[]{
                 modelTable.getRowCount() + 1,
                 item.getItemName(),
@@ -88,18 +86,30 @@ public class ItemJFrame extends javax.swing.JFrame {
 
     private void deleteOrSetSellItem() {
         String text = btnDelete.getText();
-        if(text.equals(btnDeleteText[0])){
-            if(OptionPane.confirm(this, "Bạn có muốn xóa mặt hàng này ?")){
-                itemDAO.delete(getItem(false).getIdItem());
+        String message = "";
+        Item item = getItem(false);
+        int quantityRemain = item.getQuantityRemain();
+        if (quantityRemain > 0) {
+            message = "Mặt hàng này trong kho vẫn còn  " + quantityRemain + " !\n";
+        }
+        if (text.equals(btnDeleteText[0])) {
+            message += "Bạn có muốn xóa mặt hàng này ?";
+            if (OptionPane.confirm(this, message)) {
+                itemDAO.delete(item.getIdItem());
             }
-        }else if(text.equals(btnDeleteText[1])){
-            itemDAO.update(getItem(false));
-        }else{
-            itemDAO.update(getItem(true));
+        } else {
+            boolean isSell = text.equals(btnDeleteText[2]);
+            if (isSell) {
+                itemDAO.setSell(isSell);
+            } else {
+                message += "Bạn có thực sự muốn ngừng kinh doanh mặt hàng này ?";
+                if (OptionPane.confirm(this, message)) {
+                    itemDAO.setSell(isSell);
+                }
+            }
         }
         reload();
     }
-    
 
     private Category getCategoryByID(String id) {
         List<Category> lists = cateDAO.findModel(id);
@@ -127,15 +137,13 @@ public class ItemJFrame extends javax.swing.JFrame {
         txtPrice.setText(item.getPrice() + "");
         Category category = getCategoryByID(item.getIdCategory());
         cboCategory.setSelectedIndex(getIndexComboboxToCategory(category.getCategoryName()));
-        if(item.isSell()){
-            if(!itemDAO.checkItemInBill(item.getIdItem())){
-                btnDelete.setText(btnDeleteText[0]);
-            }else{
-                btnDelete.setText(btnDeleteText[1]);
-            }
-        }else{
-            btnDelete.setText(btnDeleteText[2]);
+        String text = btnDeleteText[0];
+        if (!item.isSell()) {
+            text = btnDeleteText[2];
+        } else if (itemDAO.checkItemInBill(item.getIdItem())) {
+            text = btnDeleteText[1];
         }
+        btnDelete.setText(text);
     }
 
     private int getIndexComboboxToCategory(String categoryName) {
@@ -162,16 +170,21 @@ public class ItemJFrame extends javax.swing.JFrame {
         btnDelete.setText(null);
     }
 
+    private List<Item> getListToStringcbo() throws ClassCastException {
+        String cboText = (String) cboIdCategoryFilter.getSelectedItem();
+        switch (cboText) {
+            case "Tất cả":
+                return itemDAO.getAll();
+            case "Đang bán":
+                return itemDAO.getItemIsSell();
+            default:
+                return itemDAO.getItemStopSell();
+        }
+    }
+
     private void loadData() {
         try {
-            String cboText = (String) cboIdCategoryFilter.getSelectedItem();
-            if (cboText.equals("Tất cả")) {
-                list = itemDAO.getAll();
-            }else if(cboText.equals("Đang bán")){
-                list = itemDAO.getItemIsSell();
-            }else{
-                list = itemDAO.getItemStopSell();
-            }
+            list = getListToStringcbo();
         } catch (ClassCastException ex) {
             Category cate = (Category) cboIdCategoryFilter.getSelectedItem();
             list = itemDAO.getItemByCategory(cate.getCategoryName());
@@ -215,6 +228,9 @@ public class ItemJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -545,7 +561,7 @@ public class ItemJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoryDialogActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        fillCategory();
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -580,6 +596,10 @@ public class ItemJFrame extends javax.swing.JFrame {
     private void cboIdCategoryFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboIdCategoryFilterActionPerformed
         loadData();
     }//GEN-LAST:event_cboIdCategoryFilterActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        fillCategory();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

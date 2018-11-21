@@ -77,17 +77,17 @@ public class StatisticalDAO {
     private Object[] getObjectforItem() throws SQLException{
         return new Object[]{
             rs.getString("TenMatHang"),
-            rs.getString("TongSoLuongBanDuoc"),
-            Convert.toMoney(rs.getLong("BanDuocItNhat")),
-            Convert.toMoney(rs.getLong("BanDuocNhieuNhat")),
-            Convert.toMoney(rs.getLong("TongTien"))
+            rs.getInt("SoLuongNhapVao"),
+            rs.getInt("SoLuongBanDuoc"),
+            rs.getInt("SoLuongConTrongKho"),
+            Convert.toMoney(rs.getLong("TongTienBanDuoc"))
         };
     }
     
     public List<Object[]> getListForItemStatistical(){
         List<Object[]> list = new ArrayList<>();
         try {
-            rs = resultQuery("exec sp_ThongKeMatHangBanDuoc");
+            rs = resultQuery("exec sp_ThongKeMatHang");
             while(rs.next()){
                 list.add(getObjectforItem());
             }

@@ -145,7 +145,7 @@ public class StatisticalJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên mặt hàng", "Tổng số lượng đã bán", "Bán được ít nhất", "Bán được nhiều nhất", "Tổng tiền"
+                "Tên mặt hàng", "Số lượng nhập vào", "Số lượng bán được", "Số lượng còn trong kho", "Tổng tiền bán được"
             }
         ) {
             boolean[] canEdit = new boolean [] {

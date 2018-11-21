@@ -45,9 +45,9 @@ public class LogInJFrame extends javax.swing.JDialog {
 
     private void setStatusButton(boolean status) {
         btnLogin.setEnabled(status);
-        if(status){
+        if (status) {
             btnLogin.setText("Đăng nhập");
-        }else{
+        } else {
             btnLogin.setText("Đang xử lí...");
         }
     }
@@ -222,13 +222,14 @@ public class LogInJFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void chkShowHidPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkShowHidPassMouseClicked
+        String message = "Hiển thị mật khẩu";
+        char chr = '*';
         if (chkShowHidPass.isSelected()) {
-            chkShowHidPass.setText("Ẩn mật khẩu");
-            txtPass.setEchoChar((char) 0);
-        } else {
-            chkShowHidPass.setText("Hiển thị mật khẩu");
-            txtPass.setEchoChar('*');
+            message = "Ẩn mật khẩu";
+            chr = (char)0;
         }
+        chkShowHidPass.setText(message);
+        txtPass.setEchoChar(chr);
     }//GEN-LAST:event_chkShowHidPassMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

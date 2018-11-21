@@ -78,20 +78,23 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
 
     @Override
     public boolean update(Item model) {
-        return executeUpdate("update Item set ItemName = ?,Unit = ?, Price = ?, IdCategory = ? , isSell = ?"
+        return executeUpdate("update Item set ItemName = ?,Unit = ?, Price = ?, IdCategory = ?"
                 + " where IdItem = ?",
                 model.getItemName(),
                 model.getUnit(),
                 model.getPrice(),
                 model.getIdCategory(),
-                model.isSell() ? 1 : 0,
                 model.getIdItem()
         );
+    }
+    
+    public void setSell(Boolean isSell){
+        executeUpdate("update Item set isSell=?", isSell);
     }
 
     @Override
     public boolean delete(Integer object) {
-        return executeUpdate("delete from Item where IdItem = ?", object);
+        return executeUpdate("delete from Item where Item.IdItem = ?", object);
     }
 
     @Override

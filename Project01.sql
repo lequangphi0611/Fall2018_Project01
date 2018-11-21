@@ -51,7 +51,7 @@ create table Item(
 go
 
 create table Ware(
-	Iditem int references Item(IdItem) on delete no action unique,
+	Iditem int references Item(IdItem) on delete cascade unique,
 	QuantityRemain int not null
 )
 
@@ -151,16 +151,24 @@ create proc sp_ThongKeMatHangBanDuoc
 as
 	begin
 		select 
-			item.ItemName TenMatHang,
-			SUM(BD.Quantity) TongSoLuongBanDuoc,
-			Min((item.Price * BD.Quantity)) BanDuocItNhat,
-			max((item.Price * BD.Quantity)) BanDuocNhieuNhat,
-			SUM((item.Price * BD.Quantity)) TongTien
-		from BillDetail BD 
-				inner join Item item on BD.IdItem = item.IdItem
-		group by item.ItemName, Item.Unit order by TongSoLuongBanDuoc desc
+			it.ItemName TenMatHang ,
+			count(ip.QuantityReceived) SoLuongNhapVao,
+			count(bd.Quantity) SoLuongBanDuoc,
+			count(wh.QuantityRemain) SoLuongConTrongKho,
+			sum(bd.Price * bd.Quantity) TongTienBanDuoc
+
+		from Item it inner join BillDetail bd on it.IdItem = bd.IdItem
+					inner join Import ip on it.IdItem = ip.IdItem
+					inner join Ware wh on it.IdItem = wh.IdItem
+		group by it.ItemName
 	end
 go
+
+
+
+select * from Item it inner join BillDetail bd on it.IdItem = bd.IdItem
+					inner join Import ip on it.IdItem = ip.Iditem
+					inner join Ware wh on it.IdItem = wh.Iditem
 
 ---Bổ sung sp produce
 
@@ -192,4 +200,3 @@ as
 	end
 	go
 
-	

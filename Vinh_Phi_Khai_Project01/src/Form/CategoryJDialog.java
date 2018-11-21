@@ -18,7 +18,6 @@ import javax.swing.table.JTableHeader;
  */
 public class CategoryJDialog extends javax.swing.JDialog {
 
-    ItemJFrame itemFrame;
     CategoryDAO cateDAO = new CategoryDAO();
     DefaultTableModel model;
 
@@ -28,10 +27,9 @@ public class CategoryJDialog extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public CategoryJDialog(ItemJFrame parent, boolean modal) {
+    public CategoryJDialog(javax.swing.JFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        itemFrame = parent;
         this.model = (DefaultTableModel) tblTable.getModel();
         loadTable();
     }
@@ -102,7 +100,6 @@ public class CategoryJDialog extends javax.swing.JDialog {
 
     private void reload() {
         reset();
-        itemFrame.fillCategory();
         loadTable();
     }
 
