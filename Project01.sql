@@ -147,14 +147,14 @@ as
 	end
 go
 
-create proc sp_ThongKeMatHangBanDuoc
+create proc sp_ThongKeMatHang
 as
 	begin
 		select 
 			it.ItemName TenMatHang ,
-			count(ip.QuantityReceived) SoLuongNhapVao,
-			count(bd.Quantity) SoLuongBanDuoc,
-			count(wh.QuantityRemain) SoLuongConTrongKho,
+			sum(ip.QuantityReceived) SoLuongNhapVao,
+			sum(bd.Quantity) SoLuongBanDuoc,
+			sum(wh.QuantityRemain) SoLuongConTrongKho,
 			sum(bd.Price * bd.Quantity) TongTienBanDuoc
 
 		from Item it inner join BillDetail bd on it.IdItem = bd.IdItem
