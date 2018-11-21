@@ -62,6 +62,12 @@ public class OrderJDialog extends javax.swing.JDialog {
                 item.getQuantityRemain()
             });
         }
+        if (modelAllItem.getRowCount() == 0) {
+            modelAllItem.setColumnCount(1);
+            modelAllItem.addRow(new Object[]{
+                "Hết hàng !kiểm tra lại kho !"
+            });
+        }
     }
 
     private void loadToTableInforBill() {
@@ -136,7 +142,7 @@ public class OrderJDialog extends javax.swing.JDialog {
             int quantity = getQuantity();
             int size = tableMain.getItemOrder().size();
             tableMain.giveBackItem(itemOrder, quantity);
-            wareDAO.addQuantityRemain(new Ware(itemOrder.getIdItem(),quantity));
+            wareDAO.addQuantityRemain(new Ware(itemOrder.getIdItem(), quantity));
             loadAllItem();
             loadToTableInforBill();
             if (size == tableMain.getItemOrder().size()) {
@@ -564,13 +570,15 @@ public class OrderJDialog extends javax.swing.JDialog {
 
     private void tbAllItemMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAllItemMouseReleased
         int clickCount = evt.getClickCount();
-        if (clickCount == 1) {
-            Item item = listAllItem.get(tbAllItem.getSelectedRow());
-            loadForm(item, 1);
-            turnOffSelection(tbInforBill);
-            
-        } else if (evt.getClickCount() == 2) {
-            addItem();
+        if (listAllItem.size() > 0) {
+            if (clickCount == 1) {
+                Item item = listAllItem.get(tbAllItem.getSelectedRow());
+                loadForm(item, 1);
+                turnOffSelection(tbInforBill);
+
+            } else if (evt.getClickCount() == 2) {
+                addItem();
+            }
         }
     }//GEN-LAST:event_tbAllItemMouseReleased
 

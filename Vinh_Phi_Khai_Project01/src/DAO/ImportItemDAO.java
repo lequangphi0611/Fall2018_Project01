@@ -97,7 +97,7 @@ public class ImportItemDAO extends DAO<ImportItem> {
     }
     
     public List<ImportItem> selectByDate(Date date){
-        return executeQuery("select * from Import where Import.DateImport=?",new java.sql.Date(date.getTime()));
+        return executeQuery("select * from Import where Import.DateImport=? order by TimeImport desc",new java.sql.Date(date.getTime()));
     }
 
 }

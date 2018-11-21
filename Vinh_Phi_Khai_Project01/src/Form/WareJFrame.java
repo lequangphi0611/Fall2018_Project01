@@ -66,7 +66,12 @@ public class WareJFrame extends javax.swing.JFrame {
     }
 
     private void cboAction() {
-        txtQuantityRemain.setText(getItemToCombobox().getQuantityRemain() + "");
+        String result = "0";
+        try{
+            result = getItemToCombobox().getQuantityRemain()+"";
+        }catch(NullPointerException ex){
+        }
+        txtQuantityRemain.setText(result);
     }
 
     private void reset() {

@@ -147,7 +147,6 @@ public class TransactionHistoryJFrame extends javax.swing.JFrame {
     
     private Date getDateToCBO(){
         String date = (String) cboFiltersDetail.getSelectedItem();
-        System.out.println(date);
         return Convert.parseDate(date, "dd/MM/yyyy");
     }
 
