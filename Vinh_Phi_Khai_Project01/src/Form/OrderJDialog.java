@@ -253,9 +253,9 @@ public class OrderJDialog extends javax.swing.JDialog {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("DANH SÁCH THỰC ĐƠN");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         tbAllItem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbAllItem.setModel(new javax.swing.table.DefaultTableModel(
@@ -300,11 +300,11 @@ public class OrderJDialog extends javax.swing.JDialog {
             tbAllItem.getColumnModel().getColumn(3).setMaxWidth(180);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 590, 311));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 620, 311));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setText("THÔNG TIN CỦA BÀN");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
 
         tbInforBill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbInforBill.setModel(new javax.swing.table.DefaultTableModel(
@@ -341,7 +341,7 @@ public class OrderJDialog extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 640, 310));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Money_206469.png"))); // NOI18N
         jButton3.setText("Thanh toán");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -349,9 +349,9 @@ public class OrderJDialog extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 520, -1, 50));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, -1, 50));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setText("Giảm giá:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, -1, -1));
 
@@ -363,21 +363,21 @@ public class OrderJDialog extends javax.swing.JDialog {
                 txtPercentCaretUpdate(evt);
             }
         });
-        jPanel2.add(txtPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 70, -1));
+        jPanel2.add(txtPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 440, 70, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel9.setText("%");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 20, 30));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, 20, 30));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel10.setText("Tổng:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 390, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel11.setText("Giảm trừ:");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel12.setText("Phải thu:");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 540, -1, -1));
 
@@ -395,7 +395,7 @@ public class OrderJDialog extends javax.swing.JDialog {
                 txtSumPriceMouseClicked(evt);
             }
         });
-        jPanel2.add(txtSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 130, -1));
+        jPanel2.add(txtSumPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 130, -1));
 
         txtSale.setEditable(false);
         txtSale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -411,19 +411,19 @@ public class OrderJDialog extends javax.swing.JDialog {
                 txtSaleActionPerformed(evt);
             }
         });
-        jPanel2.add(txtSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 130, -1));
+        jPanel2.add(txtSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 490, 130, -1));
 
         txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotal.setText("0");
-        jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 540, 130, -1));
+        jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 540, 130, -1));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel13.setText("Tên mặt hàng:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel14.setText("Đơn giá:");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
 
@@ -443,7 +443,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         txtPrice.setText("0");
         jPanel2.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 180, -1));
 
-        btnAddItem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnAddItem.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnAddItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Create.png"))); // NOI18N
         btnAddItem.setText("Gọi");
         btnAddItem.addActionListener(new java.awt.event.ActionListener() {
@@ -451,9 +451,9 @@ public class OrderJDialog extends javax.swing.JDialog {
                 btnAddItemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAddItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, 90, 40));
+        jPanel2.add(btnAddItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 100, 40));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_minus_remove_green_61638.png"))); // NOI18N
         jButton5.setText("Trả");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -461,9 +461,9 @@ public class OrderJDialog extends javax.swing.JDialog {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, 90, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 100, 40));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel5.setText("Số lượng:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, -1, -1));
 

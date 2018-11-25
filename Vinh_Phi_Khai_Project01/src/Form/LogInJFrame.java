@@ -86,11 +86,11 @@ public class LogInJFrame extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_userconfig_7388.png"))); // NOI18N
         jLabel3.setText("Tên đăng nhập:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_kgpg_key3_1769.png"))); // NOI18N
         jLabel4.setText("Mật khẩu:");
 
@@ -108,7 +108,7 @@ public class LogInJFrame extends javax.swing.JDialog {
             }
         });
 
-        chkShowHidPass.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        chkShowHidPass.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         chkShowHidPass.setText("Hiển thị mật khẩu");
         chkShowHidPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,7 +116,7 @@ public class LogInJFrame extends javax.swing.JDialog {
             }
         });
 
-        btnLogin.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Login.png"))); // NOI18N
         btnLogin.setText("Đăng nhập");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {

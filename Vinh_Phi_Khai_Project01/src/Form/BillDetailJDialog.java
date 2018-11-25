@@ -85,32 +85,32 @@ public class BillDetailJDialog extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDayPayMent.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(lblDayPayMent, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 560, 30));
+        lblDayPayMent.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jPanel1.add(lblDayPayMent, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 550, 30));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(153, 0, 0));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("PHIẾU THANH TOÁN");
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 775, -1));
+        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 290, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 129, 729, -1));
 
-        lblTable.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        lblTable.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblTable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTable.setText("BÀN SỐ ");
-        jPanel1.add(lblTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 45, 775, 40));
+        jPanel1.add(lblTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 140, 40));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(" Mã hóa đơn : ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 200, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 200, 30));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("   Ngày xuất hóa đơn : ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 30));
 
         tblTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tblTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -143,13 +143,13 @@ public class BillDetailJDialog extends javax.swing.JDialog {
             tblTable.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 780, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 780, 220));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Giảm giá:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Tổng phụ:");
 
@@ -157,13 +157,13 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Tổng tiền:");
 
-        lblSale.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSale.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblSale.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        lblSumPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSumPrice.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblSumPrice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -208,8 +208,8 @@ public class BillDetailJDialog extends javax.swing.JDialog {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 360, 160));
 
-        lblIdBill1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(lblIdBill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 560, 30));
+        lblIdBill1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jPanel1.add(lblIdBill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 550, 30));
 
         jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 1, true), "HÂN HẠNH PHỤC VỤ QUÝ KHÁCH", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 20), new java.awt.Color(204, 0, 0))); // NOI18N
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 320, 30));
@@ -218,7 +218,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
