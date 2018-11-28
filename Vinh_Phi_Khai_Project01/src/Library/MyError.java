@@ -12,7 +12,7 @@ import javax.swing.text.JTextComponent;
  * @author Quang Phi
  * Thư viện kiểm một số lỗi cơ bản
  */
-public class Error {
+public class MyError {
     
     public static final String NUMBER = "^[0-9]+$";
     public static final String UNICODE = "^[\\p{L}\\s]+$";

@@ -10,7 +10,7 @@ import Library.OptionPane;
 import Model.Employees;
 import javax.swing.ButtonGroup;
 import static Form.EmployeeJFrame.*;
-import static Library.Error.*;
+import static Library.MyError.*;
 
 /**
  *

@@ -12,6 +12,7 @@ import DAO.ItemDAO;
 import DAO.WareDAO;
 import Data.UserData;
 import Library.Convert;
+import Library.OptionPane;
 import Model.Bill;
 import Model.BillDetail;
 import Model.Item;
@@ -49,7 +50,7 @@ public class OrderJDialog extends javax.swing.JDialog {
         txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         lblTable.setText("Bàn số " + table.getTableNum());
     }
-    
+
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
         listAllItem = itemDO.getListForOrder();
@@ -167,22 +168,26 @@ public class OrderJDialog extends javax.swing.JDialog {
     }
 
     private void action() {
-        Bill bill = getBill();
-        if (billDAO.insert(bill)) {
-            for (ItemOrder item : tableMain.getItemOrder()) {
-                detailDAO.insert(new BillDetail(
-                        bill.getIdBill(),
-                        item.getIdItem(),
-                        item.getQuantity(),
-                        item.getPrice()
-                ));
+        if (tableMain.isEmpty()) {
+            OptionPane.alert(this, "Bàn trống không thể thanh toán !");
+        } else {
+            Bill bill = getBill();
+            if (billDAO.insert(bill)) {
+                for (ItemOrder item : tableMain.getItemOrder()) {
+                    detailDAO.insert(new BillDetail(
+                            bill.getIdBill(),
+                            item.getIdItem(),
+                            item.getQuantity(),
+                            item.getPrice()
+                    ));
+                }
             }
+            tableMain.clear();
+            loadToTableInforBill();
+            resetPayForm();
+            clearForm();
+            new BillDetailJDialog(null, true, "Phiếu Thanh Toán", bill).setVisible(true);
         }
-        tableMain.clear();
-        loadToTableInforBill();
-        resetPayForm();
-        clearForm();
-        new BillDetailJDialog(null, true, "Phiếu Thanh Toán", bill).setVisible(true);
     }
 
     private void clearForm() {
