@@ -29,7 +29,9 @@ create table Users(
 go
 
 insert into Employees values('phi002',N'Lê Quang Phi',19,1,'0773927601',1,N'Thừa Thiên Huế')
-go 
+
+go
+ 
 insert into Users values('admin','123','phi002')
 
 create table Category(
@@ -57,13 +59,15 @@ create table Ware(
 
 go
 create table Import(
-	IdImport varchar(15) not null primary key,
+	IdImport int identity(1,1) not null primary key,
 	Iditem int references Item(IdItem) on delete no action,
 	IdEmployees varchar(10) references Employees(IdEmployees) on delete no action, 
 	TimeImport time default getdate(),
 	DateImport date default getdate(),
 	QuantityReceived int not null
 )
+
+
 
 go
 
@@ -147,56 +151,4 @@ as
 	end
 go
 
-create proc sp_ThongKeMatHang
-as
-	begin
-		select 
-			it.ItemName TenMatHang ,
-			sum(ip.QuantityReceived) SoLuongNhapVao,
-			sum(bd.Quantity) SoLuongBanDuoc,
-			sum(wh.QuantityRemain) SoLuongConTrongKho,
-			sum(bd.Price * bd.Quantity) TongTienBanDuoc
-
-		from Item it inner join BillDetail bd on it.IdItem = bd.IdItem
-					inner join Import ip on it.IdItem = ip.IdItem
-					inner join Ware wh on it.IdItem = wh.IdItem
-		group by it.ItemName
-	end
-go
-
-
-
-select * from Item it inner join BillDetail bd on it.IdItem = bd.IdItem
-					inner join Import ip on it.IdItem = ip.Iditem
-					inner join Ware wh on it.IdItem = wh.Iditem
-
----Bổ sung sp produce
-
-create proc sp_SelectImportHistory @ItemID int
-as 
-	begin
-		if @ItemID is null
-			begin
-				select
-					ip.TimeImport, 
-					ip.DateImport,
-					ip.IdEmployees,
-					ip.Iditem,
-					ip.QuantityReceived				
-				 from Import ip 
-				 order by DateImport desc,TimeImport desc
-			end
-		else
-			begin
-				select
-					ip.TimeImport, 
-					ip.DateImport,
-					ip.IdEmployees,
-					ip.Iditem,
-					ip.QuantityReceived				
-				 from Import ip where ip.Iditem = @ItemID
-				 order by DateImport desc,TimeImport desc
-			end
-	end
-	go
 

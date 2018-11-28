@@ -6,7 +6,6 @@
 package DAO;
 
 import Interface.IDao;
-import Model.Employees;
 import Model.Users;
 import java.sql.SQLException;
 import java.util.List;
@@ -58,20 +57,6 @@ public class UserDAO extends DAO<Users> implements IDao<Users, String> {
     @Override
     public List<Users> findModel(String object) {
         return executeQuery("select * from Users where UserName = ?", object);
-    }
-
-    public List<Employees> getEmployeesIsNotUser() {
-        EmployeesDAO emDAO = new EmployeesDAO();
-        List<Employees> list = emDAO.getAll();
-        for (int i = 0; i < list.size();) {
-            Employees em = list.get(i);
-            if (emDAO.isUser(em.getIdEmployees())) {
-                list.remove(em);
-            } else {
-                i++;
-            }
-        }
-        return list;
     }
 
 }

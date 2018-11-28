@@ -19,8 +19,8 @@ import javax.swing.table.JTableHeader;
 public class EmployeeJFrame extends javax.swing.JFrame {
 
     DefaultTableModel model;
-    static List<Employees> list;
     EmployeesDAO employeeDO = new EmployeesDAO();
+    static List<Employees> list;
     static int index = -1;
 
     public EmployeeJFrame() {
@@ -53,6 +53,8 @@ public class EmployeeJFrame extends javax.swing.JFrame {
         if (index >= 0) {
             if (employeeDO.delete(list.get(index).getIdEmployees())) {
                 load();
+            }else{
+                OptionPane.alert(this, "Không thể xóa nhân viên này !");
             }
         }
     }

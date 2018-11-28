@@ -18,7 +18,7 @@ public class OptionPane {
 
     public static boolean error(Component combonent, String message) {
         combonent.requestFocus();
-        alert(combonent, message);
+        alert(null, message);
         return false;
     }
 
@@ -34,5 +34,5 @@ public class OptionPane {
         int confirm = JOptionPane.showConfirmDialog(parent, message, TILTLE, JOptionPane.YES_NO_OPTION);
         return confirm == JOptionPane.YES_OPTION;
     }
-
+    
 }

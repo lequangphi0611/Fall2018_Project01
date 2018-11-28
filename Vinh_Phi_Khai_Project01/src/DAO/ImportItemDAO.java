@@ -28,7 +28,7 @@ public class ImportItemDAO extends DAO<ImportItem> {
     @Override
     public ImportItem getModel() throws SQLException {
         return new ImportItem(
-                null,
+                rs.getInt("IdImport"),
                 rs.getInt("IdItem"),
                 rs.getString("IdEmployees"),
                 rs.getTime("TimeImport"),
@@ -39,36 +39,20 @@ public class ImportItemDAO extends DAO<ImportItem> {
 
     public List<ImportItem> getListForItem(Integer idItem) {
         if(idItem == null){
-            return executeQuery("exec sp_SelectImportHistory null");
+            return executeQuery("select * from Import order by DateImport desc,TimeImport desc");
         }
-        return executeQuery("exec sp_SelectImportHistory ?", idItem);
-    }
-
-    private String getIdImport() {
-        String first = "MIP - ";
-        String random = "0123456789";
-        return MyLibry.getRandomText(first, random, 15);
+        return executeQuery("select * from Import where Iditem = ? order by DateImport desc,TimeImport desc", idItem);
     }
     
     public boolean checkUnduticate(String id){
         return executeQuery("select * from Import where IdImport=?",id).isEmpty();
-    }
-    
-    public String getID(){
-        while(true){
-            String id = getIdImport();
-            if(checkUnduticate(id)){
-                return id;
-            }
-        }
-    }
+    } 
 
     public boolean insert(ImportItem importInfor) {
         return executeUpdate(
                 "insert into Import"
-                + "(IdImport,IdItem,IdEmployees,TimeImport,DateImport,QuantityReceived)"
-                + " values (?,?,?,?,?,?)",
-                importInfor.getIdImport(),
+                + "(IdItem,IdEmployees,TimeImport,DateImport,QuantityReceived)"
+                + " values (?,?,?,?,?)",
                 importInfor.getIdItem(),
                 importInfor.getIdEmployees(),
                 new java.sql.Time(importInfor.getTimeImport().getTime()),

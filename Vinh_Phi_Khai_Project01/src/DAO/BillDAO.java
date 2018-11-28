@@ -57,7 +57,7 @@ public class BillDAO extends DAO<Bill> {
 
     public String getIDBill() {
         while (true) {
-            String idBill = MyLibry.getRandomText("HD",MyLibry.ALANDNUM,10);
+            String idBill = "HD" + MyLibry.getRandomText(8);
             if (findModel(idBill).isEmpty()) {
                 return idBill;
             }

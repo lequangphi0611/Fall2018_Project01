@@ -115,11 +115,6 @@ public class CategoryJDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTable = new javax.swing.JTable();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtCategory = new javax.swing.JTextField();
         btnInsert1 = new javax.swing.JButton();
@@ -127,6 +122,11 @@ public class CategoryJDialog extends javax.swing.JDialog {
         txtIdCategory = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTable = new javax.swing.JTable();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CATELOGY");
@@ -149,76 +149,6 @@ public class CategoryJDialog extends javax.swing.JDialog {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, 45));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-
-        tblTable.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tblTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "STT", "Mã Loại", "Tên loại"
-            }
-        ));
-        header = tblTable.getTableHeader();
-        header.setFont(new java.awt.Font("Times New Roman",0,20));
-        tblTable.setRowHeight(22);
-        jScrollPane1.setViewportView(tblTable);
-        if (tblTable.getColumnModel().getColumnCount() > 0) {
-            tblTable.getColumnModel().getColumn(0).setMinWidth(40);
-            tblTable.getColumnModel().getColumn(0).setMaxWidth(60);
-            tblTable.getColumnModel().getColumn(1).setMinWidth(120);
-            tblTable.getColumnModel().getColumn(1).setMaxWidth(140);
-        }
-
-        btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
-        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_compose_1055085.png"))); // NOI18N
-        btnUpdate.setText("Sửa");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setBackground(new java.awt.Color(204, 204, 204));
-        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
-        btnDelete.setText("Xóa");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnUpdate)
-                        .addGap(63, 63, 63)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("  Bảng thống kê  ", new javax.swing.ImageIcon(getClass().getResource("/Icon/if_table_save_64777.png")), jPanel4); // NOI18N
 
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -297,7 +227,77 @@ public class CategoryJDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("  Loại hàng  ", new javax.swing.ImageIcon(getClass().getResource("/Icon/if_category_59028.png")), jPanel3); // NOI18N
 
-        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 330));
+        tblTable.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã Loại", "Tên loại"
+            }
+        ));
+        header = tblTable.getTableHeader();
+        header.setFont(new java.awt.Font("Times New Roman",0,20));
+        tblTable.setRowHeight(22);
+        jScrollPane1.setViewportView(tblTable);
+        if (tblTable.getColumnModel().getColumnCount() > 0) {
+            tblTable.getColumnModel().getColumn(0).setMinWidth(40);
+            tblTable.getColumnModel().getColumn(0).setMaxWidth(60);
+            tblTable.getColumnModel().getColumn(1).setMinWidth(120);
+            tblTable.getColumnModel().getColumn(1).setMaxWidth(140);
+        }
+
+        btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_compose_1055085.png"))); // NOI18N
+        btnUpdate.setText("Sửa");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(204, 204, 204));
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(btnUpdate)
+                        .addGap(63, 63, 63)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("  Bảng thống kê  ", new javax.swing.ImageIcon(getClass().getResource("/Icon/if_table_save_64777.png")), jPanel4); // NOI18N
+
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 460, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -76,11 +76,8 @@ public class EmployeesDAO extends DAO<Employees> implements IDao<Employees, Stri
         return executeQuery("select * from Employees where IdEmployees = ?", object);
     }
 
-    public boolean isUser(String idEmployees) {
-        String sql = "Select * from Employees inner join Users on "
-                + "Employees.IdEmployees = Users.IdEmployees where "
-                + "Employees.IdEmployees = ?";
-        return !executeQuery(sql, idEmployees).isEmpty();
+    public List<Employees> isNotUser() {
+        return executeQuery("select * from Employees where IdEmployees not in(select IdEmployees from Users)");
     }
 
 }

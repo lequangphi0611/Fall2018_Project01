@@ -18,7 +18,7 @@ public class Convert {
 
     private static final DecimalFormat FORMATDECIMAL = new DecimalFormat("###,###,###");
 
-    public static String toMoney(long money) {
+    public static String toMoney(Number money) {
         return FORMATDECIMAL.format(money) + " đ";
     }
     

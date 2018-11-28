@@ -38,8 +38,4 @@ public class Ware{
         this.quantityRemain = quantityRemain;
     }
     
-    public boolean isOutOfStock(){
-        return this.quantityRemain == 0;
-    }
-    
 }

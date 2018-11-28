@@ -14,23 +14,15 @@ import java.util.Random;
 public class MyLibry {
 
     private static final Random RD = new Random();
-    public static final String ALANDNUM = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String ALANDNUM = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private static int getRamDom(int length) {
-        return RD.nextInt(length);
+    private static char getRamDomCharAlpabet() {
+        return ALANDNUM.charAt(RD.nextInt(ALANDNUM.length()));
     }
-
-    private static char getCharRanDomTo(String str) {
-        return str.charAt(getRamDom(str.length()));
-    }
-
-    public static String getRandomText(String firstText, String ranDomString, int length) {
-        String result = firstText;
-        if (result != null && length > result.length()) {
-            length -= result.length();
-        }
-        for (int i = 0; i < length; i++) {
-            result += getCharRanDomTo(ranDomString);
+    public static String getRandomText(int length) {
+        String result = "";
+        for(int i = 0; i < length; i++){
+            result += getRamDomCharAlpabet();
         }
         return result;
     }

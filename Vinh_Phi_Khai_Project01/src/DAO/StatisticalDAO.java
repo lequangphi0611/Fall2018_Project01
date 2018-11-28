@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Library.ConnectionDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -22,6 +23,15 @@ import java.util.logging.Logger;
 public class StatisticalDAO {
 
     ResultSet rs = null;
+    
+    public static final String[] FILTER = {
+        "Bán chạy nhất",
+        "Bán ít nhất",
+        "Hàng tồn kho",
+        "Hàng sắp hết",
+        "Nhập nhiều nhất",
+        "Doanh thu cao nhất"
+    };
     
     private String getStoreProduceForRevenue(String typeStatistics){
         String sql = "exec ";
@@ -74,20 +84,86 @@ public class StatisticalDAO {
         return list;
     }
     
+    private int getQuantityReceivedOf(int idItem){
+        String sql = "Select sum(QuantityReceived) from Import where Iditem = ? group by Iditem ";
+        ResultSet rss = null;
+        try {
+            rss = ConnectionDB.resultQuery(sql, idItem);
+            return rss.next() ? rss.getInt(1) : 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(StatisticalDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException(ex);
+        }finally{
+            try {
+                ConnectionDB.closeConnect(rss, (PreparedStatement) rss.getStatement());
+            } catch (SQLException ex) {
+                Logger.getLogger(StatisticalDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private Object[] getQuantityIsSellAndSumPrice(int idItem){
+        String sql = "select sum(Quantity),sum(Quantity * Price) from BillDetail where IdItem = ? group by IdItem";
+        ResultSet resultSet = null;
+         try {
+            resultSet = ConnectionDB.resultQuery(sql, idItem);
+            return resultSet.next() ? new Object[]{resultSet.getInt(1),resultSet.getLong(2)}
+                                    : new Object[]{0,0}; 
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }finally{
+            try {
+                ConnectionDB.closeConnect(resultSet, (PreparedStatement) resultSet.getStatement());
+            } catch (SQLException ex) {
+                Logger.getLogger(StatisticalDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     private Object[] getObjectforItem() throws SQLException{
+        int idItem = rs.getInt("IdItem");
+        Object[] billDTInfor = getQuantityIsSellAndSumPrice(idItem);
         return new Object[]{
-            rs.getString("TenMatHang"),
-            rs.getInt("SoLuongNhapVao"),
-            rs.getInt("SoLuongBanDuoc"),
-            rs.getInt("SoLuongConTrongKho"),
-            Convert.toMoney(rs.getLong("TongTienBanDuoc"))
+            rs.getString("ItemName"),
+            getQuantityReceivedOf(idItem),
+            billDTInfor[0],
+            new WareDAO().selectByItem(idItem).getQuantityRemain(),
+            Convert.toMoney((Number) billDTInfor[1])
         };
     }
     
-    public List<Object[]> getListForItemStatistical(){
+    private String getSQL(String filter){
+        String result = "Select it.IdItem, it.ItemName,sum(bd.Quantity * bd.Price) SumPrice"
+                + " from Item it inner join BillDetail bd on it.IdItem = bd.IdItem "
+                + "group by it.IdItem, it.ItemName order by SumPrice desc";
+        if(filter.equals(FILTER[0])){//Bán chạy nhất
+            result = "select it.IdItem, it.ItemName, sum(bd.Quantity) from Item it "
+                    + "inner join BillDetail bd on it.IdItem = bd.IdItem group by "
+                    + "it.IdItem, it.ItemName order by sum(Quantity) desc";
+        }else if(filter.equals(FILTER[1])){
+            result = "select it.IdItem, it.ItemName, sum(bd.Quantity) from Item it "
+                    + "inner join BillDetail bd on it.IdItem = bd.IdItem group by "
+                    + "it.IdItem, it.ItemName order by sum(Quantity) asc";
+        }else if(filter.equals(FILTER[2])){
+            result = "select * from Item inner join Ware on Item.IdItem = Ware.IdItem "
+                    + "order by Ware.QuantityRemain desc";
+        }else if(filter.equals(FILTER[3])){
+            result = "select * from Item inner join Ware on Item.IdItem = Ware.IdItem "
+                    + "order by Ware.QuantityRemain asc";
+        }else if(filter.equals(FILTER[4])){
+            result = "Select it.IdItem, it.ItemName, sum(ip.QuantityReceived) from Item it "
+                    + "inner join Import ip on it.IdItem = ip.IdItem "
+                    + "group by it.IdItem, it.ItemName "
+                    + "order by sum(ip.QuantityReceived) desc";
+        }
+        return result;
+    }
+    
+    public List<Object[]> getListForItemStatistical(String filter){
         List<Object[]> list = new ArrayList<>();
+        String sql = getSQL(filter);
         try {
-            rs = resultQuery("exec sp_ThongKeMatHang");
+            rs = resultQuery(sql);
             while(rs.next()){
                 list.add(getObjectforItem());
             }

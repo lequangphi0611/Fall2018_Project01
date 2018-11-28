@@ -39,7 +39,7 @@ public class UserJFrame extends javax.swing.JFrame {
     }
 
     private void fillComboBox() {
-        listEmployees = userDAO.getEmployeesIsNotUser();
+        listEmployees = emDAO.isNotUser();
         comboboxModel.removeAllElements();
         for (Employees em : listEmployees) {
             comboboxModel.addElement(em);
@@ -138,9 +138,13 @@ public class UserJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbJtable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        btnAddEmployee = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -347,18 +351,24 @@ public class UserJFrame extends javax.swing.JFrame {
             tbJtable.getColumnModel().getColumn(2).setMaxWidth(210);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 570, 402));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 570, 402));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_user-group-new_23632.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 15, -1, -1));
+
+        btnAddEmployee.setText("+");
+        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEmployeeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAddEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 50, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1235, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,8 +390,6 @@ public class UserJFrame extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        fillComboBox();
-        loadTable();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -399,6 +407,15 @@ public class UserJFrame extends javax.swing.JFrame {
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
         reload();
     }//GEN-LAST:event_btnCleanActionPerformed
+
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
+        new EmployeeJDiglog(this, true, new Employees()).setVisible(true);
+    }//GEN-LAST:event_btnAddEmployeeActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        fillComboBox();
+        loadTable();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -437,6 +454,7 @@ public class UserJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;

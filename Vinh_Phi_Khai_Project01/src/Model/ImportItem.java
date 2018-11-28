@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class ImportItem {
     
-    private String idImport;
+    private int idImport;
     private int idItem;
     private String idEmployees;
     private Date timeImport;
@@ -24,7 +24,7 @@ public class ImportItem {
     public ImportItem() {
     }
 
-    public ImportItem(String idImport, int idItem, String idEmployees, Date timeImport, Date dateImport, int quantityReceived) {
+    public ImportItem(int idImport, int idItem, String idEmployees, Date timeImport, Date dateImport, int quantityReceived) {
         this.idImport = idImport;
         this.idItem = idItem;
         this.idEmployees = idEmployees;
@@ -33,11 +33,11 @@ public class ImportItem {
         this.quantityReceived = quantityReceived;
     }
 
-    public String getIdImport() {
+    public int getIdImport() {
         return idImport;
     }
 
-    public void setIdImport(String idImport) {
+    public void setIdImport(int idImport) {
         this.idImport = idImport;
     }
 

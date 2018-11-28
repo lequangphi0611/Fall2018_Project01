@@ -6,6 +6,7 @@
 package Form;
 
 import DAO.BillDetailDAO;
+import DAO.EmployeesDAO;
 import DAO.ItemDAO;
 import Library.Convert;
 import Model.Bill;
@@ -30,6 +31,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         lblTable.setText("BÀN SỐ " + bill.getTableNumber());
         lblIdBill1.setText(bill.getIdBill());
         lblDayPayMent.setText(bill.getFullTime());
+        lblEmployees.setText(new EmployeesDAO().findModel(bill.getIdEmployees()).get(0).getName());
         load(bill);
         lblSumPrice.setText(Convert.toMoney(bill.getSumPrice()));
         lblSale.setText(Convert.toMoney(bill.getSale()));
@@ -63,7 +65,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblDayPayMent = new javax.swing.JLabel();
+        lblEmployees = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTable = new javax.swing.JLabel();
@@ -80,19 +82,21 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         lblTotal = new javax.swing.JLabel();
         lblIdBill1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblDayPayMent = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDayPayMent.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jPanel1.add(lblDayPayMent, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 550, 30));
+        lblEmployees.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jPanel1.add(lblEmployees, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, 190, 30));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(153, 0, 0));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("PHIẾU THANH TOÁN");
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 290, -1));
+        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 930, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 129, 729, -1));
@@ -100,7 +104,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
         lblTable.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblTable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTable.setText("BÀN SỐ ");
-        jPanel1.add(lblTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 140, 40));
+        jPanel1.add(lblTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -109,8 +113,8 @@ public class BillDetailJDialog extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("   Ngày xuất hóa đơn : ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 30));
+        jLabel4.setText("Người xuất hóa đơn :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 230, 30));
 
         tblTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tblTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -143,7 +147,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
             tblTable.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 780, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 900, 220));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -174,10 +178,8 @@ public class BillDetailJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSale, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,19 +208,27 @@ public class BillDetailJDialog extends javax.swing.JDialog {
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblSale, lblTotal});
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 360, 160));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 360, 160));
 
         lblIdBill1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jPanel1.add(lblIdBill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 550, 30));
+        jPanel1.add(lblIdBill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 240, 30));
 
         jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 1, true), "HÂN HẠNH PHỤC VỤ QUÝ KHÁCH", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 20), new java.awt.Color(204, 0, 0))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 320, 30));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 320, 30));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("   Ngày xuất hóa đơn : ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 30));
+
+        lblDayPayMent.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jPanel1.add(lblDayPayMent, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 240, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,6 +291,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -289,6 +300,7 @@ public class BillDetailJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDayPayMent;
+    private javax.swing.JLabel lblEmployees;
     private javax.swing.JLabel lblIdBill1;
     private javax.swing.JLabel lblSale;
     private javax.swing.JLabel lblSumPrice;

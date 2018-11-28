@@ -86,8 +86,7 @@ public class Table {
         if (index < 0) {
             this.itemOrder.add(item);
         } else {
-            item = ItemOrder.merge(this.itemOrder.get(index), item);
-            set(index, item);
+            set(index, ItemOrder.merge(this.itemOrder.get(index), item));
         }
     }
 

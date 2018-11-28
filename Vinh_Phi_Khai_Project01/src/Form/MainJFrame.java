@@ -5,6 +5,7 @@
  */
 package Form;
 
+import DAO.EmployeesDAO;
 import static Data.TableData.*;
 import Data.UserData;
 import Main.Main;
@@ -28,7 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         new Timer(1000, new ActionListener() {
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss a");
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,8 +57,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setVisible(false);
         new ChangePasswordJDialog(this, true).setVisible(true);
         if(ChangePasswordJDialog.isChanged){
-            UserData.logOut();
-            Main.loginAndRunMainSystem(this);
+            logOut();
         }else{
             this.setVisible(true);
         }
@@ -1140,9 +1140,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(218, 218, 218)
-                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
                 .addComponent(lblClock, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -1413,7 +1413,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        lblUser.setText("Tài khoản : "+UserData.getUserInfor().getUserName());
+        String name = new EmployeesDAO().findModel(UserData.getUserInfor().getIdEmployees()).get(0).getName();
+        lblUser.setText("Tài khoản : "+name);
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

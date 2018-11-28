@@ -193,6 +193,13 @@ public class ItemJFrame extends javax.swing.JFrame {
         loadTable(list);
     }
 
+    private void openWare(){
+        int index = tblTable.getSelectedRow();
+        if(index >= 0){
+            this.dispose();
+            new WareJFrame(list.get(index)).setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -427,6 +434,11 @@ public class ItemJFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/iconfinder_fork5_62576.png"))); // NOI18N
         jButton1.setText("Nhập Kho");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -601,6 +613,10 @@ public class ItemJFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         fillCategory();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        openWare();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

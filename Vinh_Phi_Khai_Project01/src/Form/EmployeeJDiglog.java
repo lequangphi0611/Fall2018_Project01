@@ -10,6 +10,7 @@ import Library.OptionPane;
 import Model.Employees;
 import javax.swing.ButtonGroup;
 import static Form.EmployeeJFrame.*;
+import static Library.Error.*;
 
 /**
  *
@@ -18,7 +19,7 @@ import static Form.EmployeeJFrame.*;
 public class EmployeeJDiglog extends javax.swing.JDialog {
 
     EmployeesDAO employeeDO = new EmployeesDAO();
-    
+
     public EmployeeJDiglog(javax.swing.JFrame parent, boolean modal, Employees employees) {
         super(parent, modal);
         init();
@@ -32,19 +33,100 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         bgrSex.add(rdoMale);
         bgrSex.add(rdoFemale);
         this.setLocationRelativeTo(null);
+        clearForm();
+    }
+
+    private boolean checkDuticate(String idEmployees) {
+        return employeeDO.findModel(idEmployees).isEmpty();
+    }
+
+    private boolean checkId() {
+        String idEmployees = txtIdEmployees.getText().trim();
+        String message = "";
+        boolean result = true;
+
+        if (isEmpty(idEmployees)) {
+            message = "Không được để trống Mã Nhân Viên !";
+            result = false;
+        } else if (idEmployees.length() < 5 || idEmployees.length() > 10) {
+            message = "Mã Nhân Viên phải từ 5 đến 10 ký tự";
+            result = false;
+        } else if (!isAlphabet(idEmployees)) {
+            message = "Mã Nhân Viên chỉ chứa các ký tự alphabet,ký tự số và các ký tự đặc biệt "
+                    + "như '_' và '-'";
+            result = false;
+        }
+
+        return result ? result : OptionPane.error(txtIdEmployees, message);
+    }
+
+    private boolean checkName() {
+        String name = txtName.getText().trim();
+        String message = "";
+        boolean result = true;
+
+        if (isEmpty(name)) {
+            message = "Không được để trống tên !";
+            result = false;
+        } else if (!isUnicode(name)) {
+            message = "Tên chỉ chứa ký tự unicode và khoảng trắng !";
+            result = false;
+        }
+
+        return result ? result : OptionPane.error(txtName, message);
+    }
+
+    private boolean checkAge() {
+        String ageText = txtAge.getText().trim();
+
+        if (isEmpty(ageText)) {
+            return OptionPane.error(txtAge, "Không được để trống tuổi !");
+        }
+        if (!isNumber(ageText)) {
+            return OptionPane.error(txtAge, "Tuổi Phải là số dương !");
+        }
+        int age = Integer.parseInt(ageText);
+        if (age < 16 || age > 65) {
+            return OptionPane.error(txtAge, "Tuổi phải trong khoảng 16 đến 65");
+        }
+        return true;
+    }
+
+    private boolean checkOther() {
+        String phoneText = txtPhoneNumber.getText().trim();
+
+        if (isEmpty(phoneText)) {
+            return OptionPane.error(txtPhoneNumber, "Không được để trống điện thoại !");
+        }
+        if (!isNumber(phoneText)) {
+            return OptionPane.error(txtPhoneNumber, "Số điện thoại phải là số !");
+        }
+        if (phoneText.length() < 10 || phoneText.length() > 11) {
+            return OptionPane.error(txtPhoneNumber, "Số điện thoại phải là 10 hoặc 11 số");
+        }
+        if (isEmpty(txtAddress)) {
+            return OptionPane.error(txtAddress, "Không được để trống địa chỉ !");
+        }
+        return true;
+    }
+
+    private boolean checkAll() {
+        return checkId() && checkName() && checkAge() && checkOther();
     }
 
     private void add() {
-        if (employeeDO.insert(getDataForm())) {
+        if (checkAll() && employeeDO.insert(getDataForm())) {
             clearForm();
             OptionPane.success(this, "Thêm thành công !");
         }
     }
 
     private void update() {
-        if (employeeDO.update(getDataForm())) {
-            clearForm();
-            OptionPane.success(this, "Sửa thành công !");
+        if (OptionPane.confirm(this, "Bạn có thực sự muốn sửa nhân viên này ?")) {
+            if (checkAll() && employeeDO.update(getDataForm())) {
+                clearForm();
+                OptionPane.success(this, "Sửa thành công !");
+            }
         }
     }
 
@@ -64,17 +146,11 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
         txtIdEmployees.setText(em.getIdEmployees());
         txtName.setText(em.getName());
         txtAge.setText(em.getAge() + "");
-        if (em.isSex()) {
-            rdoMale.setSelected(true);
-        } else {
-            rdoFemale.setSelected(true);
-        }
+        rdoMale.setSelected(em.isSex());
+        rdoFemale.setSelected(!em.isSex());
         txtPhoneNumber.setText(em.getPhoneNumber());
-        if (em.isRole()) {
-            rdoManage.setSelected(true);
-        } else {
-            rdoEmployees.setSelected(true);
-        }
+        rdoManage.setSelected(em.isRole());
+        rdoEmployees.setSelected(!em.isRole());
         txtAddress.setText(em.getAddress());
     }
 
@@ -83,17 +159,9 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }
 
     private void clearForm() {
+        list = employeeDO.getAll();
         loadForm(new Employees());
         index = -1;
-    }
-
-    private boolean checkEmpty() {
-        String check = txtIdEmployees.getText().trim();
-        if (check.isEmpty()) {
-
-        }
-
-        return true;
     }
 
     /**
@@ -438,7 +506,7 @@ public class EmployeeJDiglog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        if (employeeDO.findModel(txtIdEmployees.getText()).isEmpty()) {
+        if (checkDuticate(txtIdEmployees.getText())) {
             add();
         } else {
             update();

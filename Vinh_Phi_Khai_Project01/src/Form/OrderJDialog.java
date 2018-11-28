@@ -49,24 +49,25 @@ public class OrderJDialog extends javax.swing.JDialog {
         txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         lblTable.setText("Bàn số " + table.getTableNum());
     }
-
+    
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
         listAllItem = itemDO.getListForOrder();
-        for (Item item : listAllItem) {
-            modelAllItem.addRow(new Object[]{
-                item.getItemName(),
-                Convert.toMoney(item.getPrice()),
-                item.getUnit(),
-                cateDO.findModel(item.getIdCategory()).get(0),
-                item.getQuantityRemain()
-            });
-        }
-        if (modelAllItem.getRowCount() == 0) {
+        if (listAllItem.isEmpty()) {
             modelAllItem.setColumnCount(1);
             modelAllItem.addRow(new Object[]{
                 "Hết hàng !kiểm tra lại kho !"
             });
+        } else {
+            for (Item item : listAllItem) {
+                modelAllItem.addRow(new Object[]{
+                    item.getItemName(),
+                    Convert.toMoney(item.getPrice()),
+                    item.getUnit(),
+                    cateDO.findModel(item.getIdCategory()).get(0),
+                    item.getQuantityRemain()
+                });
+            }
         }
     }
 
@@ -300,7 +301,7 @@ public class OrderJDialog extends javax.swing.JDialog {
             tbAllItem.getColumnModel().getColumn(3).setMaxWidth(180);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 620, 311));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 670, 311));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setText("THÔNG TIN CỦA BÀN");
@@ -339,7 +340,7 @@ public class OrderJDialog extends javax.swing.JDialog {
             tbInforBill.getColumnModel().getColumn(1).setMaxWidth(270);
         }
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 640, 310));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 610, 310));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/if_Money_206469.png"))); // NOI18N
