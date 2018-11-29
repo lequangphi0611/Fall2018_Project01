@@ -63,6 +63,14 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
                 id
         ).isEmpty();
     }
+    
+    public boolean checkItemInImportInfor(int idItem){
+        return !executeQuery(
+                "select * from Item inner join Import "
+                        + "on Item.IdItem = Import.IdItem where Item.IdItem = ?", 
+                idItem
+        ).isEmpty();
+    }
 
     @Override
     public boolean insert(Item model) {

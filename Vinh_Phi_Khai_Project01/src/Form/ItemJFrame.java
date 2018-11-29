@@ -91,8 +91,8 @@ public class ItemJFrame extends javax.swing.JFrame {
     private boolean checkPrice() {
         try {
             Long price = Long.parseLong(txtPrice.getText());
-            if (price <= 0) {
-                return OptionPane.error(txtPrice, "Giá tiền Phải lớn hơn 0 !");
+            if (price < 1000) {
+                return OptionPane.error(txtPrice, "Giá tiền Phải lớn hơn hoặc bằng 1000 !");
             }
             return true;
         } catch (NumberFormatException ex) {
@@ -161,18 +161,18 @@ public class ItemJFrame extends javax.swing.JFrame {
         String text = btnDelete.getText();
         String message = "";
         Item item = getItem(false);
-        int quantityRemain = item.getQuantityRemain();
-        if (quantityRemain > 0) {
-            message = "Mặt hàng này trong kho vẫn còn  " + quantityRemain + " !\n";
-        }
         if (text.equals(btnDeleteText[0])) {
-            message += "Bạn có muốn xóa mặt hàng này ?";
+            message = "Bạn có muốn xóa mặt hàng này ?";
             if (OptionPane.confirm(this, message)) {
                 itemDAO.delete(item.getIdItem());
             }
         } else {
             boolean isSell = text.equals(btnDeleteText[2]);
             item = getItem(isSell);
+            int quantityRemain = item.getQuantityRemain();
+            if (quantityRemain > 0) {
+                message = "Mặt hàng này trong kho vẫn còn  " + quantityRemain + " !\n";
+            }
             if (isSell) {
                 itemDAO.setSell(item);
             } else {
@@ -204,6 +204,16 @@ public class ItemJFrame extends javax.swing.JFrame {
         );
     }
 
+    private void setTextForDelete(Item item) {
+        String text = btnDeleteText[0];
+        if (!item.isSell()) {
+            text = btnDeleteText[2];
+        } else if (itemDAO.checkItemInImportInfor(item.getIdItem()) || itemDAO.checkItemInBill(item.getIdItem())) {
+            text = btnDeleteText[1];
+        }
+        btnDelete.setText(text);
+    }
+
     private void loadForm(Item item) {
         txtIdItem.setText(item.getIdItem() + "");
         txtItemName.setText(item.getItemName());
@@ -211,13 +221,7 @@ public class ItemJFrame extends javax.swing.JFrame {
         txtPrice.setText(item.getPrice() + "");
         Category category = getCategoryByID(item.getIdCategory());
         cboCategory.setSelectedIndex(getIndexComboboxToCategory(category.getCategoryName()));
-        String text = btnDeleteText[0];
-        if (!item.isSell()) {
-            text = btnDeleteText[2];
-        } else if (itemDAO.checkItemInBill(item.getIdItem())) {
-            text = btnDeleteText[1];
-        }
-        btnDelete.setText(text);
+        setTextForDelete(item);
     }
 
     private int getIndexComboboxToCategory(String categoryName) {
@@ -269,9 +273,11 @@ public class ItemJFrame extends javax.swing.JFrame {
 
     private void openWare() {
         int index = tblTable.getSelectedRow();
+        this.dispose();
         if (index >= 0) {
-            this.dispose();
             new WareJFrame(list.get(index)).setVisible(true);
+        }else{
+            new WareJFrame().setVisible(true);
         }
     }
 
