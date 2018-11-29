@@ -32,10 +32,10 @@ public class ChangePasswordJDialog extends javax.swing.JDialog {
                 isChanged = true;
                 this.dispose();
             } else {
-                OptionPane.alert(this, "Xác nhận mật khẩu không chính xác !");
+                OptionPane.error(txtConfirmNewPass, "Xác nhận mật khẩu không chính xác !");
             }
         } else {
-            OptionPane.alert(this, "Mật khẩu cũ không chính xác !");
+            OptionPane.error(txtOldPassword, "Mật khẩu cũ không chính xác !");
         }
     }
 

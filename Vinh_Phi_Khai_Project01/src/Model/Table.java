@@ -59,20 +59,25 @@ public class Table {
     }
 
     //Tìm vị trí của Mặt hàng trong list...không có thì trả về -1
-    public int indexOf(ItemOrder item) {
-        int index = -1;
+    public int indexOf(String itemName) {
         for (int i = 0; i < this.itemOrder.size(); i++) {
-            ItemOrder itemOfList = this.itemOrder.get(i);
-            if (itemOfList.equals(item)) {
-                index = i;
-                break;
+            if (itemName.equals(this.get(i).getItemName())) {
+                return i;
             }
         }
-        return index;
+        return -1;
+    }
+
+    public int indexOf(ItemOrder item) {
+        return indexOf(item.getItemName());
     }
 
     //Tạo các hàm remove , set, push tối ưu hóa sữ dụng list
     //Thay vì table.list.add(Item) thì table.push(Item);
+    public ItemOrder get(int index) {
+        return itemOrder.get(index);
+    }
+
     public void remove(int index) {
         itemOrder.remove(index);
     }

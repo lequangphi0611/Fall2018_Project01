@@ -12,6 +12,7 @@ import DAO.ItemDAO;
 import DAO.WareDAO;
 import Data.UserData;
 import Library.Convert;
+import Library.MyError;
 import Library.OptionPane;
 import Model.Bill;
 import Model.BillDetail;
@@ -51,6 +52,12 @@ public class OrderJDialog extends javax.swing.JDialog {
         lblTable.setText("Bàn số " + table.getTableNum());
     }
 
+    private void loadForm(Item item, int quantity) {
+        txtItemName.setText(item.getItemName());
+        txtPrice.setText(Convert.toMoney(item.getPrice()));
+        spnQuantity.setValue(quantity);
+    }
+
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
         listAllItem = itemDO.getListForOrder();
@@ -87,6 +94,11 @@ public class OrderJDialog extends javax.swing.JDialog {
     }
 
     private Bill getBill() {
+        long sale = 0;
+        try {
+            sale = getSale();
+        } catch (Error ex) {
+        }
         return new Bill(
                 billDAO.getIDBill(),
                 UserData.getUserInfor().getIdEmployees(),
@@ -94,77 +106,135 @@ public class OrderJDialog extends javax.swing.JDialog {
                 Convert.getNow(),
                 tableMain.getTableNum(),
                 tableMain.sumPrice(),
-                getSale()
+                sale
         );
     }
 
     private long getSale() {
-        return (long) (tableMain.sumPrice() * getPercent() / 100);
+        try {
+            return (long) (tableMain.sumPrice() * getPercent() / 100);
+        } catch (Error ex) {
+            throw new Error(ex.getMessage());
+        }
     }
 
     private double getPercent() {
+        double percent = 0;
         try {
-            return Double.parseDouble(txtPercent.getText());
+            percent = Double.parseDouble(txtPercent.getText());
+            if (percent < 0 || percent > 100) {
+                String message = "Lỗi > 100%";
+                if (percent < 0) {
+                    message = "Lỗi < 0% !";
+                }
+                throw new Error(message);
+            }
         } catch (NumberFormatException ex) {
         }
-        return 0;
+        return percent;
     }
 
     private int getQuantity() {
         return (Integer) spnQuantity.getValue();
     }
 
+    private Item valueOf(String itemName) {
+        for (Item item : listAllItem) {
+            if (item.getItemName().equals(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private Item findItemInList(String itemName) {
+        Item result = valueOf(itemName);
+        if (result == null) {
+            result = tableMain.get(tableMain.indexOf(itemName));
+            if (result == null) {
+                throw new Error("Không tìm thấy mặt hàng !");
+            }
+        }
+        return result;
+    }
+
+    private Item getItemToTextField() {
+        if (MyError.isEmpty(txtItemName)) {
+            throw new Error("Vui lòng chọn 1 mặt hàng để tiếp tục !");
+        }
+        return findItemInList(txtItemName.getText());
+    }
+
+    private void setFormBy(ItemOrder item) {
+        int quantity = getQuantity();
+        if (quantity > item.getQuantity()) {
+            quantity = item.getQuantity();
+        }
+        loadForm(item, quantity);
+    }
+
+    private void setFormBy(Item item) {
+        int quantity = getQuantity();
+        int itemQuantity = item.getQuantityRemain();
+        if (quantity > itemQuantity) {
+            quantity = itemQuantity;
+        }
+        loadForm(item, quantity);
+    }
+
     private void addItem() {
-        int index = tbAllItem.getSelectedRow();
-        Item item = null;
-        if (index > 0) {
-            item = listAllItem.get(index);
-        } else if (!txtItemName.getText().isEmpty()) {
-            item = findItemInList(txtItemName.getText());
-        }
-        if (item != null) {
+        try {
+            Item item = getItemToTextField();
             int quantity = getQuantity();
-            tableMain.push(new ItemOrder(item, quantity));
             wareDAO.subQuantityRemain(new Ware(item.getIdItem(), quantity));
+            tableMain.push(new ItemOrder(item, quantity));
             txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
+            int oldListSize = listAllItem.size();
+
+            loadAllItem();
+            loadToTableInforBill();
+            turnOffSelection(tbAllItem);
+
+            if (oldListSize > listAllItem.size()) {
+                clearForm();
+            } else {
+                setFormBy(item);
+            }
+        } catch (Error ex) {
+            OptionPane.error(this, ex.getMessage());
         }
-        loadAllItem();
-        loadToTableInforBill();
-        turnOffSelection(tbAllItem);
     }
 
     private void giveBackItem() {
-        int index = tbInforBill.getSelectedRow();
-        if (index < 0 && !txtItemName.getText().isEmpty() && !tableMain.isEmpty()) {
-            Item item = findItemInList(txtItemName.getText());
-            index = tableMain.indexOf(new ItemOrder(item, 0));
-        }
-        if (index >= 0) {
-            ItemOrder itemOrder = tableMain.getItemOrder().get(index);
-            int quantity = getQuantity();
-            int size = tableMain.getItemOrder().size();
-            tableMain.giveBackItem(itemOrder, quantity);
-            wareDAO.addQuantityRemain(new Ware(itemOrder.getIdItem(), quantity));
-            loadAllItem();
-            loadToTableInforBill();
-            if (size == tableMain.getItemOrder().size()) {
-                itemOrder = tableMain.getItemOrder().get(index);
-                if (quantity > itemOrder.getQuantity()) {
-                    quantity = itemOrder.getQuantity();
+        if (tableMain.isEmpty()) {
+            OptionPane.error(tbInforBill, "Bàn trống !");
+        } else {
+            try {
+                int index = tableMain.indexOf(new ItemOrder(getItemToTextField(), 0));
+                if (index == -1) {
+                    throw new Error("Mặt hàng này chưa được gọi! Không thể trả!");
                 }
-                loadForm(itemOrder, quantity);
-            } else {
-                clearForm();
+
+                ItemOrder itemOrder = tableMain.get(index);
+                int quantity = getQuantity();
+                int oldSize = tableMain.getItemOrder().size();
+                tableMain.giveBackItem(itemOrder, quantity);
+                wareDAO.addQuantityRemain(new Ware(itemOrder.getIdItem(), quantity));
+                loadAllItem();
+                loadToTableInforBill();
+
+                if (oldSize > tableMain.getItemOrder().size()) {
+                    clearForm();
+                } else {
+                    itemOrder = tableMain.get(index);
+                    setFormBy(itemOrder);
+                }
+
+                txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
+            } catch (Error er) {
+                OptionPane.error(this, er.getMessage());
             }
-
-            txtSumPrice.setText(Convert.toMoney(tableMain.sumPrice()));
         }
-    }
-
-    private void loadForm(Item item, int quantity) {
-        txtItemName.setText(item.getItemName());
-        txtPrice.setText(Convert.toMoney(item.getPrice()));
-        spnQuantity.setValue(quantity);
     }
 
     private void action() {
@@ -199,16 +269,6 @@ public class OrderJDialog extends javax.swing.JDialog {
         txtPercent.setText(Convert.toMoney(0));
     }
 
-    private Item findItemInList(String itemName) {
-        Item result = null;
-        for (Item item : listAllItem) {
-            if (item.getItemName().equals(itemName)) {
-                result = item;
-            }
-        }
-        return result;
-    }
-
     private void turnOffSelection(javax.swing.JTable table) {
         try {
             table.setSelectionMode(-1);
@@ -229,9 +289,9 @@ public class OrderJDialog extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbAllItem = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbInforBill = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
@@ -262,6 +322,10 @@ public class OrderJDialog extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("DANH SÁCH THỰC ĐƠN");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel4.setText("THÔNG TIN CỦA BÀN");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
 
         tbAllItem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbAllItem.setModel(new javax.swing.table.DefaultTableModel(
@@ -308,10 +372,6 @@ public class OrderJDialog extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 670, 311));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel4.setText("THÔNG TIN CỦA BÀN");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
-
         tbInforBill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbInforBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -355,7 +415,7 @@ public class OrderJDialog extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, -1, 50));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 510, -1, 50));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setText("Giảm giá:");
@@ -544,7 +604,13 @@ public class OrderJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbInforBillMouseClicked
 
     private void txtPercentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPercentCaretUpdate
-        txtSale.setText(Convert.toMoney(getSale()));
+        String result;
+        try {
+            result = Convert.toMoney(getSale());
+        } catch (Error ex) {
+            result = ex.getMessage();
+        }
+        txtSale.setText(result);
     }//GEN-LAST:event_txtPercentCaretUpdate
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -602,16 +668,24 @@ public class OrderJDialog extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OrderJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrderJDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OrderJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrderJDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OrderJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrderJDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OrderJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrderJDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

@@ -18,7 +18,7 @@ public class OptionPane {
 
     public static boolean error(Component combonent, String message) {
         combonent.requestFocus();
-        alert(null, message);
+        OptionPane.alert(null, message);
         return false;
     }
 

@@ -60,11 +60,8 @@ public class ItemOrder extends Item {
 
     //Sữ dụng khi người dùng trả lại  hàng
     public static ItemOrder giveBackItem(ItemOrder item, int giveBackNum) {
-        if (item.getQuantity() < giveBackNum || giveBackNum < 0) {
-            throw new Error(
-                    "Lỗi ! giveBackNum phải bé hơn hoặc bằng số lượng của item "
-                    + "và phải lớn hơn 0"
-            );
+        if (item.getQuantity() < giveBackNum) {
+            throw new Error("Số lượng trả lớn hơn số lượng gọi !");
         }
         ItemOrder result = new ItemOrder(item);
         int newQuantity = result.getQuantity() - giveBackNum;

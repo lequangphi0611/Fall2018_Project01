@@ -84,7 +84,6 @@ create table bill(
 
 go 
 
-
 create table BillDetail(
 	IdBill varchar(10) references bill(IdBill) on delete cascade,
 	IdItem int references Item(IdItem) on update no action on delete cascade,
@@ -94,6 +93,7 @@ create table BillDetail(
 
 go
 
+select * from BillDetail
 
 
 create proc sp_LichSuGiaoDich @minDate date, @maxDate date

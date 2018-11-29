@@ -61,12 +61,12 @@ public class WareDAO extends DAO<Ware> {
     public boolean subQuantityRemain(Ware wh){
         Ware whLocal = selectByItem(wh.getIdItem());
         int quantityRemain = whLocal.getQuantityRemain();
-        if(quantityRemain >= wh.getQuantityRemain()){
+        if(quantityRemain < wh.getQuantityRemain()){
+            throw new Error("Mặt hàng gọi vượt quá số lượng trong kho !");
+        }else{
             quantityRemain -= wh.getQuantityRemain();
             whLocal.setQuantityRemain(quantityRemain);
             return update(whLocal);
-        }else{
-            throw new Error("Dữ liệu truyền vào vượt quá số lượng của mặt hàng có trong kho");
         }
     }
     
