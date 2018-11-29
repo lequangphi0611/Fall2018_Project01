@@ -67,6 +67,7 @@ public class OrderJDialog extends javax.swing.JDialog {
                 "Hết hàng !kiểm tra lại kho !"
             });
         } else {
+            modelAllItem.setColumnCount(5);
             for (Item item : listAllItem) {
                 modelAllItem.addRow(new Object[]{
                     item.getItemName(),
