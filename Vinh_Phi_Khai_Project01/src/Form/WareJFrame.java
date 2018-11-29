@@ -56,9 +56,11 @@ public class WareJFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         listWare = wareDAO.getAll();
         for (Ware ware : listWare) {
+            Item item = getItemTo(ware);
             model.addRow(new Object[]{
-                getItemTo(ware).getItemName(),
-                ware.getQuantityRemain()
+                item.getItemName(),
+                ware.getQuantityRemain(),
+                item.isSell() ? "Đang bán" : "Đã ngừng bán !"
             });
         }
     }
@@ -159,13 +161,10 @@ public class WareJFrame extends javax.swing.JFrame {
         tbJtable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbJtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Mặt hàng", "Số lượng trong kho"
+                "Mặt hàng", "Số lượng trong kho", "Trạng thái"
             }
         ));
         tbJtable.setRowHeight(26);

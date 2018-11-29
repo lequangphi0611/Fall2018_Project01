@@ -88,8 +88,12 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
         );
     }
     
-    public void setSell(Boolean isSell){
-        executeUpdate("update Item set isSell=?", isSell);
+    public void setSell(Item model){
+        executeUpdate(
+                "update Item set isSell=? where IdItem = ?",
+                model.isSell(), 
+                model.getIdItem()
+        );
     }
 
     @Override
@@ -105,6 +109,7 @@ public class ItemDAO extends DAO<Item> implements IDao<Item, Integer> {
     public List<Item> findModel(String itemName){
         return executeQuery("Select * from Item where ItemName=?", itemName);
     }
+    
 
     public List<Item> getItemByCategory(String category) {
         return executeQuery(

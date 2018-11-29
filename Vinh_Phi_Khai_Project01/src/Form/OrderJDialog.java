@@ -58,6 +58,24 @@ public class OrderJDialog extends javax.swing.JDialog {
         spnQuantity.setValue(quantity);
     }
 
+    private void setModel() {
+        tbAllItem.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Tên mặt hàng", "Đơn giá", "ĐVT", "Loại mặt hàng", "Số lượng còn lại"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        modelAllItem = (DefaultTableModel) tbAllItem.getModel();
+    }
+
     private void loadAllItem() {
         modelAllItem.setRowCount(0);
         listAllItem = itemDO.getListForOrder();
@@ -67,7 +85,7 @@ public class OrderJDialog extends javax.swing.JDialog {
                 "Hết hàng !kiểm tra lại kho !"
             });
         } else {
-            modelAllItem.setColumnCount(5);
+            setModel();
             for (Item item : listAllItem) {
                 modelAllItem.addRow(new Object[]{
                     item.getItemName(),

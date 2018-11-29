@@ -8,6 +8,7 @@ package Form;
 import DAO.CategoryDAO;
 import DAO.ItemDAO;
 import Library.Convert;
+import Library.MyError;
 import Library.OptionPane;
 import Model.Category;
 import Model.Item;
@@ -72,14 +73,86 @@ public class ItemJFrame extends javax.swing.JFrame {
         }
     }
 
+    private Item finItemBy(String itemName) {
+        List<Item> lists = itemDAO.findModel(itemName);
+        return lists.isEmpty() ? null : lists.get(0);
+    }
+
+    private boolean checkDuticateItem(String itemName) {
+        return finItemBy(itemName) != null;
+    }
+
+    private boolean checkItemName() {
+        return MyError.isEmpty(txtItemName)
+                ? OptionPane.error(txtItemName, "Không được để trống tên mặt hàng !")
+                : true;
+    }
+
+    private boolean checkPrice() {
+        try {
+            Long price = Long.parseLong(txtPrice.getText());
+            if (price <= 0) {
+                return OptionPane.error(txtPrice, "Giá tiền Phải lớn hơn 0 !");
+            }
+            return true;
+        } catch (NumberFormatException ex) {
+            return OptionPane.error(txtPrice, "Giá tiền phải là số !");
+        }
+    }
+
+    private Category getCategoryToCbo() {
+        try {
+            return (Category) cboCategory.getSelectedItem();
+        } catch (NullPointerException ex) {
+            throw new Error(ex);
+        }
+    }
+
+    private boolean checkCBO() {
+        try {
+            getCategoryToCbo();
+            return true;
+        } catch (Error ex) {
+            return OptionPane.error(cboCategory, "Vui lòng chọn loại mặt hàng hoặc thêm mới !");
+        }
+    }
+
+    private boolean checkOther() {
+        if (MyError.isEmpty(txtUnit)) {
+            return OptionPane.error(txtUnit, "Không được để trống đơn vị tính !");
+        }
+        if (MyError.isEmpty(txtPrice)) {
+            return OptionPane.error(txtPrice, "Không được để trống giá tiền !");
+        }
+        return true;
+    }
+
+    private boolean checkAll() {
+        return checkItemName() && checkOther() && checkPrice() && checkCBO();
+    }
+
+    private boolean update(Item item) {
+        return itemDAO.update(item);
+    }
+
     private void add() {
-        if (itemDAO.insert(getItem(true))) {
+        if (checkAll()) {
+            Item item = getItem(true);
+            if (checkDuticateItem(txtItemName.getText())) {
+                if (OptionPane.confirm(this, "Mặt hàng đã tồn tại ! "
+                        + "Bạn có muốn sửa mặt hàng không ?")) {
+                    update(item);
+                }
+            } else {
+                itemDAO.insert(item);
+            }
             reload();
         }
     }
 
     private void edit() {
-        if (itemDAO.update(getItem(true))) {
+        if (checkAll() && OptionPane.confirm(this, "Bạn có muốn sửa mặt hàng này ?")) {
+            update(getItem(true));
             reload();
         }
     }
@@ -99,12 +172,13 @@ public class ItemJFrame extends javax.swing.JFrame {
             }
         } else {
             boolean isSell = text.equals(btnDeleteText[2]);
+            item = getItem(isSell);
             if (isSell) {
-                itemDAO.setSell(isSell);
+                itemDAO.setSell(item);
             } else {
                 message += "Bạn có thực sự muốn ngừng kinh doanh mặt hàng này ?";
                 if (OptionPane.confirm(this, message)) {
-                    itemDAO.setSell(isSell);
+                    itemDAO.setSell(item);
                 }
             }
         }
@@ -125,7 +199,7 @@ public class ItemJFrame extends javax.swing.JFrame {
                 txtItemName.getText(),
                 txtUnit.getText(),
                 Long.parseLong(txtPrice.getText()),
-                ((Category) cboCategory.getSelectedItem()).getIdCategory(),
+                getCategoryToCbo().getIdCategory(),
                 isSell
         );
     }
@@ -193,13 +267,14 @@ public class ItemJFrame extends javax.swing.JFrame {
         loadTable(list);
     }
 
-    private void openWare(){
+    private void openWare() {
         int index = tblTable.getSelectedRow();
-        if(index >= 0){
+        if (index >= 0) {
             this.dispose();
             new WareJFrame(list.get(index)).setVisible(true);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -574,7 +649,7 @@ public class ItemJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoryDialogActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -586,7 +661,10 @@ public class ItemJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtItemNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtItemNameCaretUpdate
-
+        Item item = finItemBy(txtItemName.getText());
+        if (item != null) {
+            txtIdItem.setText(item.getIdItem() + "");
+        }
     }//GEN-LAST:event_txtItemNameCaretUpdate
 
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
