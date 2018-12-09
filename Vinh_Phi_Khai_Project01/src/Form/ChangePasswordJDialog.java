@@ -6,8 +6,8 @@
 package Form;
 
 import static Data.UserData.*;
+import Library.MyError;
 import Library.OptionPane;
-
 
 /**
  *
@@ -16,23 +16,43 @@ import Library.OptionPane;
 public class ChangePasswordJDialog extends javax.swing.JDialog {
 
     public static boolean isChanged;
-    
+
     public ChangePasswordJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         isChanged = false;
     }
-    
+
+    private boolean checkAll() {
+        String newPass = new String(txtNewPassword.getPassword());
+        if (MyError.isEmpty(newPass)) {
+            return OptionPane.error(txtNewPassword, "Không được để trống password !");
+        }
+        if (newPass.length() < 3) {
+            return OptionPane.error(txtNewPassword, "Mật khẩu mới phải có ít nhất 3 ký tự !");
+        }
+        String confirmPass = new String(txtConfirmNewPass.getPassword());
+        if (MyError.isEmpty(confirmPass)) {
+            return OptionPane.error(txtConfirmNewPass, "Vui lòng xác nhận lại mật khẩu !");
+        }
+        if (!confirmPass.equals(newPass)) {
+            return OptionPane.error(txtConfirmNewPass, "Xác nhận mật khẩu không chính xác !");
+        }
+        return true;
+    }
+
     private void changePass() {
         String oldPass = new String(txtOldPassword.getPassword());
         if (oldPass.equals(getUserInfor().getPassword())) {
-            String newPass = new String(txtNewPassword.getPassword());
-            if (newPass.equals(new String(txtConfirmNewPass.getPassword()))) {
-                changePassword(newPass);
-                isChanged = true;
-                this.dispose();
-            } else {
-                OptionPane.error(txtConfirmNewPass, "Xác nhận mật khẩu không chính xác !");
+            if (checkAll()) {
+                String newPass = new String(txtNewPassword.getPassword());
+                if (newPass.equals(new String(txtConfirmNewPass.getPassword()))) {
+                    changePassword(newPass);
+                    isChanged = true;
+                    this.dispose();
+                } else {
+                    OptionPane.error(txtConfirmNewPass, "Xác nhận mật khẩu không chính xác !");
+                }
             }
         } else {
             OptionPane.error(txtOldPassword, "Mật khẩu cũ không chính xác !");

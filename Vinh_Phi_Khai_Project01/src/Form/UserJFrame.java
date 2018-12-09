@@ -7,6 +7,7 @@ package Form;
 
 import DAO.EmployeesDAO;
 import DAO.UserDAO;
+import Library.MyError;
 import Library.OptionPane;
 import Model.Employees;
 import Model.Users;
@@ -62,6 +63,38 @@ public class UserJFrame extends javax.swing.JFrame {
         return emDAO.findModel(id).get(0);
     }
 
+    private boolean checkUserName() {
+        String userName = txtUserName.getText().trim();
+        if (userName.isEmpty()) {
+            return OptionPane.error(txtUserName, "Không được để trống tên đăng nhập !");
+        }
+        if (!MyError.isAlphabet(userName)) {
+            return OptionPane.error(txtUserName, "Tên đăng nhập chỉ chứa các ký tự alphabet và số !");
+        }
+        if (userName.length() < 5 || userName.length() > 10) {
+            return OptionPane.error(txtUserName, "Tên đăng nhập ít nhất 5 ký tự và không quá 10 ký tự !");
+        }
+        return true;
+    }
+
+    private boolean checkPassword() {
+        String password = new String(txtPass.getPassword());
+        if (MyError.isEmpty(password)) {
+            return OptionPane.error(txtPass, "Không được để trống password !");
+        }
+        if (password.length() < 3) {
+            return OptionPane.error(txtPass, "Mật khẩu ít nhất 3 ký tự !");
+        }
+        return true;
+    }
+
+    private boolean checkUnduticate() {
+        if( !userDAO.findModel(txtUserName.getText()).isEmpty() ){
+            return OptionPane.error(txtUserName, "Tên đăng nhập đã tồn tại !");
+        }
+        return true;
+    }
+
     private Users getUsers() {
         Employees ee = (Employees) cboEmployees.getSelectedItem();
         return new Users(
@@ -72,21 +105,26 @@ public class UserJFrame extends javax.swing.JFrame {
     }
 
     private void add() {
-        if (userDAO.insert(getUsers())) {
-            reload();
-            OptionPane.success(this, "Thêm thành công !");
+        if (checkUserName() && checkPassword() && checkUnduticate()) {
+            if (userDAO.insert(getUsers())) {
+                reload();
+                OptionPane.success(this, "Thêm thành công !");
+            }
         }
     }
-    
-    private void update(){
-        if(userDAO.update(getUsers())){
+
+    private void update() {
+        if (checkUserName() && checkPassword() && userDAO.update(getUsers())) {
             reload();
             OptionPane.success(this, "Sửa thành công !");
         }
     }
 
     private void delete() {
-        if (userDAO.delete(txtUserName.getText())) {
+        String userName = txtUserName.getText().trim();
+        if (userName.isEmpty()) {
+            OptionPane.alert(this, "Chọn một tài khoản để tiếp tục !");
+        } else if (userDAO.delete(userName)) {
             reload();
             OptionPane.success(this, "Xóa thành công !");
         }

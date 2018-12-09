@@ -8,6 +8,7 @@ package Form;
 import DAO.EmployeesDAO;
 import static Data.TableData.*;
 import Data.UserData;
+import Library.OptionPane;
 import Main.Main;
 import Model.Table;
 import java.awt.event.ActionEvent;
@@ -37,32 +38,32 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }).start();
     }
-    
-    private void openOrder(Table table, JRadioButton radio){
+
+    private void openOrder(Table table, JRadioButton radio) {
         new OrderJDialog(this, true, table).setVisible(true);
-        if(table.isEmpty()){
+        if (table.isEmpty()) {
             radio.setSelected(false);
-        }else{
+        } else {
             radio.setSelected(true);
         }
     }
 
-    private void logOut(){
+    private void logOut() {
         UserData.logOut();
         this.setVisible(false);
         Main.loginAndRunMainSystem(this);
     }
-    
-    private void changePassAction(){
+
+    private void changePassAction() {
         this.setVisible(false);
         new ChangePasswordJDialog(this, true).setVisible(true);
-        if(ChangePasswordJDialog.isChanged){
+        if (ChangePasswordJDialog.isChanged) {
             logOut();
-        }else{
+        } else {
             this.setVisible(true);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1317,7 +1318,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTable03MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       new ItemJFrame().setVisible(true);
+        new ItemJFrame().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void btnTable04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable04MouseClicked
@@ -1341,15 +1342,15 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTable08MouseClicked
 
     private void btnTable09MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable09MouseClicked
-       openOrder(TABLE09, rdoTable09);
+        openOrder(TABLE09, rdoTable09);
     }//GEN-LAST:event_btnTable09MouseClicked
 
     private void btnTable10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable10MouseClicked
-       openOrder(TABLE10, rdoTable10);
+        openOrder(TABLE10, rdoTable10);
     }//GEN-LAST:event_btnTable10MouseClicked
 
     private void btnTable11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable11MouseClicked
-       openOrder(TABLE11, rdoTable11);
+        openOrder(TABLE11, rdoTable11);
     }//GEN-LAST:event_btnTable11MouseClicked
 
     private void btnTable12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTable12MouseClicked
@@ -1385,11 +1386,19 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        new StatisticalJFrame().setVisible(true);
+        if (!UserData.isAdmin()) {
+            OptionPane.error(jButton9, "Chỉ có quản trị viên mới có thể truy cập vào chức năng này !");
+        } else {
+            new StatisticalJFrame().setVisible(true);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new UserJFrame().setVisible(true);
+        if (!UserData.isAdmin()) {
+            OptionPane.error(jButton2, "Chỉ có quản trị viên mới có thể truy cập vào chức năng này !");
+        } else {
+            new UserJFrame().setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1413,8 +1422,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        String name = new EmployeesDAO().findModel(UserData.getUserInfor().getIdEmployees()).get(0).getName();
-        lblUser.setText("Tài khoản : "+name);
+        lblUser.setText("Tài khoản : " + UserData.getEmployees().getName());
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

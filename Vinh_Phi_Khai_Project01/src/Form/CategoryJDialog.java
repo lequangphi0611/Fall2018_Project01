@@ -6,6 +6,7 @@
 package Form;
 
 import DAO.CategoryDAO;
+import Library.MyError;
 import Library.OptionPane;
 import Model.Category;
 import java.util.List;
@@ -46,8 +47,29 @@ public class CategoryJDialog extends javax.swing.JDialog {
         }
     }
 
+    private boolean checkIdCategory() {
+        String idCategory = txtIdCategory.getText().trim();
+        if(idCategory.isEmpty()){
+            return OptionPane.error(txtIdCategory, "Không được để trống mã loại !");
+        }
+        if(idCategory.length() > 6){
+            return OptionPane.error(txtIdCategory, "Mã loại không quá 6 ký tự !");
+        }
+        if(!cateDAO.findModel(idCategory).isEmpty()){
+            return OptionPane.error(txtIdCategory, "Mã loại đã tồn tại !");
+        }
+        return true;
+    }
+    
+    private boolean checkCategoryName(){
+        if(MyError.isEmpty(txtCategory)){
+            return OptionPane.error(txtCategory, "Không được để trống tên loại");
+        }
+        return true;
+    }
+
     private void add() {
-        if (cateDAO.insert(getCategory())) {
+        if (checkIdCategory() && checkCategoryName() && cateDAO.insert(getCategory())) {
             reload();
             OptionPane.success(this, "Thêm thành công !");
         }

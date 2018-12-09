@@ -5,7 +5,9 @@
  */
 package Data;
 
+import DAO.EmployeesDAO;
 import DAO.UserDAO;
+import Model.Employees;
 import Model.Users;
 
 /**
@@ -44,9 +46,17 @@ public class UserData {
         }
     }
 
-    public static void changePassword(String newPassword){
+    public static void changePassword(String newPassword) {
         UserData.user.setPassword(newPassword);
         new UserDAO().update(UserData.user);
     }
     
+    public static Employees getEmployees(){
+        return new EmployeesDAO().findModel(user.getIdEmployees()).get(0);
+    }
+
+    public static boolean isAdmin() {
+        return getEmployees().isRole();
+    }
+
 }
